@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <th:block th:replace="fragments/head :: header('Log-In')"/>
 </head>
-<body class="min-vh-100 background">
-<th:block th:replace="fragments/navbar :: nav"/>
-<div class="contain-bg container user-contain">
+<body>
+<!--<th:block th:replace="fragments/navbar :: nav"/>-->
+<div class="container">
     <div class="alert-danger" style="text-align: center" th:if="${param.error}">
         Invalid Username or Password.
     </div>
