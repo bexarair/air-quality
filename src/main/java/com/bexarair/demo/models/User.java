@@ -1,4 +1,4 @@
-package com.bexarair.demo;
+package com.bexarair.demo.models;
 
 import javax.persistence.*;
 @Entity
