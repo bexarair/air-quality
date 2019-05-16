@@ -59,8 +59,8 @@
 var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: {lat: -28, lng: 137}
+        zoom: 10,
+        center: {lat: 29.4241, lng: -98.4936}
     });
 
     // NOTE: This uses cross-domain XHR, and may not work on older browsers.
