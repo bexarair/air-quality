@@ -27,3 +27,7 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+### Google API ###
+
+var apiKey = 'AIzaSyD7AO7D6VjWNKSVCPztMggEPph3J97hrms';
