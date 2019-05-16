@@ -17,8 +17,16 @@
 
     <properties>
         <java.version>1.8</java.version>
+<<<<<<< HEAD
     </properties>
 
+=======
+        <skipTests>true</skipTests>
+    </properties>
+
+
+
+>>>>>>> 6b188c1edf5edc4f8ee51dcb86a7dae233c81c1a
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,10 +84,17 @@
             <version>3.3.1</version>
         </dependency>
 
+<<<<<<< HEAD
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+=======
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+        <!--</dependency>-->
+>>>>>>> 6b188c1edf5edc4f8ee51dcb86a7dae233c81c1a
 
         <dependency>
             <groupId>javax.xml.bind</groupId>

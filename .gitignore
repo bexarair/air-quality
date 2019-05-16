@@ -27,4 +27,9 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 **application.properties
+=======
+
+*application.properties
+>>>>>>> 6b188c1edf5edc4f8ee51dcb86a7dae233c81c1a
