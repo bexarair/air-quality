@@ -1,6 +1,8 @@
 package com.bexarair.demo;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -31,6 +33,11 @@ public class User {
 
     @Column(nullable = false)
     private boolean dailyAlert;
+
+//    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "locations")
+//    private List<userLocations> locations;
+
+
 
 //    @OneToOne
 //    private User user;
