@@ -32,4 +32,10 @@ public class UserController {
         users.save(user);
         return "redirect:/login";
     }
+
+    @GetMapping("/profile")
+    public String showUserProfile(Model model){
+        model.addAttribute("user", new User());
+        return "users/profile";
+    }
 }
