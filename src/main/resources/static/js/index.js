@@ -62,9 +62,9 @@ function initMap() {
         zoom: 9,
         center: {lat: 29.4241, lng: -98.4936},
 
-        mapTypeControlOptions: {
-            mapTypeIds: ['satellite']
-        }
+        // mapTypeControlOptions: {
+        //     mapTypeIds: ['satellite']
+        // }
     });
 
     // NOTE: This uses cross-domain XHR, and may not work on older browsers.
