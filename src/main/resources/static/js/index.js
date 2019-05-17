@@ -55,17 +55,26 @@
 // bermudaTriangle.setMap(map);
 // }
 
-
+console.log("Javascript is online");
 var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: {lat: 29.4241, lng: -98.4936}
+        zoom: 9,
+        center: {lat: 29.4241, lng: -98.4936},
+
+        mapTypeControlOptions: {
+            mapTypeIds: ['satellite']
+        }
     });
 
     // NOTE: This uses cross-domain XHR, and may not work on older browsers.
     map.data.loadGeoJson(
         'https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson');
+
+
+
+
+
 }
 
 
