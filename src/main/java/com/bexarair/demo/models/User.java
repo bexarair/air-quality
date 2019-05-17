@@ -1,6 +1,8 @@
 package com.bexarair.demo.models;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,6 +34,14 @@ public class User {
     @Column(nullable = false)
     private boolean dailyAlert;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="users_locations", // this is the pivot table //
+            joinColumns={@JoinColumn(name="user_id")},
+            inverseJoinColumns={@JoinColumn(name="location_id")}
+    )
+
+    private List<UserLocation> locations;
 //    @OneToOne
 //    private User user;
 
