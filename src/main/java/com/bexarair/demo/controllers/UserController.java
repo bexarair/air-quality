@@ -39,9 +39,9 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/profile")
-    public String showUserProfile(Model model){
-        model.addAttribute("user", new User());
-        return "users/profile";
-    }
+//    @GetMapping("/profile")
+//    public String showUserProfile(Model model){
+//        model.addAttribute("user", new User());
+//        return "users/profile";
+//    }
 }
