@@ -42,27 +42,33 @@ public class AirQualityRecord {
     private int categoryNumber;
 
     @Column(nullable = false)
-    private int zipCode;
+    private String categoryName;
 
     @Column(nullable = false)
-    private Date forecastDateIssue;
+    private String zipCode;
 
-    @Column(nullable = false)
+//    @Column
+//    private Date forecastDateIssue;
+
+    @Column
     private Date forecastDate;
 
-    @Column(nullable = false)
+    @Column
     private String forecastParameterName;
 
-    @Column(nullable = false)
+    @Column
     private int forecastAQI;
 
-    @Column(nullable = false)
+    @Column
     private int forecastCategoryNumber;
 
-    @Column(nullable = false)
+    @Column
+    private String forecastCategoryName;
+
+    @Column
     private boolean forecastActionDay;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(columnDefinition = "text")
     private String forecastDiscussion;
 
 
@@ -71,8 +77,7 @@ public class AirQualityRecord {
 
     }
 
-    //used to read and edit
-    public AirQualityRecord(Date dateObserved, int hourObserved, String localTimeZone, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, int zipCode, Date forecastDateIssue, Date forecastDate, String forecastParameterName, int forecastAQI, int forecastCategoryNumber, boolean forecastActionDay, String forecastDiscussion) {
+    public AirQualityRecord(Date dateObserved, int hourObserved, String localTimeZone, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, String zipCode, Date forecastDate, String forecastParameterName, int forecastAQI, int forecastCategoryNumber, String forecastCategoryName, boolean forecastActionDay, String forecastDiscussion) {
         this.dateObserved = dateObserved;
         this.hourObserved = hourObserved;
         this.localTimeZone = localTimeZone;
@@ -83,16 +88,16 @@ public class AirQualityRecord {
         this.parameterName = parameterName;
         this.AQI = AQI;
         this.categoryNumber = categoryNumber;
+        this.categoryName = categoryName;
         this.zipCode = zipCode;
-        this.forecastDateIssue = forecastDateIssue;
         this.forecastDate = forecastDate;
         this.forecastParameterName = forecastParameterName;
         this.forecastAQI = forecastAQI;
         this.forecastCategoryNumber = forecastCategoryNumber;
+        this.forecastCategoryName = forecastCategoryName;
         this.forecastActionDay = forecastActionDay;
         this.forecastDiscussion = forecastDiscussion;
     }
-
 
     public long getId() {
         return id;
@@ -182,20 +187,20 @@ public class AirQualityRecord {
         this.categoryNumber = categoryNumber;
     }
 
-    public int getZipCode() {
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public Date getForecastDateIssue() {
-        return forecastDateIssue;
-    }
-
-    public void setForecastDateIssue(Date forecastDateIssue) {
-        this.forecastDateIssue = forecastDateIssue;
     }
 
     public Date getForecastDate() {
@@ -228,6 +233,14 @@ public class AirQualityRecord {
 
     public void setForecastCategoryNumber(int forecastCategoryNumber) {
         this.forecastCategoryNumber = forecastCategoryNumber;
+    }
+
+    public String getForecastCategoryName() {
+        return forecastCategoryName;
+    }
+
+    public void setForecastCategoryName(String forecastCategoryName) {
+        this.forecastCategoryName = forecastCategoryName;
     }
 
     public boolean isForecastActionDay() {
