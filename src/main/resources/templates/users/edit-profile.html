@@ -9,8 +9,7 @@
 <div class="container">
 
     <h1 style="text-align: center">Edit Your Profile</h1>
-    <form th:action="@{/edit}" method="POST" th:object="${user}">
-
+    <form th:action="@{'/profile/' + ${user.id} + '/edit'}" method="POST" th:object="${user}">
 
         <div class="form-group">
             <label for="email">Email</label>

@@ -35,7 +35,7 @@
                     </form>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <form th:action="@{/editprofile}" th:method="post">
+                    <form th:action="@{'/profile/' + ${user.id} + '/edit'}" th:method="post">
                         <button class="btn-link btn">Edit Profile</button>
                     </form>
                 </li>
