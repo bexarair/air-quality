@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -17,6 +18,7 @@ public class UserController {
     private UserRepository userCRUD;
     private LocationRepository locationCRUD;
     private PasswordEncoder passwordEncoder;
+    private LocationRepository locationCRUD;
 
     public UserController(UserRepository user, LocationRepository location, PasswordEncoder passwordEncoder) {
         this.userCRUD = user;
@@ -36,6 +38,24 @@ public class UserController {
         return "users/user-profile";
     }
 
+    // this isn't working as of 05/19
+    @GetMapping("/profile/{id}/edit")
+    public String showEditProfile(@PathVariable long id, Model model){
+        UserLocation location = locationCRUD.findOne(id);
+        model.addAttribute("user", new User());
+        return "users/edit-profile";
+    }
+
+    // this isn't working as of 05/19
+    @PostMapping("/profile/{id}/edit")
+    public String saveEditedUser(@ModelAttribute User user){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+        users.save(user);
+        return "redirect:/login";
+    }
+
+
     @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
@@ -50,7 +70,6 @@ public class UserController {
 //        return "users/profile";
 //    }
 
-
     //should this be in a location controller?
     @GetMapping("/graph")
     public String showGraph(
@@ -61,4 +80,5 @@ public class UserController {
 //        viewModel.addAttribute("locations",locationCRUD.findAllByUsersId(user));
         return "users/graph-test";
     }
+
 }
