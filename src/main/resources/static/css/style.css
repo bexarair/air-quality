@@ -2,3 +2,12 @@
     height: 600px;
     width: 100%;
 }
+
+.air-chart{
+    /*width: 100%;*/
+    margin-left: 15em;
+}
+
+.home-title{
+    text-align: center;
+}
