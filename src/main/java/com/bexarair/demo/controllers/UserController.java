@@ -1,7 +1,6 @@
 package com.bexarair.demo.controllers;
 
 import com.bexarair.demo.models.User;
-import com.bexarair.demo.models.UserLocation;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,19 +44,21 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/profile")
-    public String showUserProfile(Model model){
-        model.addAttribute("user", new User());
-        return "users/profile";
-    }
+//    @GetMapping("/profile")
+//    public String showUserProfile(Model model){
+//        model.addAttribute("user", new User());
+//        return "users/profile";
+//    }
 
 
     //should this be in a location controller?
     @GetMapping("/graph")
-    public String showGraph(Model viewModel){
-        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long user = sessionUser.getId();
-        viewModel.addAttribute("locations",locationCRUD.findAllByUsersId(user));
+    public String showGraph(
+//            Model viewModel
+    ){
+//        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        long user = sessionUser.getId();
+//        viewModel.addAttribute("locations",locationCRUD.findAllByUsersId(user));
         return "users/graph-test";
     }
 }
