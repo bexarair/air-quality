@@ -67,10 +67,11 @@ var airQualityAvg;
 
 for(var i = 0; i < testZip.length; i++){
     $.get(currentURL + testZip[i] + distanceURL + apiKey).done(function(airInfo){
-        console.log(airInfo[0]);
+        // console.log(airInfo[0]);
+        console.log(airInfo);
         airQualityName = airInfo[0].Category.Name;
+        console.log(airQualityName);
 
-        console.log(airInfo[i++]);
 
         airQuality1 = airInfo[0].AQI;
         airQuality2 = airInfo[1].AQI;
@@ -132,17 +133,17 @@ function initMap() {
     map.data.setStyle(function(feature) {
         var zipCode = feature.getProperty('ZIP');
         var color;
-        if (airQualityName === "Good"){
+        if (airQualityAvg >= 0 && airQualityAvg <= 50){
             color = "green";
-        }else if(airQualityName === "Moderate"){
+        }else if(airQualityAvg >= 51 && airQualityAvg <= 100){
             color = "yellow";
-        }else if(airQualityName ==="Unhealthy for Sensitive Groups"){
+        }else if(airQualityAvg >= 101 && airQualityAvg <= 150){
             color = "orange";
-        }else if(airQualityName === "Unhealthy"){
+        }else if(airQualityAvg >= 151 && airQualityAvg <= 200){
             color = "red";
-        }else if(airQualityName === "Very Unhealthy"){
+        }else if(airQualityAvg >= 201 && airQualityAvg <= 300){
             color = "magenta";
-        }else if(airQualityName === "Hazardous"){
+        }else if(airQualityAvg >= 301 && airQualityAvg <= 500){
             color = "maroon";
         }else{
             color = "black";
