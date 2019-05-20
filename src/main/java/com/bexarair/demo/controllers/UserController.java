@@ -1,6 +1,7 @@
 package com.bexarair.demo.controllers;
 
 import com.bexarair.demo.models.User;
+import com.bexarair.demo.models.UserLocation;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,16 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
+/****************Dependancy Injection********************/
     private UserRepository userCRUD;
     private LocationRepository locationCRUD;
     private PasswordEncoder passwordEncoder;
-    private LocationRepository locationCRUD;
 
     public UserController(UserRepository user, LocationRepository location, PasswordEncoder passwordEncoder) {
         this.userCRUD = user;
         this.locationCRUD = location;
         this.passwordEncoder = passwordEncoder;
     }
+/*********************************************************/
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
@@ -39,20 +41,26 @@ public class UserController {
     }
 
     // this isn't working as of 05/19
-    @GetMapping("/profile/{id}/edit")
-    public String showEditProfile(@PathVariable long id, Model model){
-        UserLocation location = locationCRUD.findOne(id);
-        model.addAttribute("user", new User());
+    @GetMapping("/profile/edit")
+    public String showEditProfile(Model model){
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userDB = userCRUD.findOne(sessionUser.getId());
+//        UserLocation location = locationCRUD.findOne(id);
+        model.addAttribute("user", userDB);
         return "users/edit-profile";
     }
 
     // this isn't working as of 05/19
-    @PostMapping("/profile/{id}/edit")
-    public String saveEditedUser(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        users.save(user);
-        return "redirect:/login";
+    @PostMapping("/profile/edit")
+    public String saveEditedUser(@ModelAttribute User userToEdit){
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String hash = passwordEncoder.encode(userToEdit.getPassword());
+        userToEdit.setId(sessionUser.getId());
+        userToEdit.setPassword(hash);
+        userToEdit.setFirstName(sessionUser.getFirstName());
+        userToEdit.setLastName(sessionUser.getLastName());
+        userCRUD.save(userToEdit);
+        return "redirect:/profile";
     }
 
 

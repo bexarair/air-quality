@@ -127,48 +127,22 @@ function initMap() {
         // }
     });
 
-//grabs the properties in the geoJson data
-    //this is specifically grabbing the ZIP property and checking if it 78002.  If it is, it turns red.  Otherwise Blue
-    // map.data.setStyle(function(feature) {
-    //     var zipCode = feature.getProperty('ZIP');
-    //     var color;
-    //     if (airQualityName === "Good"){
-    //         color = "green";
-    //     }else if(airQualityName === "Moderate"){
-    //         color = "yellow";
-    //     }else if(airQualityName ==="Unhealthy for Sensitive Groups"){
-    //         color = "orange";
-    //     }else if(airQualityName === "Unhealthy"){
-    //         color = "red";
-    //     }else if(airQualityName === "Very Unhealthy"){
-    //         color = "magenta";
-    //     }else if(airQualityName === "Hazardous"){
-    //         color = "maroon";
-    //     }else{
-    //         color = "black";
-    //     }
-    //     // var color = ascii === "78002" ? 'red' : 'blue';
-    //     return {
-    //         fillColor: color,
-    //         strokeWeight: 1
-    //     };
-    // });
-
-
+// grabs the properties in the geoJson data
+//     this is specifically grabbing the ZIP property and checking if it 78002.  If it is, it turns red.  Otherwise Blue
     map.data.setStyle(function(feature) {
         var zipCode = feature.getProperty('ZIP');
         var color;
-        if (zipCode.includes("1")){
+        if (airQualityName === "Good"){
             color = "green";
-        }else if(zipCode.includes("9")){
+        }else if(airQualityName === "Moderate"){
             color = "yellow";
-        }else if(zipCode.includes("0")){
+        }else if(airQualityName ==="Unhealthy for Sensitive Groups"){
             color = "orange";
-        }else if(zipCode.includes("5")){
+        }else if(airQualityName === "Unhealthy"){
             color = "red";
-        }else if(zipCode.includes("4") === "Very Unhealthy"){
+        }else if(airQualityName === "Very Unhealthy"){
             color = "magenta";
-        }else if(zipCode.includes("6")){
+        }else if(airQualityName === "Hazardous"){
             color = "maroon";
         }else{
             color = "black";
@@ -179,6 +153,32 @@ function initMap() {
             strokeWeight: 1
         };
     });
+
+
+    // map.data.setStyle(function(feature) {
+    //     var zipCode = feature.getProperty('ZIP');
+    //     var color;
+    //     if (zipCode.includes("1")){
+    //         color = "green";
+    //     }else if(zipCode.includes("9")){
+    //         color = "yellow";
+    //     }else if(zipCode.includes("0")){
+    //         color = "orange";
+    //     }else if(zipCode.includes("5")){
+    //         color = "red";
+    //     }else if(zipCode.includes("4") === "Very Unhealthy"){
+    //         color = "magenta";
+    //     }else if(zipCode.includes("6")){
+    //         color = "maroon";
+    //     }else{
+    //         color = "black";
+    //     }
+    //     // var color = ascii === "78002" ? 'red' : 'blue';
+    //     return {
+    //         fillColor: color,
+    //         strokeWeight: 1
+    //     };
+    // });
 
 
 
