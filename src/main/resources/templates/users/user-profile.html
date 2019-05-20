@@ -11,10 +11,22 @@
         <div class="row">
 
             <div class="card bg-light col-12 col-md-4 ">
-                <div class="card-header">Place 1</div>
-                <div class="card-body">
-                    <h5 class="card-title">AQI</h5>
-                </div>
+                <form th:action="@{/save-location}" th:method="post" th:object="${location}">
+
+                    <div class="card-header">Place 1</div>
+                    <div class="card-body">
+                        <h5 class="card-title">AQI</h5>
+                    </div>
+                    <div class="form-group">
+                        <label for="loc-title">Title</label>
+                        <input id="loc-title" class="form-control" th:field="*{title}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="zipcode">Zipcode</label>
+                        <input id="zipcode" class="form-control" th:field="*{zipcode}" />
+                    </div>
+                    <button type="submit" class="btn btn-primary loginBtn">Please sir</button>
+                </form>
             </div>
 
             <div class="card bg-light col-12 col-md-4">
