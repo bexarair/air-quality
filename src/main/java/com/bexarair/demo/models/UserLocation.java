@@ -17,20 +17,28 @@ public class UserLocation {
     @Column
     private String title;
 
+
+
     @ManyToOne
     @JoinColumn(name= "user_id", referencedColumnName = "id")
     private User user;
 
 
-    public UserLocation(){
+    public UserLocation(){}
 
-    }
-
-    public UserLocation(String zipcode, String title, String city, String country, User user) {
+    public UserLocation(String zipcode, String title, User user) {
         this.zipcode = zipcode;
         this.title = title;
         this.user = user;
     }
+
+    public UserLocation(String zipcode, String title) {
+        this.zipcode = zipcode;
+        this.title = title;
+
+    }
+
+
 
     public long getId() {
         return id;
