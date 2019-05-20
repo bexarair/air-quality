@@ -40,20 +40,30 @@
             <input id="password" class="form-control" type="password" th:field="*{password}" />
         </div>
 
-        <div class="form-group">
-            <label for="loc1">Location 1</label>
-            <input id="loc1" class="form-control" th:field="*{location}" />
-        </div>
+        <!--<div class="form-group" th:object="${location1}">-->
+            <!--&lt;!&ndash;<input id="user-id1" type="hidden" th:field="*{user.getId()}" />&ndash;&gt;-->
+            <!--<label for="loc-title">Title</label>-->
+            <!--<input id="loc-title" class="form-control" th:field="*{title}" />-->
+            <!--<label for="loc1">Location 1</label>-->
+            <!--<input id="loc1" class="form-control" th:field="*{zipcode}" />-->
 
-        <div class="form-group">
-            <label for="loc2">Location 2</label>
-            <input id="loc2" class="form-control" th:field="*{location}" />
-        </div>
+        <!--</div>-->
 
-        <div class="form-group">
-            <label for="loc3">Location 3</label>
-            <input id="loc3" class="form-control" th:field="*{location}" />
-        </div>
+        <!--<div class="form-group" th:object="${location2}">-->
+            <!--&lt;!&ndash;<input id="user-id2" type="hidden" th:field="*{user.getId()}" />&ndash;&gt;-->
+            <!--<label for="loc-title2">Title</label>-->
+            <!--<input id="loc-title2" class="form-control" th:field="*{title}" />-->
+            <!--<label for="loc2">Location 2</label>-->
+            <!--<input id="loc2" class="form-control" th:field="*{zipcode}" />-->
+        <!--</div>-->
+
+        <!--<div class="form-group" th:object="${location3}">-->
+            <!--&lt;!&ndash;<input id="user-id3" type="hidden" th:field="*{user.getId()}" />&ndash;&gt;-->
+            <!--<label for="loc-title3">Title</label>-->
+            <!--<input id="loc-title3" class="form-control" th:field="*{title}" />-->
+            <!--<label for="loc3">Location 3</label>-->
+            <!--<input id="loc3" class="form-control" th:field="*{zipcode}" />-->
+        <!--</div>-->
 
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="textAlerts" th:field="*{textAlert}"/>

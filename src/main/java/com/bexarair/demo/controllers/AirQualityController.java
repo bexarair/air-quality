@@ -66,7 +66,7 @@ public class AirQualityController {
 //3600000
 
 
-    @Scheduled(fixedRate = 10000) //grabs air every hour
+//    @Scheduled(fixedRate = 10000) //grabs air every hour
     public void getAir() {
         try {
 
@@ -129,6 +129,14 @@ public class AirQualityController {
 
 
     }//end of getAir
+
+
+
+
+
+
+
+
 ////3600000
 ////@Scheduled(fixedRate = 10000)
 //    public void getFutureAir(){

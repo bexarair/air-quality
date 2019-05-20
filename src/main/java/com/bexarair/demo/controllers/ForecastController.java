@@ -62,7 +62,7 @@ public class ForecastController {
 
 
     //3600000
-@Scheduled(fixedRate = 10000)
+//@Scheduled(fixedRate = 10000)
     public void getFutureAir(){
         try {
 

@@ -17,11 +17,6 @@ public class UserLocation {
     @Column
     private String title;
 
-    @Column
-    private String city;
-
-    @Column
-    private String country;
 
 
     @ManyToOne
@@ -29,17 +24,20 @@ public class UserLocation {
     private User user;
 
 
-    public UserLocation(){
+    public UserLocation(){}
 
-    }
-
-    public UserLocation(String zipcode, String title, String city, String country, User user) {
+    public UserLocation(String zipcode, String title, User user) {
         this.zipcode = zipcode;
         this.title = title;
-        this.city = city;
-        this.country = country;
         this.user = user;
     }
+
+    public UserLocation(String zipcode, String title) {
+        this.zipcode = zipcode;
+        this.title = title;
+    }
+
+
 
     public long getId() {
         return id;
@@ -65,21 +63,6 @@ public class UserLocation {
         this.title = title;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 
     public User getUser() {
         return user;

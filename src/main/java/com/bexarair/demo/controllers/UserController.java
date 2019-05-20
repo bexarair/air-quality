@@ -31,12 +31,16 @@ public class UserController {
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
+        model.addAttribute("location1", new UserLocation());
+        model.addAttribute("location2", new UserLocation());
+        model.addAttribute("location3", new UserLocation());
         return "users/sign-up";
     }
 
     @GetMapping("/profile")
     public String showUserProfile(Model model){
         model.addAttribute("user", new User());
+        model.addAttribute("location", new UserLocation());  // i just added this
         return "users/user-profile";
     }
 

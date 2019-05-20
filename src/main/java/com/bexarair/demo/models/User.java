@@ -35,7 +35,7 @@ public class User {
     private boolean dailyAlert;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<UserLocation> locations;
+    private List<UserLocation> location;
 
 //    @OneToOne
 //    private User user;
@@ -45,8 +45,22 @@ public class User {
 
     }
 
+
+
     //Reading and Updating the User
-    public User(String firstName, String lastName, String email, String username, String password, String phone, boolean textAlert, boolean dailyAlert) {
+//    public User(String firstName, String lastName, String email, String username, String password, String phone, boolean textAlert, boolean dailyAlert) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.username = username;
+//        this.password = password;
+//        this.phone = phone;
+//        this.textAlert = textAlert;
+//        this.dailyAlert = dailyAlert;
+//    }
+
+
+    public User(String firstName, String lastName, String email, String username, String password, String phone, boolean textAlert, boolean dailyAlert, List<UserLocation> location) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -55,8 +69,8 @@ public class User {
         this.phone = phone;
         this.textAlert = textAlert;
         this.dailyAlert = dailyAlert;
+        this.location = location;
     }
-
 
     public User(User copy) {
         id = copy.id;
@@ -68,6 +82,7 @@ public class User {
         phone = copy.phone;
         textAlert = copy.textAlert;
         dailyAlert = copy.dailyAlert;
+        location = copy.location;
 
     }
 
@@ -142,5 +157,13 @@ public class User {
 
     public void setDailyAlert(boolean dailyAlert) {
         this.dailyAlert = dailyAlert;
+    }
+
+    public List<UserLocation> getLocation() {
+        return location;
+    }
+
+    public void setLocation(List<UserLocation> location) {
+        this.location = location;
     }
 }//end of user class
