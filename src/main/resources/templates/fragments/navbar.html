@@ -34,11 +34,11 @@
                         <button class="btn-link btn">Logout</button>
                     </form>
                 </li>
-                <li sec:authorize="isAuthenticated()">
-                    <form th:action="@{'/profile/' + ${user.id} + '/edit'}" th:method="post">
-                        <button class="btn-link btn">Edit Profile</button>
-                    </form>
-                </li>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile/edit">Edit Profile</a>
+                    </li>
+                </th:block>
             </ul>
         </div>
     </nav>

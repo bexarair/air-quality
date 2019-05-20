@@ -32,7 +32,7 @@ public class ForecastRecord {
     private String parameterName;
 
     @Column
-    private Integer AQI;
+    private int AQI;
 
     @Column
     private int categoryNumber;
@@ -54,7 +54,7 @@ public class ForecastRecord {
 
     }
 
-    public ForecastRecord(Date dateIssue, Date forecastDate, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, Integer AQI, int categoryNumber, String categoryName, boolean actionDay, String discussion, String zipCode) {
+    public ForecastRecord(Date dateIssue, Date forecastDate, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, boolean actionDay, String discussion, String zipCode) {
         this.dateIssue = dateIssue;
         this.forecastDate = forecastDate;
         this.reportingArea = reportingArea;
@@ -134,11 +134,11 @@ public class ForecastRecord {
         this.parameterName = parameterName;
     }
 
-    public Integer getAQI() {
+    public int getAQI() {
         return AQI;
     }
 
-    public void setAQI(Integer AQI) {
+    public void setAQI(int AQI) {
         this.AQI = AQI;
     }
 

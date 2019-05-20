@@ -35,6 +35,7 @@ public class UserLocation {
     public UserLocation(String zipcode, String title) {
         this.zipcode = zipcode;
         this.title = title;
+
     }
 
 
@@ -62,7 +63,6 @@ public class UserLocation {
     public void setTitle(String title) {
         this.title = title;
     }
-
 
     public User getUser() {
         return user;
