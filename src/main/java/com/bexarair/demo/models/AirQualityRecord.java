@@ -50,26 +50,26 @@ public class AirQualityRecord {
 //    @Column
 //    private Date forecastDateIssue;
 
-    @Column
-    private Date forecastDate;
-
-    @Column
-    private String forecastParameterName;
-
-    @Column
-    private int forecastAQI;
-
-    @Column
-    private int forecastCategoryNumber;
-
-    @Column
-    private String forecastCategoryName;
-
-    @Column
-    private boolean forecastActionDay;
-
-    @Column(columnDefinition = "text")
-    private String forecastDiscussion;
+//    @Column
+//    private Date forecastDate;
+//
+//    @Column
+//    private String forecastParameterName;
+//
+//    @Column
+//    private int forecastAQI;
+//
+//    @Column
+//    private int forecastCategoryNumber;
+//
+//    @Column
+//    private String forecastCategoryName;
+//
+//    @Column
+//    private boolean forecastActionDay;
+//
+//    @Column(columnDefinition = "text")
+//    private String forecastDiscussion;
 
 
     //used to create
@@ -77,7 +77,7 @@ public class AirQualityRecord {
 
     }
 
-    public AirQualityRecord(Date dateObserved, int hourObserved, String localTimeZone, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, String zipCode, Date forecastDate, String forecastParameterName, int forecastAQI, int forecastCategoryNumber, String forecastCategoryName, boolean forecastActionDay, String forecastDiscussion) {
+    public AirQualityRecord(Date dateObserved, int hourObserved, String localTimeZone, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, String zipCode) {
         this.dateObserved = dateObserved;
         this.hourObserved = hourObserved;
         this.localTimeZone = localTimeZone;
@@ -90,13 +90,13 @@ public class AirQualityRecord {
         this.categoryNumber = categoryNumber;
         this.categoryName = categoryName;
         this.zipCode = zipCode;
-        this.forecastDate = forecastDate;
-        this.forecastParameterName = forecastParameterName;
-        this.forecastAQI = forecastAQI;
-        this.forecastCategoryNumber = forecastCategoryNumber;
-        this.forecastCategoryName = forecastCategoryName;
-        this.forecastActionDay = forecastActionDay;
-        this.forecastDiscussion = forecastDiscussion;
+//        this.forecastDate = forecastDate;
+//        this.forecastParameterName = forecastParameterName;
+//        this.forecastAQI = forecastAQI;
+//        this.forecastCategoryNumber = forecastCategoryNumber;
+//        this.forecastCategoryName = forecastCategoryName;
+//        this.forecastActionDay = forecastActionDay;
+//        this.forecastDiscussion = forecastDiscussion;
     }
 
     public long getId() {
@@ -203,59 +203,60 @@ public class AirQualityRecord {
         this.zipCode = zipCode;
     }
 
-    public Date getForecastDate() {
-        return forecastDate;
-    }
+//    public Date getForecastDate() {
+//        return forecastDate;
+//    }
+//
+//    public void setForecastDate(Date forecastDate) {
+//        this.forecastDate = forecastDate;
+//    }
+//
+//    public String getForecastParameterName() {
+//        return forecastParameterName;
+//    }
+//
+//    public void setForecastParameterName(String forecastParameterName) {
+//        this.forecastParameterName = forecastParameterName;
+//    }
+//
+//    public int getForecastAQI() {
+//        return forecastAQI;
+//    }
+//
+//    public void setForecastAQI(int forecastAQI) {
+//        this.forecastAQI = forecastAQI;
+//    }
+//
+//    public int getForecastCategoryNumber() {
+//        return forecastCategoryNumber;
+//    }
+//
+//    public void setForecastCategoryNumber(int forecastCategoryNumber) {
+//        this.forecastCategoryNumber = forecastCategoryNumber;
+//    }
+//
+//    public String getForecastCategoryName() {
+//        return forecastCategoryName;
+//    }
+//
+//    public void setForecastCategoryName(String forecastCategoryName) {
+//        this.forecastCategoryName = forecastCategoryName;
+//    }
+//
+//    public boolean isForecastActionDay() {
+//        return forecastActionDay;
+//    }
+//
+//    public void setForecastActionDay(boolean forecastActionDay) {
+//        this.forecastActionDay = forecastActionDay;
+//    }
+//
+//    public String getForecastDiscussion() {
+//        return forecastDiscussion;
+//    }
+//
+//    public void setForecastDiscussion(String forecastDiscussion) {
+//        this.forecastDiscussion = forecastDiscussion;
+//    }
 
-    public void setForecastDate(Date forecastDate) {
-        this.forecastDate = forecastDate;
-    }
-
-    public String getForecastParameterName() {
-        return forecastParameterName;
-    }
-
-    public void setForecastParameterName(String forecastParameterName) {
-        this.forecastParameterName = forecastParameterName;
-    }
-
-    public int getForecastAQI() {
-        return forecastAQI;
-    }
-
-    public void setForecastAQI(int forecastAQI) {
-        this.forecastAQI = forecastAQI;
-    }
-
-    public int getForecastCategoryNumber() {
-        return forecastCategoryNumber;
-    }
-
-    public void setForecastCategoryNumber(int forecastCategoryNumber) {
-        this.forecastCategoryNumber = forecastCategoryNumber;
-    }
-
-    public String getForecastCategoryName() {
-        return forecastCategoryName;
-    }
-
-    public void setForecastCategoryName(String forecastCategoryName) {
-        this.forecastCategoryName = forecastCategoryName;
-    }
-
-    public boolean isForecastActionDay() {
-        return forecastActionDay;
-    }
-
-    public void setForecastActionDay(boolean forecastActionDay) {
-        this.forecastActionDay = forecastActionDay;
-    }
-
-    public String getForecastDiscussion() {
-        return forecastDiscussion;
-    }
-
-    public void setForecastDiscussion(String forecastDiscussion) {
-        this.forecastDiscussion = forecastDiscussion;
-    }
-}//end of hospitalrecord class
+}//end of CurrentAQRecord class
