@@ -26,7 +26,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private int phone;
+    private String phone;
 
     @Column(nullable = false)
     private boolean textAlert;
@@ -51,7 +51,7 @@ public class User {
     }
 
     //Reading and Updating the User
-    public User(String firstName, String lastName, String email, String username, String password, int phone, boolean textAlert, boolean dailyAlert) {
+    public User(String firstName, String lastName, String email, String username, String password, String phone, boolean textAlert, boolean dailyAlert) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -124,11 +124,11 @@ public class User {
         this.password = password;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

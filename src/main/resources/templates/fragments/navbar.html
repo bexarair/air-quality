@@ -3,7 +3,7 @@
 <head></head>
 <body>
 <th:block th:fragment="nav">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav">
         <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,6 +21,7 @@
                 <th:block sec:authorize="!isAuthenticated()">
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
+                        <!--<button id="loginBtnModal" type="button" class="btn btn-outline-primary">Login</button>-->
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/sign-up">Register</a>
@@ -39,6 +40,7 @@
                         <button class="btn-link btn">Edit Profile</button>
                     </form>
                 </li>
+
             </ul>
         </div>
     </nav>

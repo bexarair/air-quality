@@ -26,7 +26,7 @@
             <!--}-->
         <!--</style>-->
     </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav">
     <a class="navbar-brand" href="/">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,8 @@
             <!--</th:block>-->
             <!--<th:block sec:authorize="!isAuthenticated()">-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link login-btn" href="/login">Login</a>
+                    <!--<button id="loginBtnModal" type="button" class="btn btn-outline-primary">Login</button>-->
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/sign-up">Register</a>
@@ -67,15 +68,17 @@
 
     <div class="container">
         <div id="map"></div>
-        <div class="col-4" style="background-color: mediumvioletred">
-            Place 1
-        </div>
-        <div class="col-4" style="background-color: aquamarine">
-            Place 2
-        </div>
-        <div class="col-4" style="background-color: forestgreen">
-            Place 3
-        </div>
+            <div class="row">
+                <div class="col-12 col-md-4" style="background-color: mediumvioletred">
+                    BLURB 1
+                </div>
+                <div class="col-12 col-md-4" style="background-color: aquamarine">
+                    BLURB 2
+                </div>
+                <div class="col-12 col-md-4" style="background-color: forestgreen">
+                    BLURB 3
+                </div>
+            </div>
     </div>
       
     <div class="air-chart">

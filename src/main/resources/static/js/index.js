@@ -241,6 +241,11 @@ function drawCurveTypes() {
 }
 
 
+    // $("#loginBtnModal").on("click", function() {
+    //     console.log("You clicked log in");
+    //     $("#modal-login").modal("show");
+    // });
+
 
 
 //

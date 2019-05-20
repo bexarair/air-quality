@@ -11,3 +11,8 @@
 .home-title{
     text-align: center;
 }
+
+nav {
+    background-color: #010733;
+    height: 4em;
+}
