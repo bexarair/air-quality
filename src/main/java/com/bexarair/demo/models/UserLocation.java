@@ -17,13 +17,6 @@ public class UserLocation {
     @Column
     private String title;
 
-    @Column
-    private String city;
-
-    @Column
-    private String country;
-
-
     @ManyToOne
     @JoinColumn(name= "user_id", referencedColumnName = "id")
     private User user;
@@ -36,8 +29,6 @@ public class UserLocation {
     public UserLocation(String zipcode, String title, String city, String country, User user) {
         this.zipcode = zipcode;
         this.title = title;
-        this.city = city;
-        this.country = country;
         this.user = user;
     }
 
@@ -63,22 +54,6 @@ public class UserLocation {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public User getUser() {

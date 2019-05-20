@@ -41,6 +41,7 @@ public class ForecastController {
     private static Map<String, HttpResponse> apiResponses = new HashMap<>();
     //    private static long currentAirQualityID;
     private static long currentForecastAQID;
+    private static boolean seeder = false;
 
     /*********************THIS IS INJECTION*******************/
     private final ForecastRepository forecastCRUD;
@@ -56,13 +57,90 @@ public class ForecastController {
     /**********************************************************/
 
 
-
-
+//    @Scheduled(fixedRate = 10000)
+//    public void setupFutureAir(){
+//        try {
+//
+//            for(int i = 0; i < testZip.length; i++) {
+//                jsonNodeHttpResponse = Unirest.get(forecastURL + testZip[i] + dateURL + distanceURL + apiKey)
+//                        .asJson();
+//                apiResponses.put(testZip[i], jsonNodeHttpResponse);
+//
+//                JSONArray aqiArray = jsonNodeHttpResponse.getBody().getArray();
+//                JSONObject forecastAir = aqiArray.getJSONObject(0);
+//
+//                System.out.println(tomorrowDate);
+//
+//                System.out.println(aqiArray);
+//                System.out.println(forecastAir);
+//                System.out.println(jsonNodeHttpResponse);
+//
+//                String dateIssue = forecastAir.getString("DateIssue");
+//                String reportingArea = forecastAir.getString("ReportingArea");
+//                String stateCode = forecastAir.getString("StateCode");
+//                double latitude = forecastAir.getDouble("Latitude");
+//                double longitude = forecastAir.getDouble("Longitude");
+//                String dateForcast = forecastAir.getString("DateForecast");
+//                String forcastParameterName = forecastAir.getString("ParameterName");
+//
+//
+//                int forecastAqi = forecastAir.getInt("AQI");
+//
+//
+//                int forecastNumber = forecastAir.getJSONObject("Category").getInt("Number");
+//                String forecastName = forecastAir.getJSONObject("Category").getString("Name");
+//                boolean actionDay = forecastAir.getBoolean("ActionDay");
+//                String discussion = forecastAir.getString("Discussion");
+//
+//
+//
+//
+//
+//                Date forcastDate = null;
+//                Date forecastDateIssue = null;
+//                try {
+//                    forcastDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateForcast);
+//                    forecastDateIssue = new SimpleDateFormat("yyyy-MM-dd").parse(dateIssue);
+//                    System.out.println("this is in the forecast loop " + currentForecastAQID);
+//
+//                    ForecastRecord newForecastRecord = new ForecastRecord();
+//                    newForecastRecord.setDateIssue(forecastDateIssue);
+//                    newForecastRecord.setReportingArea(reportingArea);
+//                    newForecastRecord.setStateCode(stateCode);
+//                    newForecastRecord.setLatitude(latitude);
+//                    newForecastRecord.setLongitude(longitude);
+//                    newForecastRecord.setForecastDate(forcastDate);
+//                    newForecastRecord.setParameterName(forcastParameterName);
+//
+//
+//                    newForecastRecord.setAQI(forecastAqi);
+//
+//
+//                    newForecastRecord.setCategoryNumber(forecastNumber);
+//                    newForecastRecord.setCategoryName(forecastName);
+//                    newForecastRecord.setActionDay(actionDay);
+//                    newForecastRecord.setDiscussion(discussion);
+//                    newForecastRecord.setZipCode(testZip[i]);
+//                    forecastCRUD.save(newForecastRecord);
+//
+//
+//
+//                } catch (ParseException parseException) {
+//                    System.out.println(parseException);
+//                }
+//
+//
+//            }
+//
+//        } catch (UnirestException e) {
+//            e.printStackTrace();
+//        }
+//    }//end of future air
 
 
 
     //3600000
-@Scheduled(fixedRate = 10000)
+//@Scheduled(fixedDelay = 10000)
     public void getFutureAir(){
         try {
 
@@ -105,7 +183,7 @@ public class ForecastController {
                 Date forecastDateIssue = null;
                 try {
                     forcastDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateForcast);
-                    forecastDateIssue = new SimpleDateFormat("yyyy-MM-dd").parse(dateForcast);
+                    forecastDateIssue = new SimpleDateFormat("yyyy-MM-dd").parse(dateIssue);
                     System.out.println("this is in the forecast loop " + currentForecastAQID);
 
                     ForecastRecord currentRecord = forecastCRUD.findByZipCode(testZip[i]);
@@ -141,4 +219,12 @@ public class ForecastController {
             e.printStackTrace();
         }
     }//end of future air
+
+
+
+
+
+
+
+
 }
