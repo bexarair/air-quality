@@ -34,14 +34,9 @@ public class User {
     @Column(nullable = false)
     private boolean dailyAlert;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_locations", // this is the pivot table //
-            joinColumns={@JoinColumn(name="user_id")},
-            inverseJoinColumns={@JoinColumn(name="location_id")}
-    )
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserLocation> locations;
+
 //    @OneToOne
 //    private User user;
 

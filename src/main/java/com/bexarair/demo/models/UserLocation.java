@@ -24,20 +24,21 @@ public class UserLocation {
     private String country;
 
 
-    @ManyToMany(mappedBy = "locations")
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name= "user_id", referencedColumnName = "id")
+    private User user;
 
 
     public UserLocation(){
 
     }
 
-    public UserLocation(String zipcode, String title, String city, String country, List<User> users) {
+    public UserLocation(String zipcode, String title, String city, String country, User user) {
         this.zipcode = zipcode;
         this.title = title;
         this.city = city;
         this.country = country;
-        this.users = users;
+        this.user = user;
     }
 
     public long getId() {
@@ -80,11 +81,11 @@ public class UserLocation {
         this.country = country;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
