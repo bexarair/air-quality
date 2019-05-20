@@ -82,35 +82,35 @@ for(var i = 0; i < testZip.length; i++){
 }
 
 
-// var airColorObj = [
-//     {
-//         condition: "Good",
-//         color: "green"},
-//     {
-//         condition: "Moderate",
-//         color: "yellow"},
-//     {
-//         condition: "Unhealthy for Sensitive Groups",
-//         color: "orange"},
-//     {
-//         condition: "Unhealthy",
-//         color: "red"},
-//     {
-//         condition: "Very Unhealthy",
-//         color: "magenta"},
-//     {
-//         condition: "Hazardous",
-//         color: "maroon"}
-//     ];
-//
-// function showAirColor(airQualityName){
-//     for(var i = 0; i<=airColorObj.length; i++){
-//         if(airQualityName === airColorObj[i].condition){
-//             // $('body, html').css('background-image', weatherObj[i].backPic);
-//             return "<img src=" + weatherObj[i].url + ">";
-//         }
-//     }
-// }
+var airColorObj = [
+    {
+        condition: "Good",
+        color: "green"},
+    {
+        condition: "Moderate",
+        color: "yellow"},
+    {
+        condition: "Unhealthy for Sensitive Groups",
+        color: "orange"},
+    {
+        condition: "Unhealthy",
+        color: "red"},
+    {
+        condition: "Very Unhealthy",
+        color: "magenta"},
+    {
+        condition: "Hazardous",
+        color: "maroon"}
+    ];
+
+function showAirColor(airQualityName){
+    for(var i = 0; i<=airColorObj.length; i++){
+        if(airQualityName === airColorObj[i].condition){
+            // $('body, html').css('background-image', weatherObj[i].backPic);
+            return "<img src=" + weatherObj[i].url + ">";
+        }
+    }
+}
 
 
 
@@ -128,31 +128,31 @@ function initMap() {
     });
 
 //grabs the properties in the geoJson data
-    //this is specifically grabbing the ZIP property and checking if it 78002.  If it is, it turns red.  Otherwise Blue
-    // map.data.setStyle(function(feature) {
-    //     var zipCode = feature.getProperty('ZIP');
-    //     var color;
-    //     if (airQualityName === "Good"){
-    //         color = "green";
-    //     }else if(airQualityName === "Moderate"){
-    //         color = "yellow";
-    //     }else if(airQualityName ==="Unhealthy for Sensitive Groups"){
-    //         color = "orange";
-    //     }else if(airQualityName === "Unhealthy"){
-    //         color = "red";
-    //     }else if(airQualityName === "Very Unhealthy"){
-    //         color = "magenta";
-    //     }else if(airQualityName === "Hazardous"){
-    //         color = "maroon";
-    //     }else{
-    //         color = "black";
-    //     }
-    //     // var color = ascii === "78002" ? 'red' : 'blue';
-    //     return {
-    //         fillColor: color,
-    //         strokeWeight: 1
-    //     };
-    // });
+//     this is specifically grabbing the ZIP property and checking if it 78002.  If it is, it turns red.  Otherwise Blue
+    map.data.setStyle(function(feature) {
+        var zipCode = feature.getProperty('ZIP');
+        var color;
+        if (airQualityName === "Good"){
+            color = "green";
+        }else if(airQualityName === "Moderate"){
+            color = "yellow";
+        }else if(airQualityName ==="Unhealthy for Sensitive Groups"){
+            color = "orange";
+        }else if(airQualityName === "Unhealthy"){
+            color = "red";
+        }else if(airQualityName === "Very Unhealthy"){
+            color = "magenta";
+        }else if(airQualityName === "Hazardous"){
+            color = "maroon";
+        }else{
+            color = "black";
+        }
+        // var color = ascii === "78002" ? 'red' : 'blue';
+        return {
+            fillColor: color,
+            strokeWeight: 1
+        };
+    });
 
 
     map.data.setStyle(function(feature) {
