@@ -31,9 +31,13 @@ public class LocationController {
 
     @GetMapping("/save-location")
     public String getLocation(Model model) {
-        model.addAttribute("location", new UserLocation());
+        model.addAttribute("location1", new UserLocation());
+//        model.addAttribute("location2", new UserLocation());
+//        model.addAttribute("location3", new UserLocation());
         return "users/user-profile";
     }
+
+
 
     @PostMapping("/save-location")
     public String saveLocation(@ModelAttribute UserLocation locationToCreate){
@@ -46,5 +50,9 @@ public class LocationController {
         locationCRUD.save(locationToCreate);
         return "redirect:/profile";
     }
+
+
+
+
 }
 
