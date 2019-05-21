@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -141,8 +142,7 @@ public class ForecastController {
 
     //3600000
 
-//@Scheduled(fixedRate = 10000)
-
+//    @Scheduled(fixedRate = 10000)
     public void getFutureAir(){
         try {
 

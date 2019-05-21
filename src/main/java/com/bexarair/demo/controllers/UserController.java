@@ -37,12 +37,14 @@ public class UserController {
         return "users/sign-up";
     }
 
-    @GetMapping("/profile")
-    public String showUserProfile(Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("location", new UserLocation());  // i just added this
-        return "users/user-profile";
-    }
+//    @GetMapping("/profile")
+//    public String showUserProfile(Model model){
+//        model.addAttribute("user", new User());
+//        model.addAttribute("location", new UserLocation());
+//        model.addAttribute("location2", new UserLocation());
+//        model.addAttribute("location3", new UserLocation()); // i just added this
+//        return "users/user-profile";
+//    }
 
     // this isn't working as of 05/19
     @GetMapping("/profile/edit")

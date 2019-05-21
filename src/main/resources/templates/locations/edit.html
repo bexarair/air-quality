@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <th:block th:replace="fragments/head :: header('Edit')"/>
+    </head>
+    <body class="min-vh-100 background">
+        <th:block th:replace="fragments/navbar :: nav"/>
+
+        <div class="container">
+            <h1>My Places</h1><p class="text-right">Manage My Places</p>
+            <div class="row">
+                <div class="card bg-light col-12 col-md-4">
+                    <th:block th:each="location : ${locations}">
+                        <!--<th:block th:if="${users}">-->
+                        <div class="contain-bg card" style="text-align: center; width: 100%">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${location.title}"></h5>
+                                <p class="card-text" th:text="${location.zipcode}"></p>
+                                <!--if no posts, dont show-->
+                                <!--<button class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${location.getId()}}">Edit</a></button>-->
+                                <!--<button class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${location.getId()}}">Delete</a></button>-->
+
+                            </div>
+                        </div>
+                        <!--</th:block>-->
+                    </th:block>
+
+
+                    <div>
+                        <h2 style="text-align: center">Edit Your Location</h2>
+                        <form th:action="@{'/locations/edit/' + ${id}}" th:method="post" th:object="${location}">
+                            <div class="form-group">
+                                Title:
+                                <input class="form-control" th:field="*{title}" />
+                                <br/>
+                            </div>
+                            <div class="form-group">
+                                Description:
+                                <textarea class="form-control input-post" th:field="*{zipcode}"></textarea>
+                                <br/>
+                            </div>
+                            <button id="post-btn" type="submit" class="btn btn-primary loginBtn">Submit Edit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
