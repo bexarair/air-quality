@@ -3,6 +3,7 @@ package com.bexarair.demo.controllers;
 import com.bexarair.demo.models.AirQualityRecord;
 import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
+import com.bexarair.demo.repositories.ARRecordRepository;
 import com.bexarair.demo.repositories.AirQualityRepository;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
@@ -25,6 +26,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,10 +37,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
 import javax.swing.Timer;
+import javax.validation.Valid;
 
-@Controller
+
+@RestController
+@RequestMapping("/api/v1")
 public class AirQualityController {
 
+    @Autowired
+    private ARRecordRepository aqRecordRepository;
 
     private HttpResponse<JsonNode> jsonNodeHttpResponse;
     private static final String currentURL = "http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=";
@@ -66,6 +75,63 @@ public class AirQualityController {
 //3600000
 
 
+
+
+/*********************THIS IS THE REST API*******************/
+@GetMapping("/airquality")
+public List<AirQualityRecord> getAllAirQuality() {
+    return aqRecordRepository.findAll();
+}
+
+    @GetMapping("/airquality/{userId}/{zipcode}")
+    public ResponseEntity<AirQualityRecord> getAirQualityByZip(@PathVariable Long userId, @PathVariable String zipCode)
+            throws ResourceNotFoundException {
+        AirQualityRecord airQualityRecord =
+                aqRecordRepository
+                        .findByZipCode(zipCode);  /// what ?
+
+//                        .orElseThrow(() -> new ResourceNotFoundException("Zipcode not found on :: " + zipCode));
+        return ResponseEntity.ok().body(airQualityRecord);
+    }
+
+    @PostMapping("/airquality")
+    public AirQualityRecord createAirQuality(@Valid @RequestBody AirQualityRecord airQualityRecord) {
+        return aqRecordRepository.save(airQualityRecord);
+    }
+
+    @PutMapping("/airquality/{userId}/{zipcode}")
+    public ResponseEntity<AirQualityRecord> updateAirQuality(
+            @PathVariable(value = "id") Long userId, @Valid @RequestBody AirQualityRecord airRecordDetails, @PathVariable String zipCode)
+            throws ResourceNotFoundException {
+        AirQualityRecord airQualityRecord =
+                aqRecordRepository
+                        .findByZipCodeAndDateObserved(zipCode, new Date());
+//                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
+        airQualityRecord.setAQI(airRecordDetails.getAQI());
+        airQualityRecord.setZipCode(airRecordDetails.getZipCode());
+        airQualityRecord.setDateObserved(airRecordDetails.getDateObserved());
+//        airQualityRecord.setUpdatedAt(new Date());  idk what this is.
+        final AirQualityRecord updatedAirQuality = aqRecordRepository.save(airRecordDetails);
+        return ResponseEntity.ok(updatedAirQuality);
+    }
+
+
+
+    @DeleteMapping("/airquality/{userId}/{zipcode}")
+    public Map<String, Boolean> deleteAirQualityRecord(@PathVariable(value = "id") Long userId, @PathVariable String zipCode) throws Exception {
+        AirQualityRecord airQualityRecord =
+                aqRecordRepository
+                        .findByZipCodeAndDateObserved(zipCode, new Date());
+//                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + zipCode));
+        aqRecordRepository.delete(airQualityRecord);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+/*********************END OF REST API*******************/
+
+
+/********************Database Injection**********************/
 //    @Scheduled(fixedRate = 10000) //grabs air every hour
     public void getAir() {
         try {
