@@ -1,11 +1,14 @@
 package com.bexarair.demo.models;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.util.Date;
 
 
 @Entity
 @Table(name = "AirQuality")
+@EntityListeners(AuditingEntityListener.class)
 public class AirQualityRecord {
     @Id
     @GeneratedValue

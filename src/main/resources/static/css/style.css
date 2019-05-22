@@ -11,3 +11,12 @@
 .home-title{
     text-align: center;
 }
+
+.james-card, .anwar-card, .bethany-card {
+    width: 100%;
+    background-repeat: no-repeat;
+}
+
+.about-us-container {
+    max-width: 900px;
+}

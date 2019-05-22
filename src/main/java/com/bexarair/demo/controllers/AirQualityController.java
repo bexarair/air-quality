@@ -3,6 +3,7 @@ package com.bexarair.demo.controllers;
 import com.bexarair.demo.models.AirQualityRecord;
 import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
+import com.bexarair.demo.repositories.AQRestRepository;
 import com.bexarair.demo.repositories.AirQualityRepository;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
@@ -12,30 +13,30 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
-import javax.swing.Timer;
+import javax.validation.Valid;
 
-@Controller
+
+//@RestController
+@RequestMapping("/api/v1")
 public class AirQualityController {
+
+    @Autowired
+    private AQRestRepository aqRecordRepository;
 
 
     private HttpResponse<JsonNode> jsonNodeHttpResponse;
@@ -44,8 +45,6 @@ public class AirQualityController {
     private static final LocalDate tomorrowDate = LocalDate.now().plus(1, ChronoUnit.DAYS);
     private static final String dateURL = "&date=" + tomorrowDate;
     private static final String distanceURL = "&distance=0&API_KEY=";
-
-
     private static final String apiKey = "A4D00993-8E59-4B13-924E-9BA79D1FCE63";
     private static final String[] zipcodes = {"78002","78006","78009","78015","78023","78039","78052","78056","78063","78064","78065","78066","78069","78073","78101","78108","78109","78112","78114","78121","78124","78148","78150","78152","78154","78155","78163","78201","78202","78203","78204","78205","78207","78208","78209","78210","78211","78212","78213","78214","78215","78216","78217","78218","78219","78220","78221","78222","78223","78224","78225","78226","78227","78228","78229","78230","78231","78232","78233","78234","78235","78236","78237","78238","78239","78240","78242","78244","78245","78247","78248","78249","78250","78251","78252","78253","78254","78255","78256","78257","78258","78259","78260","78261","78263","78264","78266"};
     private static final String[] testZip = {"78002", "78006", "78009", "78015", "78023"};
@@ -66,6 +65,63 @@ public class AirQualityController {
 //3600000
 
 
+
+
+///*********************THIS IS THE REST API*******************/
+//    @GetMapping("/airquality")
+//    public List<AirQualityRecord> getAllAirQuality() {
+//        return aqRecordRepository.findAll();
+//    }
+//
+//    @GetMapping("/airquality/{userId}/{zipcode}")
+//    public ResponseEntity<AirQualityRecord> getAirQualityByZip(@PathVariable Long userId, @PathVariable String zipCode)
+//            throws ResourceNotFoundException {
+//        AirQualityRecord airQualityRecord =
+//                aqRecordRepository
+//                        .findByZipCode(zipCode);  /// what ?
+//
+////                        .orElseThrow(() -> new ResourceNotFoundException("Zipcode not found on :: " + zipCode));
+//        return ResponseEntity.ok().body(airQualityRecord);
+//    }
+//
+//    @PostMapping("/airquality")
+//    public AirQualityRecord createAirQuality(@Valid @RequestBody AirQualityRecord airQualityRecord) {
+//        return aqRecordRepository.save(airQualityRecord);
+//    }
+//
+//    @PutMapping("/airquality/{userId}/{zipcode}")
+//    public ResponseEntity<AirQualityRecord> updateAirQuality(
+//            @PathVariable(value = "id") Long userId, @Valid @RequestBody AirQualityRecord airRecordDetails, @PathVariable String zipCode)
+//            throws ResourceNotFoundException {
+//        AirQualityRecord airQualityRecord =
+//                aqRecordRepository
+//                        .findByZipCodeAndDateObserved(zipCode, new Date());
+////                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
+//        airQualityRecord.setAQI(airRecordDetails.getAQI());
+//        airQualityRecord.setZipCode(airRecordDetails.getZipCode());
+//        airQualityRecord.setDateObserved(airRecordDetails.getDateObserved());
+////        airQualityRecord.setUpdatedAt(new Date());  idk what this is.
+//        final AirQualityRecord updatedAirQuality = aqRecordRepository.save(airRecordDetails);
+//        return ResponseEntity.ok(updatedAirQuality);
+//    }
+//
+//
+//
+//    @DeleteMapping("/airquality/{userId}/{zipcode}")
+//    public Map<String, Boolean> deleteAirQualityRecord(@PathVariable(value = "id") Long userId, @PathVariable String zipCode) throws Exception {
+//        AirQualityRecord airQualityRecord =
+//                aqRecordRepository
+//                        .findByZipCodeAndDateObserved(zipCode, new Date());
+////                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + zipCode));
+//        aqRecordRepository.delete(airQualityRecord);
+//        Map<String, Boolean> response = new HashMap<>();
+//        response.put("deleted", Boolean.TRUE);
+//        return response;
+//    }
+///*********************END OF REST API*******************/
+
+
+/********************Database Injection**********************/
 //    @Scheduled(fixedRate = 10000) //grabs air every hour
     public void getAir() {
         try {
@@ -138,7 +194,7 @@ public class AirQualityController {
 
 
 ////3600000
-////@Scheduled(fixedRate = 10000)
+//@Scheduled(fixedRate = 10000)
 //    public void getFutureAir(){
 //        try {
 //
