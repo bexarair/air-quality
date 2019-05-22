@@ -185,7 +185,7 @@ function initMap() {
 
     // NOTE: This uses cross-domain XHR, and may not work on older browsers.
     map.data.loadGeoJson(
-        'https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson'
+        'mapData/BexarAndZips.geojson'
     );
     // var triangleCoords = [
     //     {lat: 25.774, lng: -80.190},
