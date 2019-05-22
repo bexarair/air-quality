@@ -2,19 +2,25 @@ package com.bexarair.demo.controllers;
 
 import com.bexarair.demo.models.AirQualityRecord;
 import com.bexarair.demo.models.ForecastRecord;
+import com.bexarair.demo.models.User;
+import com.bexarair.demo.models.UserLocation;
 import com.bexarair.demo.repositories.AirQualityRepository;
 import com.bexarair.demo.repositories.ForecastRepository;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
+import com.bexarair.demo.services.SmsSender;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import javafx.util.converter.LocalDateStringConverter;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -49,101 +55,19 @@ public class ForecastController {
     private final AirQualityRepository airCRUD;
     private final UserRepository userCRUD;
     private final LocationRepository locationCRUD;
-    public ForecastController(ForecastRepository forecastCRUD, AirQualityRepository airCRUD, UserRepository userCRUD, LocationRepository locationCRUD){
+    private SmsSender textAlerts;
+    public ForecastController(ForecastRepository forecastCRUD, AirQualityRepository airCRUD, UserRepository userCRUD, LocationRepository locationCRUD, SmsSender textAlerts){
         this.forecastCRUD = forecastCRUD;
         this.airCRUD = airCRUD;
         this.userCRUD = userCRUD;
         this.locationCRUD = locationCRUD;
+        this.textAlerts = textAlerts;
     }
     /**********************************************************/
 
 
-//    @Scheduled(fixedRate = 10000)
-//    public void setupFutureAir(){
-//        try {
-//
-//            for(int i = 0; i < testZip.length; i++) {
-//                jsonNodeHttpResponse = Unirest.get(forecastURL + testZip[i] + dateURL + distanceURL + apiKey)
-//                        .asJson();
-//                apiResponses.put(testZip[i], jsonNodeHttpResponse);
-//
-//                JSONArray aqiArray = jsonNodeHttpResponse.getBody().getArray();
-//                JSONObject forecastAir = aqiArray.getJSONObject(0);
-//
-//                System.out.println(tomorrowDate);
-//
-//                System.out.println(aqiArray);
-//                System.out.println(forecastAir);
-//                System.out.println(jsonNodeHttpResponse);
-//
-//                String dateIssue = forecastAir.getString("DateIssue");
-//                String reportingArea = forecastAir.getString("ReportingArea");
-//                String stateCode = forecastAir.getString("StateCode");
-//                double latitude = forecastAir.getDouble("Latitude");
-//                double longitude = forecastAir.getDouble("Longitude");
-//                String dateForcast = forecastAir.getString("DateForecast");
-//                String forcastParameterName = forecastAir.getString("ParameterName");
-//
-//
-//                int forecastAqi = forecastAir.getInt("AQI");
-//
-//
-//                int forecastNumber = forecastAir.getJSONObject("Category").getInt("Number");
-//                String forecastName = forecastAir.getJSONObject("Category").getString("Name");
-//                boolean actionDay = forecastAir.getBoolean("ActionDay");
-//                String discussion = forecastAir.getString("Discussion");
-//
-//
-//
-//
-//
-//                Date forcastDate = null;
-//                Date forecastDateIssue = null;
-//                try {
-//                    forcastDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateForcast);
-//                    forecastDateIssue = new SimpleDateFormat("yyyy-MM-dd").parse(dateIssue);
-//                    System.out.println("this is in the forecast loop " + currentForecastAQID);
-//
-//                    ForecastRecord newForecastRecord = new ForecastRecord();
-//                    newForecastRecord.setDateIssue(forecastDateIssue);
-//                    newForecastRecord.setReportingArea(reportingArea);
-//                    newForecastRecord.setStateCode(stateCode);
-//                    newForecastRecord.setLatitude(latitude);
-//                    newForecastRecord.setLongitude(longitude);
-//                    newForecastRecord.setForecastDate(forcastDate);
-//                    newForecastRecord.setParameterName(forcastParameterName);
-//
-//
-//                    newForecastRecord.setAQI(forecastAqi);
-//
-//
-//                    newForecastRecord.setCategoryNumber(forecastNumber);
-//                    newForecastRecord.setCategoryName(forecastName);
-//                    newForecastRecord.setActionDay(actionDay);
-//                    newForecastRecord.setDiscussion(discussion);
-//                    newForecastRecord.setZipCode(testZip[i]);
-//                    forecastCRUD.save(newForecastRecord);
-//
-//
-//
-//                } catch (ParseException parseException) {
-//                    System.out.println(parseException);
-//                }
-//
-//
-//            }
-//
-//        } catch (UnirestException e) {
-//            e.printStackTrace();
-//        }
-//    }//end of future air
-
-
-
-    //3600000
-
-//    @Scheduled(fixedRate = 10000)
-    public void getFutureAir(){
+    @Scheduled(fixedRate = 10000)
+    public void setupFutureAir(){
         try {
 
             for(int i = 0; i < testZip.length; i++) {
@@ -184,29 +108,32 @@ public class ForecastController {
                 Date forcastDate = null;
                 Date forecastDateIssue = null;
                 try {
+
+//                    forcastDate = LocalDate.parse(dateForcast);
+
                     forcastDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateForcast);
-                    forecastDateIssue = new SimpleDateFormat("yyyy-MM-dd").parse(dateIssue);
+//                    forecastDateIssue = new SimpleDateFormat("yyyy-MM-dd").parse(dateIssue);
                     System.out.println("this is in the forecast loop " + currentForecastAQID);
 
-                    ForecastRecord currentRecord = forecastCRUD.findByZipCode(testZip[i]);
-                    currentRecord.setDateIssue(forecastDateIssue);
-                    currentRecord.setReportingArea(reportingArea);
-                    currentRecord.setStateCode(stateCode);
-                    currentRecord.setLatitude(latitude);
-                    currentRecord.setLongitude(longitude);
-                    currentRecord.setForecastDate(forcastDate);
-                    currentRecord.setParameterName(forcastParameterName);
+                    ForecastRecord newForecastRecord = new ForecastRecord();
+                    newForecastRecord.setDateIssue(dateIssue);
+                    newForecastRecord.setReportingArea(reportingArea);
+                    newForecastRecord.setStateCode(stateCode);
+                    newForecastRecord.setLatitude(latitude);
+                    newForecastRecord.setLongitude(longitude);
+                    newForecastRecord.setForecastDate(dateForcast);
+                    newForecastRecord.setParameterName(forcastParameterName);
 
 
-                    currentRecord.setAQI(forecastAqi);
+                    newForecastRecord.setAQI(forecastAqi);
 
 
-                    currentRecord.setCategoryNumber(forecastNumber);
-                    currentRecord.setCategoryName(forecastName);
-                    currentRecord.setActionDay(actionDay);
-                    currentRecord.setDiscussion(discussion);
-                    currentRecord.setZipCode(testZip[i]);
-                    forecastCRUD.save(currentRecord);
+                    newForecastRecord.setCategoryNumber(forecastNumber);
+                    newForecastRecord.setCategoryName(forecastName);
+                    newForecastRecord.setActionDay(actionDay);
+                    newForecastRecord.setDiscussion(discussion);
+                    newForecastRecord.setZipCode(testZip[i]);
+                    forecastCRUD.save(newForecastRecord);
 
 
 
@@ -220,12 +147,172 @@ public class ForecastController {
         } catch (UnirestException e) {
             e.printStackTrace();
         }
+
+
+
+//
+//        if(daily_alert) {
+//            public static sendDailyAlert() {
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+                String date = simpleDateFormat.format(new Date());
+                System.out.println(date);
+
+
+                List<ForecastRecord> forecast = forecastCRUD.findAllByDateIssue(date);
+                List<UserLocation> userLocation = locationCRUD.findAll();
+                List<User> alertUsers = userCRUD.findAllByDailyAlert(true);
+
+
+//                List<User> user = userCRUD.find
+
+
+                //text messages based alerts and ID
+                for (int i = 0; i < alertUsers.size(); i++) {
+                    long userId = alertUsers.get(i).getId();
+                    for(int j=0; j< userLocation.size(); j++) {
+                        long userLocationId = userLocation.get(j).getUser().getId();
+                        System.out.println("This should be the user IDS: " + alertUsers.get(i).getId());
+                        System.out.println("This should be the user ID of the location : " + userLocation.get(i).getUser().getId());
+                        if (userId == userLocationId)
+                            textAlerts.aqiOverviewText(forecast.get(i), userLocation.get(j), alertUsers.get(i));
+                        //this is putting the info into the text and then sending
+//                        }
+//                    }
+                    }
+                }
+
+//            }
+//        }
+
+
+
+
+        Date date3 = new Date();
+
+        System.out.println("Please sir BE THE ONE: " + forecast);
+        System.out.println("This is Garbage Date: " + date);
+
+        LocalDate goodDate = LocalDate.now();
+        System.out.println("This is what we want " + goodDate);
+
+
+//        System.out.println(date);
+//        forcastDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateForcast);
+//        try {
+//            formatDate = new SimpleDateFormat("yyyy-MM-dd").parse(date.toString());
+//        }catch(ParseException e){
+//            System.out.println("You crazy as hell" + e);
+//        }
+//        ForecastRecord forecast = forecastCRUD.findAllByForecastDate(formatDate);
+//        List<UserLocation> userTitle = locationCRUD.findAll();
+//        System.out.println("What the HELL is THIS?! " + formatDate);
+//        System.out.println("This is find by date: " + forecast);
+//        System.out.println("This is the needed title " + userTitle);
     }//end of future air
 
 
 
+    //3600000
+
+//    @Scheduled(fixedRate = 10000)
+//    public void getFutureAir(){
+//        try {
+//
+//            for(int i = 0; i < testZip.length; i++) {
+//                jsonNodeHttpResponse = Unirest.get(forecastURL + testZip[i] + dateURL + distanceURL + apiKey)
+//                        .asJson();
+//                apiResponses.put(testZip[i], jsonNodeHttpResponse);
+//
+//                JSONArray aqiArray = jsonNodeHttpResponse.getBody().getArray();
+//                JSONObject forecastAir = aqiArray.getJSONObject(0);
+//
+//                System.out.println(tomorrowDate);
+//
+//                System.out.println(aqiArray);
+//                System.out.println(forecastAir);
+//                System.out.println(jsonNodeHttpResponse);
+//
+//                String dateIssue = forecastAir.getString("DateIssue");
+//                String reportingArea = forecastAir.getString("ReportingArea");
+//                String stateCode = forecastAir.getString("StateCode");
+//                double latitude = forecastAir.getDouble("Latitude");
+//                double longitude = forecastAir.getDouble("Longitude");
+//                String dateForcast = forecastAir.getString("DateForecast");
+//                String forcastParameterName = forecastAir.getString("ParameterName");
+//
+//
+//                int forecastAqi = forecastAir.getInt("AQI");
+//
+//
+//                int forecastNumber = forecastAir.getJSONObject("Category").getInt("Number");
+//                String forecastName = forecastAir.getJSONObject("Category").getString("Name");
+//                boolean actionDay = forecastAir.getBoolean("ActionDay");
+//                String discussion = forecastAir.getString("Discussion");
+//
+//
+//
+//
+//
+//                Date forcastDate = null;
+//                Date forecastDateIssue = null;
+//                try {
+////                    forcastDate = LocalDate.parse(dateForcast);
+//                    forcastDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateForcast);
+//                    forecastDateIssue = new SimpleDateFormat("yyyy-MM-dd").parse(dateIssue);
+//                    System.out.println("this is in the forecast loop " + currentForecastAQID);
+//
+//                    ForecastRecord currentRecord = forecastCRUD.findByZipCode(testZip[i]);
+//                    currentRecord.setDateIssue(forecastDateIssue);
+//                    currentRecord.setReportingArea(reportingArea);
+//                    currentRecord.setStateCode(stateCode);
+//                    currentRecord.setLatitude(latitude);
+//                    currentRecord.setLongitude(longitude);
+//                    currentRecord.setForecastDate(forcastDate);
+//                    currentRecord.setParameterName(forcastParameterName);
+//
+//
+//                    currentRecord.setAQI(forecastAqi);
+//
+//
+//                    currentRecord.setCategoryNumber(forecastNumber);
+//                    currentRecord.setCategoryName(forecastName);
+//                    currentRecord.setActionDay(actionDay);
+//                    currentRecord.setDiscussion(discussion);
+//                    currentRecord.setZipCode(testZip[i]);
+//                    forecastCRUD.save(currentRecord);
+//
+//
+//
+//                } catch (ParseException parseException) {
+//                    System.out.println(parseException);
+//                }
+//
+//
+//            }
+//
+//        } catch (UnirestException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }//end of future air
 
 
+//public void sendDailyAQI() {
+//    ForecastRecord forecast = forecastCRUD.findAllByForecastDate(tomorrowDate);
+//    List<UserLocation> userTitle = locationCRUD.findAll();
+
+//    Date date = new Date();
+//    ForecastRecord forecast = forecastCRUD.findAllByForecastDate(date);
+//    List<UserLocation> userTitle = locationCRUD.findAll();
+//
+//    System.out.println("This is find by date: " + forecast);
+//    System.out.println("This is the needed title " + userTitle);
+
+//    textAlerts.aqiOverviewText(forecast, userTitle);
+//}
 
 
 

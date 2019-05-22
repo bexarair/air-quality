@@ -1,10 +1,13 @@
 package com.bexarair.demo.controllers;
 
+import com.bexarair.demo.models.ForecastRecord;
 import com.bexarair.demo.models.User;
 //import com.bexarair.demo.models.UserLocation;
 import com.bexarair.demo.models.UserLocation;
+import com.bexarair.demo.repositories.ForecastRepository;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
+import com.bexarair.demo.services.SmsSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,11 +26,14 @@ public class LocationController {
     private UserRepository userCRUD;
     private LocationRepository locationCRUD;
     private PasswordEncoder passwordEncoder;
+    private SmsSender textService;
 
-    public LocationController(UserRepository userCRUD, LocationRepository locationCRUD, PasswordEncoder passwordEncoder) {
+
+    public LocationController(UserRepository userCRUD, LocationRepository locationCRUD, PasswordEncoder passwordEncoder, SmsSender textService) {
         this.userCRUD = userCRUD;
         this.locationCRUD = locationCRUD;
         this.passwordEncoder = passwordEncoder;
+        this.textService = textService;
     }
 
 
@@ -40,12 +46,14 @@ public class LocationController {
         return "locations/create";
     }
 
+    //using this as a test case for text messages
     @PostMapping("/locations/create")
     public String saveLocation(@ModelAttribute UserLocation locationToCreate){
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userDB = userCRUD.findOne(sessionUser.getId());
         locationToCreate.setUser(userDB);
         locationCRUD.save(locationToCreate);
+//        textService.prepareAndSend();
         return "redirect:/profile";
     }
 
