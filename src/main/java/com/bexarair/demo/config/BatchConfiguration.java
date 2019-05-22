@@ -44,7 +44,7 @@ public class BatchConfiguration {
         FlatFileItemReader<CityHospitalRecord> reader = new FlatFileItemReader<CityHospitalRecord>();
         reader.setResource(new ClassPathResource("cityHospital.csv"));
         reader.setLineMapper(new DefaultLineMapper<CityHospitalRecord>() {{
-            setLineTokenizer(new DelimitedLineTokenizer() {{
+            setLineTokenizer(new DelimitedLineTokenizer(",") {{
                 setNames(new String[] { "zipCode", "pediAsthmaCases","pediPopulation","pediAsthmaRate" });
             }});
             setFieldSetMapper(new BeanWrapperFieldSetMapper<CityHospitalRecord>() {{
