@@ -1,7 +1,9 @@
 package com.bexarair.demo.config;
 
+import com.bexarair.demo.listener.JobCompletionNotificationListener;
 import com.bexarair.demo.models.CityHospitalRecord;
 import com.bexarair.demo.models.StateHospitalRecord;
+import com.bexarair.demo.processor.CityItemProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -43,7 +45,7 @@ public class BatchConfiguration {
         reader.setResource(new ClassPathResource("cityHospital.csv"));
         reader.setLineMapper(new DefaultLineMapper<CityHospitalRecord>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
-                setNames(new String[] { "firstName", "lastName","email","age" });
+                setNames(new String[] { "zipCode", "pediAsthmaCases","pediPopulation","pediAsthmaRate" });
             }});
             setFieldSetMapper(new BeanWrapperFieldSetMapper<CityHospitalRecord>() {{
                 setTargetType(CityHospitalRecord.class);
@@ -61,7 +63,7 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<CityHospitalRecord> writer() {
         JdbcBatchItemWriter<CityHospitalRecord> writer = new JdbcBatchItemWriter<CityHospitalRecord>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<CityHospitalRecord>());
-//        writer.setSql("INSERT INTO person (first_name, last_name,email,age) VALUES (:firstName, :lastName,:email,:age)");
+//        writer.setSql("INSERT INTO CityHospitalRecords (zipCode, pediAsthmaCases,pediPopulation,pediAsthmaRate) VALUES (:zipCode, :pediAsthmaCases,:pediPopulation,:pediAsthmaRate)");
         writer.setDataSource(dataSource);
         return writer;
     }
