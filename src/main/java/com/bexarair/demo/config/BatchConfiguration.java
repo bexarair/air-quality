@@ -63,7 +63,7 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<CityHospitalRecord> writer() {
         JdbcBatchItemWriter<CityHospitalRecord> writer = new JdbcBatchItemWriter<CityHospitalRecord>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<CityHospitalRecord>());
-//        writer.setSql("INSERT INTO CityHospitalRecords (zipCode, pediAsthmaCases,pediPopulation,pediAsthmaRate) VALUES (:zipCode, :pediAsthmaCases,:pediPopulation,:pediAsthmaRate)");
+        writer.setSql("INSERT INTO CityHospitalRecords (zipCode, pediAsthmaCases,pediPopulation,pediAsthmaRate) VALUES (:zipCode, :pediAsthmaCases,:pediPopulation,:pediAsthmaRate)");
         writer.setDataSource(dataSource);
         return writer;
     }
