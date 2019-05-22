@@ -11,3 +11,12 @@
 .home-title{
     text-align: center;
 }
+
+.james-card, .anwar-card, .bethany-card {
+    width: 100%;
+    /*height: 255px;*/
+    background-image: url("../images/james-lampkins.jpg");
+    /*background-size: cover;*/
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+}

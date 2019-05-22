@@ -48,6 +48,13 @@ public class UserController {
         return "users/user-profile";
     }
 
+    @GetMapping("/about")
+    public String showAboutPage(){
+//        model.addAttribute("user", new User());
+//        model.addAttribute("location", new UserLocation());  // i just added this
+        return "about-page";
+    }
+
     // this isn't working as of 05/19
     @GetMapping("/profile/edit")
     public String showEditProfile(Model model){

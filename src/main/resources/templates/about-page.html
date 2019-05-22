@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <th:block th:replace="fragments/head :: header('Sign-Up')"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: nav"/>
+<div class="container">
+    <h1 class="text-center">About us</h1>
+    <div class="row">
+
+
+        <div class="col-12 col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">James Lampkins</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Software Developer</h6>
+                    <div class="james-card"><img th:src="@{/images/james-lampkins.jpg}"/></div>
+                    <p class="card-text">Fun fact here</p>
+                    <a href="#" class="card-link">Hire him</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 ">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Anwar Lopez</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Software Developer</h6>
+                    <div class="anwar-card"><img th:src="@{/images/anwar-lopez.jpg}"/></div>
+                    <p class="card-text">Fun fact here</p>
+                    <a href="#" class="card-link">Hire him</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 ">
+            <div class="col-12 col-md-4 ">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Bethany Ramirez</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Software Developer</h6>
+                        <div class="bethany-card"><img th:src="@{/images/bethany-ramirez.jpg}"/></div>
+                        <p class="card-text">Fun fact here</p>
+                        <a href="#" class="card-link">Hire him</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer" />
+</body>
+</html>
