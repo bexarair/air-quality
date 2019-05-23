@@ -183,10 +183,9 @@ function initMap() {
 
 
 
-
     // NOTE: This uses cross-domain XHR, and may not work on older browsers.
     map.data.loadGeoJson(
-        'Bexar_County_ZIP_Code_Areas.json'
+        'https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson'
     );
     // var triangleCoords = [
     //     {lat: 25.774, lng: -80.190},
