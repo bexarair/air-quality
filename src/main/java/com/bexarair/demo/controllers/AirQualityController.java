@@ -25,14 +25,14 @@ import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 
-//@RestController
-@RequestMapping("/api/v1")
+@Controller
 public class AirQualityController {
 
     @Autowired
