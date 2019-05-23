@@ -13,7 +13,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import javafx.util.converter.LocalDateStringConverter;
+//import javafx.util.converter.LocalDateStringConverter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.format.datetime.joda.LocalDateParser;
@@ -66,7 +66,7 @@ public class ForecastController {
     /**********************************************************/
 
 
-    @Scheduled(fixedRate = 10000)
+//    @Scheduled(fixedRate = 10000)
     public void setupFutureAir(){
         try {
 

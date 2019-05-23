@@ -3,7 +3,6 @@ package com.bexarair.demo.controllers;
 import com.bexarair.demo.models.AirQualityRecord;
 import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
-import com.bexarair.demo.repositories.AQRestRepository;
 import com.bexarair.demo.repositories.AirQualityRepository;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
@@ -25,6 +24,7 @@ import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +32,12 @@ import javax.validation.Valid;
 
 
 //@RestController
-@RequestMapping("/api/v1")
+//@RequestMapping("/api/v1")
+@Controller
 public class AirQualityController {
 
     @Autowired
-    private AQRestRepository aqRecordRepository;
+    private AirQualityRepository aqRepository;
 
 
     private HttpResponse<JsonNode> jsonNodeHttpResponse;
@@ -122,7 +123,7 @@ public class AirQualityController {
 
 
 /********************Database Injection**********************/
-//    @Scheduled(fixedRate = 10000) //grabs air every hour
+    @Scheduled(fixedRate = 10000) //grabs air every hour
     public void getAir() {
         try {
 

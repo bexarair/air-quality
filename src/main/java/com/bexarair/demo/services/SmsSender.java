@@ -29,11 +29,6 @@ public class SmsSender {
 
 
 
-    // Find your Account Sid and Auth Token at twilio.com/console
-//    public static final String ACCOUNT_SID =
-//            "ACcdf95a958c8700fb8b990660e446cc44";
-//    public static final String AUTH_TOKEN =
-//            "0f9e6ce4e07b1e526c73103d84afa9dd";
 @Value("${twilio.sid}")
 private String sid;
 @Value("${twilio.token}")
