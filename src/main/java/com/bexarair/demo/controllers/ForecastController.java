@@ -25,10 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -149,39 +146,49 @@ public class ForecastController {
         }
 
 
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
 
+        System.out.println("THIS IS THE DATE WE WANT " + dt);
 //
 //        if(daily_alert) {
 //            public static sendDailyAlert() {
                 String pattern = "yyyy-MM-dd";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-                String date = simpleDateFormat.format(new Date());
+                String date = simpleDateFormat.format(dt);
                 System.out.println(date);
 
 
-                List<ForecastRecord> forecast = forecastCRUD.findAllByDateIssue(date);
-                List<UserLocation> userLocation = locationCRUD.findAll();
-                List<User> alertUsers = userCRUD.findAllByDailyAlert(true);
+                List<ForecastRecord> forecast = forecastCRUD.findAllByForecastDate(date);
+                List<UserLocation> useLocation = locationCRUD.findAllByTextAlert(true);
+                List<User> alertUsers = userCRUD.findAll();
 
 
 //                List<User> user = userCRUD.find
 
 
-                //text messages based alerts and ID
-                for (int i = 0; i < alertUsers.size(); i++) {
-                    long userId = alertUsers.get(i).getId();
-                    for(int j=0; j< userLocation.size(); j++) {
-                        long userLocationId = userLocation.get(j).getUser().getId();
-                        System.out.println("This should be the user IDS: " + alertUsers.get(i).getId());
-                        System.out.println("This should be the user ID of the location : " + userLocation.get(i).getUser().getId());
-                        if (userId == userLocationId)
-                            textAlerts.aqiOverviewText(forecast.get(i), userLocation.get(j), alertUsers.get(i));
+//                text messages based alerts and ID
+                for (int i=0; i < useLocation.size(); i++) {
+                    long userId = useLocation.get(i).getUser().getId();
+                    for(int j=0; j < alertUsers.size(); j++) {
+                        long userLocationId = alertUsers.get(j).getId();
+                        System.out.println("This should be the user IDS: " + useLocation.get(i).getUser().getId());
+                        System.out.println("This should be the user ID of the location : " + alertUsers.get(j).getId());
+                        if (userLocationId == userId){
+                            textAlerts.aqiOverviewText(forecast.get(i), useLocation.get(i), alertUsers.get(j));
                         //this is putting the info into the text and then sending
 //                        }
-//                    }
+                        }
                     }
                 }
+
+
+
+
 
 //            }
 //        }

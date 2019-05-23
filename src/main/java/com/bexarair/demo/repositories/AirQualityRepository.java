@@ -14,6 +14,8 @@ public interface AirQualityRepository extends CrudRepository<AirQualityRecord, L
 AirQualityRecord findByHourObserved(String hour);
 AirQualityRecord findByZipCodeAndHourObserved(String zipCode, String HourObserved);
 AirQualityRecord findByZipCodeAndDateObserved(String zipCode, Date dateObserved);
+List<AirQualityRecord> findAllByCategoryName(String name);
+List<AirQualityRecord> findAllByDateObserved(String date);
 
 
 
