@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface ForecastRepository extends CrudRepository<ForecastRecord, Long> {
     ForecastRecord findByZipCode(String zipCode);
-    ForecastRecord findAllByForecastDate(String date);
+    ForecastRecord findByForecastDate(String date);
     List<ForecastRecord> findAllByDateIssue(String date);
+    List<ForecastRecord> findAllByForecastDate(String date);
 }

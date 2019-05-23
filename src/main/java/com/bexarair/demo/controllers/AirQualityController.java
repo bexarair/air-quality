@@ -1,11 +1,14 @@
 package com.bexarair.demo.controllers;
 
 import com.bexarair.demo.models.AirQualityRecord;
+import com.bexarair.demo.models.ForecastRecord;
 import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
-import com.bexarair.demo.repositories.AirQualityRepository;
-import com.bexarair.demo.repositories.LocationRepository;
-import com.bexarair.demo.repositories.UserRepository;
+
+
+import com.bexarair.demo.repositories.*;
+import com.bexarair.demo.services.SmsSender;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -31,13 +34,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 
-//@RestController
-//@RequestMapping("/api/v1")
+
 @Controller
 public class AirQualityController {
 
-    @Autowired
-    private AirQualityRepository aqRepository;
+//    @Autowired
+//    private AQRestRepository aqRecordRepository;
+
 
 
     private HttpResponse<JsonNode> jsonNodeHttpResponse;
@@ -57,132 +60,132 @@ public class AirQualityController {
     private final AirQualityRepository airCRUD;
     private final UserRepository userCRUD;
     private final LocationRepository locationCRUD;
-    public AirQualityController(AirQualityRepository airCRUD, UserRepository userCRUD, LocationRepository locationCRUD){
+    private final ForecastRepository forecastCRUD;
+    private final SmsSender textAlerts;
+    public AirQualityController(AirQualityRepository airCRUD, UserRepository userCRUD, LocationRepository locationCRUD, ForecastRepository forecastCRUD, SmsSender textAlerts){
         this.airCRUD = airCRUD;
         this.userCRUD = userCRUD;
         this.locationCRUD = locationCRUD;
+        this.forecastCRUD = forecastCRUD;
+        this.textAlerts = textAlerts;
     }
 /**********************************************************/
 //3600000
 
-
-
-
-///*********************THIS IS THE REST API*******************/
-//    @GetMapping("/airquality")
-//    public List<AirQualityRecord> getAllAirQuality() {
-//        return aqRecordRepository.findAll();
-//    }
-//
-//    @GetMapping("/airquality/{userId}/{zipcode}")
-//    public ResponseEntity<AirQualityRecord> getAirQualityByZip(@PathVariable Long userId, @PathVariable String zipCode)
-//            throws ResourceNotFoundException {
-//        AirQualityRecord airQualityRecord =
-//                aqRecordRepository
-//                        .findByZipCode(zipCode);  /// what ?
-//
-////                        .orElseThrow(() -> new ResourceNotFoundException("Zipcode not found on :: " + zipCode));
-//        return ResponseEntity.ok().body(airQualityRecord);
-//    }
-//
-//    @PostMapping("/airquality")
-//    public AirQualityRecord createAirQuality(@Valid @RequestBody AirQualityRecord airQualityRecord) {
-//        return aqRecordRepository.save(airQualityRecord);
-//    }
-//
-//    @PutMapping("/airquality/{userId}/{zipcode}")
-//    public ResponseEntity<AirQualityRecord> updateAirQuality(
-//            @PathVariable(value = "id") Long userId, @Valid @RequestBody AirQualityRecord airRecordDetails, @PathVariable String zipCode)
-//            throws ResourceNotFoundException {
-//        AirQualityRecord airQualityRecord =
-//                aqRecordRepository
-//                        .findByZipCodeAndDateObserved(zipCode, new Date());
-////                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + userId));
-//        airQualityRecord.setAQI(airRecordDetails.getAQI());
-//        airQualityRecord.setZipCode(airRecordDetails.getZipCode());
-//        airQualityRecord.setDateObserved(airRecordDetails.getDateObserved());
-////        airQualityRecord.setUpdatedAt(new Date());  idk what this is.
-//        final AirQualityRecord updatedAirQuality = aqRecordRepository.save(airRecordDetails);
-//        return ResponseEntity.ok(updatedAirQuality);
-//    }
-//
-//
-//
-//    @DeleteMapping("/airquality/{userId}/{zipcode}")
-//    public Map<String, Boolean> deleteAirQualityRecord(@PathVariable(value = "id") Long userId, @PathVariable String zipCode) throws Exception {
-//        AirQualityRecord airQualityRecord =
-//                aqRecordRepository
-//                        .findByZipCodeAndDateObserved(zipCode, new Date());
-////                        .orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + zipCode));
-//        aqRecordRepository.delete(airQualityRecord);
-//        Map<String, Boolean> response = new HashMap<>();
-//        response.put("deleted", Boolean.TRUE);
-//        return response;
-//    }
-///*********************END OF REST API*******************/
-
-
 /********************Database Injection**********************/
-//    @Scheduled(fixedRate = 20000) //grabs air every hour
+
+    @Scheduled(cron = "0 7 * * * ?") //grab at 7am everyday
+
     public void getAir() {
         try {
 
-        for(int i = 0; i < testZip.length; i++) {
-            jsonNodeHttpResponse = Unirest.get(currentURL + testZip[i] + distanceURL + apiKey)
-                    .asJson();
-            apiResponses.put(testZip[i], jsonNodeHttpResponse);
+            for(int i = 0; i < testZip.length; i++) {
+                jsonNodeHttpResponse = Unirest.get(currentURL + testZip[i] + distanceURL + apiKey)
+                        .asJson();
+                apiResponses.put(testZip[i], jsonNodeHttpResponse);
 
-            JSONArray aqiArray = jsonNodeHttpResponse.getBody().getArray();
-            JSONObject currentAir = aqiArray.getJSONObject(0);
+                JSONArray aqiArray = jsonNodeHttpResponse.getBody().getArray();
+                JSONObject currentAir = aqiArray.getJSONObject(0);
 
-            String dateObserved = currentAir.getString("DateObserved");
-            int hour = currentAir.getInt("HourObserved");
-            String localTimeZone = currentAir.getString("LocalTimeZone");
-            String reportingArea = currentAir.getString("ReportingArea");
-            String stateCode = currentAir.getString("StateCode");
-            double latitude = currentAir.getDouble("Latitude");
-            double longitude = currentAir.getDouble("Longitude");
-            String parameterName = currentAir.getString("ParameterName");
-            int AQI = currentAir.getInt("AQI");
-            int number = currentAir.getJSONObject("Category").getInt("Number");
-            String name = currentAir.getJSONObject("Category").getString("Name");
+                String dateObserved = currentAir.getString("DateObserved");
+                int hour = currentAir.getInt("HourObserved");
+                String localTimeZone = currentAir.getString("LocalTimeZone");
+                String reportingArea = currentAir.getString("ReportingArea");
+                String stateCode = currentAir.getString("StateCode");
+                double latitude = currentAir.getDouble("Latitude");
+                double longitude = currentAir.getDouble("Longitude");
+                String parameterName = currentAir.getString("ParameterName");
+                int AQI = currentAir.getInt("AQI");
+                int number = currentAir.getJSONObject("Category").getInt("Number");
+                String name = currentAir.getJSONObject("Category").getString("Name");
 
 
+                System.out.println(currentURL + testZip[i] + distanceURL + apiKey);
+    //            Date date = null;
+    //            try {
+    //                date = new SimpleDateFormat("yyyy-MM-dd").parse(dateObserved);
 
-            Date date = null;
-            try {
-                date = new SimpleDateFormat("yyyy-MM-dd").parse(dateObserved);
+                    AirQualityRecord newAirQuality = new AirQualityRecord();
+                    newAirQuality.setDateObserved(dateObserved);
+                    newAirQuality.setHourObserved(hour);
+                    newAirQuality.setLocalTimeZone(localTimeZone);
+                    newAirQuality.setReportingArea(reportingArea);
+                    newAirQuality.setStateCode(stateCode);
+                    newAirQuality.setLatitude(latitude);
+                    newAirQuality.setLongitude(longitude);
+                    newAirQuality.setParameterName(parameterName);
+                    newAirQuality.setAQI(AQI);
+                    newAirQuality.setCategoryNumber(number);
+                    newAirQuality.setCategoryName(name);
+                    newAirQuality.setZipCode(testZip[i]);
+                    airCRUD.save(newAirQuality);
 
-                AirQualityRecord newAirQuality = new AirQualityRecord();
-                newAirQuality.setDateObserved(date);
-                newAirQuality.setHourObserved(hour);
-                newAirQuality.setLocalTimeZone(localTimeZone);
-                newAirQuality.setReportingArea(reportingArea);
-                newAirQuality.setStateCode(stateCode);
-                newAirQuality.setLatitude(latitude);
-                newAirQuality.setLongitude(longitude);
-                newAirQuality.setParameterName(parameterName);
-                newAirQuality.setAQI(AQI);
-                newAirQuality.setCategoryNumber(number);
-                newAirQuality.setCategoryName(name);
-                newAirQuality.setZipCode(testZip[i]);
-                airCRUD.save(newAirQuality);
+                    //this is pulling the id but only the last one.  Need to store them all
+                    currentAirQualityID = newAirQuality.getId();
+                    System.out.println("This is in the loop " + currentAirQualityID);
+    //            } catch (ParseException parseException) {
+    //                System.out.println(parseException);
+    //            }
 
-                //this is pulling the id but only the last one.  Need to store them all
-                currentAirQualityID = newAirQuality.getId();
-                System.out.println("This is in the loop " + currentAirQualityID);
-            } catch (ParseException parseException) {
-                System.out.println(parseException);
+
             }
-
-
-        }
 
         } catch (UnirestException e) {
             e.printStackTrace();
+            }
+
+
+
+
+        Date dt = new Date();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(dt);
+        System.out.println(date);
+
+
+//        List<ForecastRecord> forecast = forecastCRUD.findAllByForecastDate(date);
+        List<AirQualityRecord> current = airCRUD.findAllByDateObserved(date);
+        List<UserLocation> useLocation = locationCRUD.findAllByTextAlert(true);
+        List<User> alertUsers = userCRUD.findAll();
+
+//Used to send the Text Alerts
+        int count = 0;
+        for (int i=0; i < current.size(); i++) {
+            count++;
+            if(count > alertUsers.size()){
+                break;
+            }
+            String currentZipCode = current.get(i).getZipCode();
+            String currentCatName = current.get(i).getCategoryName();
+            for(int j=0; j < useLocation.size(); j++) {
+                long userLocationId = useLocation.get(j).getUser().getId();
+                String locationZipCode = useLocation.get(j).getZipcode();
+                for(int k=0; k < alertUsers.size(); k++){
+                    long userId = alertUsers.get(k).getId();
+                    if (userLocationId == userId && currentZipCode.equals(locationZipCode) && currentCatName.equals("Unhealthy for Sensitive Groups") || currentCatName.equals("Unhealthy") || currentCatName.equals("Very Unhealthy") || currentCatName.equals("Hazardous") ){
+                        textAlerts.currentAlert(current.get(j), useLocation.get(j), alertUsers.get(k));
+//                    System.out.println("text message was sent");
+                    //this is putting the info into the text and then sending
+                    }
+                }
+            }
         }
 
+// look through all the airquality records...
 
+        // users are opted in to text messages..
+
+        // if they are... then what are their locations?
+
+        // compare the user locations zip codes against all of the air quality records zip codes
+
+            // if they match, and the air quality record has a bad AQI, then send a text message
+
+
+
+//
+// location zipCode to the current Zipcode/
 
 
     }//end of getAir

@@ -28,11 +28,11 @@ public class User {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = false)
-    private boolean textAlert;
-
-    @Column(nullable = false)
-    private boolean dailyAlert;
+//    @Column(nullable = false)
+//    private boolean textAlert;
+//
+//    @Column(nullable = false)
+//    private boolean dailyAlert;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserLocation> location;
@@ -60,15 +60,15 @@ public class User {
 //    }
 
 
-    public User(String firstName, String lastName, String email, String username, String password, String phone, boolean textAlert, boolean dailyAlert, List<UserLocation> location) {
+    public User(String firstName, String lastName, String email, String username, String password, String phone, List<UserLocation> location) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.password = password;
         this.phone = phone;
-        this.textAlert = textAlert;
-        this.dailyAlert = dailyAlert;
+//        this.textAlert = textAlert;
+//        this.dailyAlert = dailyAlert;
         this.location = location;
     }
 
@@ -80,8 +80,8 @@ public class User {
         username = copy.username;
         password = copy.password;
         phone = copy.phone;
-        textAlert = copy.textAlert;
-        dailyAlert = copy.dailyAlert;
+//        textAlert = copy.textAlert;
+//        dailyAlert = copy.dailyAlert;
         location = copy.location;
 
     }
@@ -143,21 +143,21 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean isTextAlert() {
-        return textAlert;
-    }
-
-    public void setTextAlert(boolean textAlert) {
-        this.textAlert = textAlert;
-    }
-
-    public boolean isDailyAlert() {
-        return dailyAlert;
-    }
-
-    public void setDailyAlert(boolean dailyAlert) {
-        this.dailyAlert = dailyAlert;
-    }
+//    public boolean isTextAlert() {
+//        return textAlert;
+//    }
+//
+//    public void setTextAlert(boolean textAlert) {
+//        this.textAlert = textAlert;
+//    }
+//
+//    public boolean isDailyAlert() {
+//        return dailyAlert;
+//    }
+//
+//    public void setDailyAlert(boolean dailyAlert) {
+//        this.dailyAlert = dailyAlert;
+//    }
 
     public List<UserLocation> getLocation() {
         return location;
