@@ -4,8 +4,11 @@ import com.bexarair.demo.models.AirQualityRecord;
 import com.bexarair.demo.models.ForecastRecord;
 import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
+
+
 import com.bexarair.demo.repositories.*;
 import com.bexarair.demo.services.SmsSender;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -39,6 +42,7 @@ public class AirQualityController {
 //    private AQRestRepository aqRecordRepository;
 
 
+
     private HttpResponse<JsonNode> jsonNodeHttpResponse;
     private static final String currentURL = "http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=";
     private static final String forecastURL = "http://www.airnowapi.org/aq/forecast/zipCode/?format=application/json&zipCode=";
@@ -69,7 +73,9 @@ public class AirQualityController {
 //3600000
 
 /********************Database Injection**********************/
+
     @Scheduled(cron = "0 7 * * * ?") //grab at 7am everyday
+
     public void getAir() {
         try {
 
