@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 
-@Controller
+@org.springframework.web.bind.annotation.RestController
 public class RestController {
     @Autowired
     private AQRestRepository aqRecordRepository;
