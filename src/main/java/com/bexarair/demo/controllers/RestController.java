@@ -1,7 +1,11 @@
 package com.bexarair.demo.controllers;
 
 import com.bexarair.demo.models.AirQualityRecord;
+import com.bexarair.demo.models.User;
+import com.bexarair.demo.models.UserLocation;
 import com.bexarair.demo.repositories.AQRestRepository;
+import com.bexarair.demo.repositories.LocationRepository;
+import com.bexarair.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +20,15 @@ import java.util.*;
 public class RestController {
     @Autowired
     private AQRestRepository aqRecordRepository;
+    private UserRepository userCRUD;
+    private LocationRepository locationCRUD;
 
+
+    public RestController(AQRestRepository aqRecordRepository, LocationRepository locationCRUD, UserRepository userCRUD) {
+        this.aqRecordRepository = aqRecordRepository;
+        this.userCRUD = userCRUD;
+        this.locationCRUD = locationCRUD;
+    }
 
     @GetMapping("/airquality")
     @ResponseBody
@@ -24,19 +36,50 @@ public class RestController {
         return aqRecordRepository.findAll();    }
 
 
+
+        // this is pulling from the air quality table //
     @GetMapping("/airquality/{zipcode}")
     @ResponseBody
     public ResponseEntity<List<AirQualityRecord>> getAirQualityByZip(@PathVariable String zipcode)
             throws ResourceNotFoundException {
         List <AirQualityRecord> airQualityRecord =
                 aqRecordRepository
-                        .findByZipCode(zipcode);  /// what ?
-
+                        .findByZipCode(zipcode);
 //                        .orElseThrow(() -> new ResourceNotFoundException("Zipcode not found on :: " + zipCode));
-//        List<AirQualityRecord> returnedList = new ArrayList<>();
-//        returnedList.add(airQualityRecord);
          return ResponseEntity.ok().body(airQualityRecord);
     }
+
+    @GetMapping("/airquality/user/{userId}")
+    @ResponseBody
+    public ResponseEntity<List<AirQualityRecord>> getAirQualityByZipAndUser(@PathVariable long userId)
+            throws ResourceNotFoundException {
+
+
+        User user = userCRUD.findById(userId);
+
+        List<UserLocation> userLocations = user.getLocation();
+        List<AirQualityRecord> aqRecordToReturn = new ArrayList<>();
+        List<AirQualityRecord> airQualityRecords = aqRecordRepository.findAll();
+
+        for (int i = 0; i < userLocations.size(); i++) {
+
+            UserLocation userLocation = userLocations.get(i);
+            for (int j = 0; j < airQualityRecords.size(); j++) {
+
+                if (userLocation.getZipcode().equals(airQualityRecords.get(j).getZipCode())) {
+
+                            System.out.println("userLocations loop #: " + i );
+                            System.out.println("airQualityRecords loop #: " + j );
+                            aqRecordToReturn.add(airQualityRecords.get(j));
+
+                }
+            }
+//                        .orElseThrow(() -> new ResourceNotFoundException("Zipcode not found on :: " + zipCode));
+        }
+                return ResponseEntity.ok().body(aqRecordToReturn);
+
+    }
+
 
 //    @PostMapping("/airquality")
 //    public AirQualityRecord createAirQuality(@Valid @RequestBody AirQualityRecord airQualityRecord) {
@@ -71,10 +114,10 @@ public class RestController {
 //        Map<String, Boolean> response = new HashMap<>();
 //        response.put("deleted", Boolean.TRUE);
 //        return response;
-    }
+//    }
 /*********************END OF REST API*******************/
 
-//}
+}
 
 
 

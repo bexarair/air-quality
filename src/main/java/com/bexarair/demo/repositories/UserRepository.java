@@ -12,5 +12,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail(String email);
     List<User> findAll();
     List<User> findAllByDailyAlert(boolean alert);
+    User findById(long id);
 
 }
