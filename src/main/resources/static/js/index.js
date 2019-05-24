@@ -54,9 +54,9 @@
 // });
 // bermudaTriangle.setMap(map);
 // }
-var currentURL = "https://cors-anywhere.herokuapp.com/http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=";
-var distanceURL = "&distance=0&API_KEY=";
-var apiKey = "A4D00993-8E59-4B13-924E-9BA79D1FCE63";
+var currentURL = "http://localhost:8080/airquality";
+
+
 var zipcodes = ["78002","78006","78009","78015","78023","78039","78052","78056","78063","78064","78065","78066","78069","78073","78101","78108","78109","78112","78114","78121","78124","78148","78150","78152","78154","78155","78163","78201","78202","78203","78204","78205","78207","78208","78209","78210","78211","78212","78213","78214","78215","78216","78217","78218","78219","78220","78221","78222","78223","78224","78225","78226","78227","78228","78229","78230","78231","78232","78233","78234","78235","78236","78237","78238","78239","78240","78242","78244","78245","78247","78248","78249","78250","78251","78252","78253","78254","78255","78256","78257","78258","78259","78260","78261","78263","78264","78266"];
 var testZip = ["78002", "78006", "78009", "78015", "78023"];
 
@@ -65,22 +65,23 @@ var airQuality1;
 var airQuality2;
 var airQualityAvg;
 
-for(var i = 0; i < zipcodes.length; i++){
-    $.get(currentURL + zipcodes[i] + distanceURL + apiKey).done(function(airInfo){
+$.get(currentURL).done(function(airInfo){
+        for(var i = 0; i < zipcodes.length; i++){
         // console.log(airInfo[0]);
-        console.log(airInfo);
-        airQualityName = airInfo[0].Category.Name;
-        console.log(airQualityName);
+        // console.log("airInfo" + airInfo);
+        airQualityName = airInfo[0];
 
+        console.log(airInfo[i]);
+        console.log("air quality category: " + airInfo[i].categoryName);
+            console.log("air quality: " + airInfo[i].aqi);
 
-        airQuality1 = airInfo[0].AQI;
-        airQuality2 = airInfo[1].AQI;
-
+        // airQuality1 = airInfo[0].AQI;
+        // airQuality2 = airInfo[1].AQI;
         airQualityAvg = (airQuality1+airQuality2)/2;
 
-        console.log(airQualityAvg);
-    });
-}
+        // console.log(airQualityAvg);
+    }
+});
 
 
 // var airColorObj = [
@@ -130,46 +131,20 @@ function initMap() {
 
 // grabs the properties in the geoJson data
 //     this is specifically grabbing the ZIP property and checking if it 78002.  If it is, it turns red.  Otherwise Blue
-//     map.data.setStyle(function(feature) {
-//         var zipCode = feature.getProperty('ZIP');
-//         var color;
-//         if (airQualityAvg >= 0 && airQualityAvg <= 50){
-//             color = "green";
-//         }else if(airQualityAvg >= 51 && airQualityAvg <= 100){
-//             color = "yellow";
-//         }else if(airQualityAvg >= 101 && airQualityAvg <= 150){
-//             color = "orange";
-//         }else if(airQualityAvg >= 151 && airQualityAvg <= 200){
-//             color = "red";
-//         }else if(airQualityAvg >= 201 && airQualityAvg <= 300){
-//             color = "magenta";
-//         }else if(airQualityAvg >= 301 && airQualityAvg <= 500){
-//             color = "maroon";
-//         }else{
-//             color = "black";
-//         }
-//         // var color = ascii === "78002" ? 'red' : 'blue';
-//         return {
-//             fillColor: color,
-//             strokeWeight: 1
-//         };
-//     });
-
-
     map.data.setStyle(function(feature) {
         var zipCode = feature.getProperty('ZIP');
         var color;
-        if (zipCode.includes("1")){
+        if (airQualityAvg >= 0 && airQualityAvg <= 50){
             color = "green";
-        }else if(zipCode.includes("9")){
+        }else if(airQualityAvg >= 51 && airQualityAvg <= 100){
             color = "yellow";
-        }else if(zipCode.includes("0")){
+        }else if(airQualityAvg >= 101 && airQualityAvg <= 150){
             color = "orange";
-        }else if(zipCode.includes("5")){
+        }else if(airQualityAvg >= 151 && airQualityAvg <= 200){
             color = "red";
-        }else if(zipCode.includes("4") === "Very Unhealthy"){
+        }else if(airQualityAvg >= 201 && airQualityAvg <= 300){
             color = "magenta";
-        }else if(zipCode.includes("6")){
+        }else if(airQualityAvg >= 301 && airQualityAvg <= 500){
             color = "maroon";
         }else{
             color = "black";
@@ -180,6 +155,32 @@ function initMap() {
             strokeWeight: 1
         };
     });
+
+
+    // map.data.setStyle(function(feature) {
+    //     var zipCode = feature.getProperty('ZIP');
+    //     var color;
+    //     if (zipCode.includes("1")){
+    //         color = "green";
+    //     }else if(zipCode.includes("9")){
+    //         color = "yellow";
+    //     }else if(zipCode.includes("0")){
+    //         color = "orange";
+    //     }else if(zipCode.includes("5")){
+    //         color = "red";
+    //     }else if(zipCode.includes("4") === "Very Unhealthy"){
+    //         color = "magenta";
+    //     }else if(zipCode.includes("6")){
+    //         color = "maroon";
+    //     }else{
+    //         color = "black";
+    //     }
+    //     // var color = ascii === "78002" ? 'red' : 'blue';
+    //     return {
+    //         fillColor: color,
+    //         strokeWeight: 1
+    //     };
+    // });
 
 
 

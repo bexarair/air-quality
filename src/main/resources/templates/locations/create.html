@@ -36,10 +36,26 @@
                             <label for="loc-title">Title</label>
                             <input id="loc-title" class="form-control" th:field="*{title}" />
                             </div>
+
                             <div class="form-group">
                             <label for="zipcode">Zipcode</label>
                             <input id="zipcode" class="form-control" th:field="*{zipcode}" />
                             </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="textAlerts" th:field="*{textAlert}"/>
+                                <label class="form-check-label" for="textAlerts">
+                                    Air Quality Text Alerts
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="dailyAlerts" th:field="*{dailyAlert}"/>
+                                <label class="form-check-label" for="dailyAlerts">
+                                    Daily Air Quality Text Alerts
+                                </label>
+                            </div>
+
                         </div>
                         <button type="submit" class="btn btn-primary loginBtn">Create Location</button>
                     </form>

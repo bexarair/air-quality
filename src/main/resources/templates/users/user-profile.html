@@ -9,7 +9,7 @@
         <div class="container">
             <h1>My Places</h1><button th:if="${create}" class="btn btn-dark"><a th:href="${'/locations/create/'}">Create</a></button>
             <div class="row">
-                <div class="card bg-light col-12 col-md-4">
+                <div class="col-12 col-md-4">
                 <th:block th:each="location : ${locations}">
                     <!--<th:block th:if="${users}">-->
                     <div class="contain-bg card" style="text-align: center; width: 100%">
@@ -102,7 +102,7 @@
             </div>
 
 
-            <!--<div id="chart_div">CHART HERE</div>-->
+            <div id="chart_div">CHART HERE</div>
         </div>
 
         <footer th:replace="fragments/footer :: footer" />

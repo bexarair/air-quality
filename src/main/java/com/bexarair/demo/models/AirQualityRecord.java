@@ -15,7 +15,7 @@ public class AirQualityRecord {
     private long id;
 
     @Column(nullable = false)
-    private Date dateObserved;
+    private String dateObserved;
 
     @Column(nullable = false)
     private int hourObserved;
@@ -80,7 +80,7 @@ public class AirQualityRecord {
 
     }
 
-    public AirQualityRecord(Date dateObserved, int hourObserved, String localTimeZone, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, String zipCode) {
+    public AirQualityRecord(String dateObserved, int hourObserved, String localTimeZone, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, String zipCode) {
         this.dateObserved = dateObserved;
         this.hourObserved = hourObserved;
         this.localTimeZone = localTimeZone;
@@ -110,11 +110,11 @@ public class AirQualityRecord {
         this.id = id;
     }
 
-    public Date getDateObserved() {
+    public String getDateObserved() {
         return dateObserved;
     }
 
-    public void setDateObserved(Date dateObserved) {
+    public void setDateObserved(String dateObserved) {
         this.dateObserved = dateObserved;
     }
 

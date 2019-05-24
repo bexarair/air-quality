@@ -10,4 +10,8 @@ import java.util.List;
 public interface LocationRepository extends CrudRepository<UserLocation, Long> {
     List<UserLocation> findAllByUserId(long userId);
     List<UserLocation> findAll();
+
+    List<UserLocation> findAllByTextAlert(boolean alert);
+    List<UserLocation> findAllByDailyAlert(boolean alert);
+
 }
