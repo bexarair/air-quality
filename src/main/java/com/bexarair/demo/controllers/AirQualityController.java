@@ -84,7 +84,7 @@ public class AirQualityController {
                 apiResponses.put(zipcodes[i], jsonNodeHttpResponse);
 
                 JSONArray aqiArray = jsonNodeHttpResponse.getBody().getArray();
-                JSONObject currentAir = aqiArray.getJSONObject(0);
+                JSONObject currentAir = aqiArray.getJSONObject(1);
 
                 String dateObserved = currentAir.getString("DateObserved");
                 int hour = currentAir.getInt("HourObserved");
