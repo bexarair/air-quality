@@ -31,10 +31,18 @@ public class RestController {
         this.locationCRUD = locationCRUD;
     }
 
-    @GetMapping("/airquality")
+    @GetMapping("/airquality/currentdate")
     @ResponseBody
     public List<AirQualityRecord> getAllAirQuality() {
-        return aqRecordRepository.findAll();    }
+
+        Date dt = new Date();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(dt);
+
+
+        return aqRecordRepository.findByDateObserved(date);
+    }
 
 
 
@@ -57,13 +65,11 @@ public class RestController {
     @ResponseBody
     public ResponseEntity<List<AirQualityRecord>> getAirQualityByZipAndUser(@PathVariable long userId)
             throws ResourceNotFoundException {
-        // does the userid in the @getMapping request need to be changed into String format?
 
         Date dt = new Date();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(dt);
-        System.out.println(date);
 
         User user = userCRUD.findById(userId);
         List<UserLocation> userLocations = user.getLocation();

@@ -71,7 +71,7 @@ $.get(currentURL).done(function(airInfo){
         // console.log("airInfo" + airInfo);
         airQualityName = airInfo[0];
 
-        console.log(airInfo[i]);
+        console.log("this is the entire airInfo object: " + airInfo[i]);
         console.log("air quality category: " + airInfo[i].categoryName);
             console.log("air quality: " + airInfo[i].aqi);
 
