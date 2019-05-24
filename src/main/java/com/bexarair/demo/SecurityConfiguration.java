@@ -31,10 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         ;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-    }
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+////        http.csrf().disable();
+////    }
 //        http
 //                /* Login configuration */
 //                .formLogin()
@@ -57,9 +57,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //
 //                        "/profile", // only authenticated users can create ads
 //                        "/profile/{id}/edit" // only authenticated users can edit ads
-//
-//
-//
+//                        "/uploadFile"//only authenticated users can upload files
+
+
 //                )
 //                .authenticated()
 //        ;
