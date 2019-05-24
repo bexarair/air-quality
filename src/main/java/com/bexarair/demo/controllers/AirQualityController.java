@@ -69,7 +69,7 @@ public class AirQualityController {
 //3600000
 
 /********************Database Injection**********************/
-    @Scheduled(cron = "0 7 * * * ?") //grab at 7am everyday
+    @Scheduled(cron = "0 0 7 * * *") //grab at 7am everyday
     public void getAir() {
         try {
 
@@ -94,7 +94,7 @@ public class AirQualityController {
                 String name = currentAir.getJSONObject("Category").getString("Name");
 
 
-                System.out.println(currentURL + testZip[i] + distanceURL + apiKey);
+//                System.out.println(currentURL + testZip[i] + distanceURL + apiKey);
     //            Date date = null;
     //            try {
     //                date = new SimpleDateFormat("yyyy-MM-dd").parse(dateObserved);
@@ -115,8 +115,8 @@ public class AirQualityController {
                     airCRUD.save(newAirQuality);
 
                     //this is pulling the id but only the last one.  Need to store them all
-                    currentAirQualityID = newAirQuality.getId();
-                    System.out.println("This is in the loop " + currentAirQualityID);
+//                    currentAirQualityID = newAirQuality.getId();
+//                    System.out.println("This is in the loop " + currentAirQualityID);
     //            } catch (ParseException parseException) {
     //                System.out.println(parseException);
     //            }
