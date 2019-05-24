@@ -74,7 +74,8 @@ public class AirQualityController {
 
 /********************Database Injection**********************/
 
-    @Scheduled(cron = "0 0 7 * * *") //grab at 7am everyday
+//    @Scheduled(cron = "0 0 7 * * *") //grab at 7am everyday
+    @Scheduled(fixedRate = 20000)
     public void getAir() {
         try {
 

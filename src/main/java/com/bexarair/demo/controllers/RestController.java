@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -58,18 +59,23 @@ public class RestController {
             throws ResourceNotFoundException {
         // does the userid in the @getMapping request need to be changed into String format?
 
-        User user = userCRUD.findById(userId);
+        Date dt = new Date();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(dt);
+        System.out.println(date);
 
+        User user = userCRUD.findById(userId);
         List<UserLocation> userLocations = user.getLocation();
         List<AirQualityRecord> aqRecordToReturn = new ArrayList<>();
-        List<AirQualityRecord> airQualityRecords = aqRecordRepository.findAll();
+        List<AirQualityRecord> airQualityRecords = aqRecordRepository.findByDateObserved(date);
 
         for (int i = 0; i < userLocations.size(); i++) {
 
             UserLocation userLocation = userLocations.get(i);
             for (int j = 0; j < airQualityRecords.size(); j++) {
 
-                if (userLocation.getZipcode().equals(airQualityRecords.get(j).getZipCode())) {
+                if ((userLocation.getZipcode().equals(airQualityRecords.get(j).getZipCode()))) {
 
                             System.out.println("userLocations loop #: " + i );
                             System.out.println("airQualityRecords loop #: " + j );
