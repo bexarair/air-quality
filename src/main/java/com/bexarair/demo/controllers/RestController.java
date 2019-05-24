@@ -38,7 +38,7 @@ public class RestController {
 
 
         // this is pulling from the air quality table //
-    @GetMapping("/airquality/{zipcode}")
+    @GetMapping("/airquality/zipcode/{zipcode}")
     @ResponseBody
     public ResponseEntity<List<AirQualityRecord>> getAirQualityByZip(@PathVariable String zipcode)
             throws ResourceNotFoundException {
@@ -49,11 +49,14 @@ public class RestController {
          return ResponseEntity.ok().body(airQualityRecord);
     }
 
+
+    /**this filters out the locations of the user**/
+
     @GetMapping("/airquality/user/{userId}")
     @ResponseBody
     public ResponseEntity<List<AirQualityRecord>> getAirQualityByZipAndUser(@PathVariable long userId)
             throws ResourceNotFoundException {
-
+        // does the userid in the @getMapping request need to be changed into String format?
 
         User user = userCRUD.findById(userId);
 
