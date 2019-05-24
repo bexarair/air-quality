@@ -77,7 +77,6 @@ $.get(currentURL).done(function(airInfo){
 
         // airQuality1 = airInfo[0].AQI;
         // airQuality2 = airInfo[1].AQI;
-
         airQualityAvg = (airQuality1+airQuality2)/2;
 
         // console.log(airQualityAvg);

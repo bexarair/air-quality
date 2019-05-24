@@ -56,7 +56,6 @@ public class RestController {
     @ResponseBody
     public ResponseEntity<List<AirQualityRecord>> getAirQualityByZipAndUser(@PathVariable long userId)
             throws ResourceNotFoundException {
-
         // does the userid in the @getMapping request need to be changed into String format?
 
         User user = userCRUD.findById(userId);
