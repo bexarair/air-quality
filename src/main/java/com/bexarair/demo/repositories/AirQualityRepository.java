@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -12,6 +13,9 @@ public interface AirQualityRepository extends CrudRepository<AirQualityRecord, L
     AirQualityRecord findByZipCode(String zipCode);
 AirQualityRecord findByHourObserved(String hour);
 AirQualityRecord findByZipCodeAndHourObserved(String zipCode, String HourObserved);
+AirQualityRecord findByZipCodeAndDateObserved(String zipCode, Date dateObserved);
+List<AirQualityRecord> findAllByCategoryName(String name);
+List<AirQualityRecord> findAllByDateObserved(String date);
 
 
 

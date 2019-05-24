@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+//
+//import java.time.LocalDate;
 
 
 @Controller
@@ -27,6 +29,8 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 /*********************************************************/
+
+
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
@@ -45,6 +49,13 @@ public class UserController {
 //        model.addAttribute("location3", new UserLocation()); // i just added this
 //        return "users/user-profile";
 //    }
+
+    @GetMapping("/about")
+    public String showAboutPage(){
+//        model.addAttribute("user", new User());
+//        model.addAttribute("location", new UserLocation());  // i just added this
+        return "about-page";
+    }
 
     // this isn't working as of 05/19
     @GetMapping("/profile/edit")

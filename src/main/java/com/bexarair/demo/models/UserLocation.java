@@ -17,6 +17,12 @@ public class UserLocation {
     @Column
     private String title;
 
+    @Column(nullable = false)
+    private boolean textAlert;
+
+    @Column(nullable = false)
+    private boolean dailyAlert;
+
 
 
     @ManyToOne
@@ -26,15 +32,19 @@ public class UserLocation {
 
     public UserLocation(){}
 
-    public UserLocation(String zipcode, String title, User user) {
+    public UserLocation(String zipcode, String title, User user, boolean textAlert, boolean dailyAlert) {
         this.zipcode = zipcode;
         this.title = title;
         this.user = user;
+        this.textAlert = textAlert;
+        this.dailyAlert = dailyAlert;
     }
 
-    public UserLocation(String zipcode, String title) {
+    public UserLocation(String zipcode, String title, boolean textAlert, boolean dailyAlert) {
         this.zipcode = zipcode;
         this.title = title;
+        this.textAlert = textAlert;
+        this. dailyAlert = dailyAlert;
 
     }
 
@@ -71,4 +81,21 @@ public class UserLocation {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public void setTextAlert(boolean textAlert){
+        this.textAlert = textAlert;
+    }
+
+    public boolean getTextAlert(){
+        return textAlert;
+    }
+
+    public void setDailyAlert(boolean dailyAlert){
+        this.dailyAlert = dailyAlert;
+    }
+
+    public boolean getDailyAlert(){
+        return dailyAlert;
+    }
+
 }

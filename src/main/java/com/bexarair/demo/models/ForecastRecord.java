@@ -1,6 +1,7 @@
 package com.bexarair.demo.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -11,10 +12,10 @@ public class ForecastRecord {
     private long id;
 
     @Column
-    private Date dateIssue;
+    private String dateIssue;
 
     @Column
-    private Date forecastDate;
+    private String forecastDate;
 
     @Column
     private String reportingArea;
@@ -54,7 +55,7 @@ public class ForecastRecord {
 
     }
 
-    public ForecastRecord(Date dateIssue, Date forecastDate, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, boolean actionDay, String discussion, String zipCode) {
+    public ForecastRecord(String dateIssue, String forecastDate, String reportingArea, String stateCode, double latitude, double longitude, String parameterName, int AQI, int categoryNumber, String categoryName, boolean actionDay, String discussion, String zipCode) {
         this.dateIssue = dateIssue;
         this.forecastDate = forecastDate;
         this.reportingArea = reportingArea;
@@ -78,19 +79,19 @@ public class ForecastRecord {
         this.id = id;
     }
 
-    public Date getDateIssue() {
+    public String getDateIssue() {
         return dateIssue;
     }
 
-    public void setDateIssue(Date dateIssue) {
+    public void setDateIssue(String dateIssue) {
         this.dateIssue = dateIssue;
     }
 
-    public Date getForecastDate() {
+    public String getForecastDate() {
         return forecastDate;
     }
 
-    public void setForecastDate(Date forecastDate) {
+    public void setForecastDate(String forecastDate) {
         this.forecastDate = forecastDate;
     }
 
