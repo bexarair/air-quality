@@ -12,21 +12,35 @@
                 <div class="col-12 col-md-4">
                     <!--<th:block th:each="catName : ${catName}">-->
                         <!--<th:block th:each="aqi : ${aqi}">-->
-                            <th:block th:each="aqiZipCode : ${aqiZipCodes}">
-                                <!--<th:block th:if="${users}">-->
-                                <div class="contain-bg card" style="text-align: center; width: 100%">
-                                    <div class="card-body">
-                                        <h5 class="card-title" th:text="${aqiZipCode.title}"></h5>
-                                        <p class="card-text" th:text="${aqiZipCode.zipCode}"></p>
-                                        <p>Current AQI<span class="card-text" th:text="${aqiZipCode.aqi}"></span></p>
-                                        <p>The AQI is in a: <span class="card-text" th:text="${aqiZipCode.categoryName}"></span>range</p>
-                                        <!--if no posts, dont show-->
-                                        <!--<button th:if="${edit}" class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${location.getId()}}">Edit</a></button>-->
-                                        <!--<button th:if="${edit}" class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${location.getId()}}">Delete</a></button>-->
-                                    </div>
-                                </div>
-                                <!--</th:block>-->
-                            </th:block>
+                    <th:block th:each="location : ${locations}">
+                        <!--<th:block th:if="${users}">-->
+                        <div class="contain-bg card" style="text-align: center; width: 100%">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${location.title}"></h5>
+                                <p class="card-text" th:text="${location.zipcode}"></p>
+                                <!--if no posts, dont show-->
+                                <!--<button class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${location.getId()}}">Edit</a></button>-->
+                                <!--<button class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${location.getId()}}">Delete</a></button>-->
+
+                            </div>
+                        </div>
+                        <!--</th:block>-->
+                    </th:block>
+                            <!--<th:block th:each="aqiZipCode : ${aqiZipCodes}">-->
+                                <!--&lt;!&ndash;<th:block th:if="${users}">&ndash;&gt;-->
+                                <!--<div class="contain-bg card" style="text-align: center; width: 100%">-->
+                                    <!--<div class="card-body">-->
+                                        <!--<h5 class="card-title" th:text="${aqiZipCode.title}"></h5>-->
+                                        <!--<p class="card-text" th:text="${aqiZipCode.zipCode}"></p>-->
+                                        <!--<p>Current AQI<span class="card-text" th:text="${aqiZipCode.aqi}"></span></p>-->
+                                        <!--<p>The AQI is in a: <span class="card-text" th:text="${aqiZipCode.categoryName}"></span>range</p>-->
+                                        <!--&lt;!&ndash;if no posts, dont show&ndash;&gt;-->
+                                        <!--<button th:if="${edit}" class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}">Edit</a></button>-->
+                                        <!--<button th:if="${edit}" class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${aqiZipCode.getId()}}">Delete</a></button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;</th:block>&ndash;&gt;-->
+                            <!--</th:block>-->
                         <!--</th:block>-->
                     <!--</th:block>-->
             <!--</div>-->

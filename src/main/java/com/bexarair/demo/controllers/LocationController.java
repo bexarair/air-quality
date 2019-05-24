@@ -104,8 +104,8 @@ public class LocationController {
 
 
 
-
         viewModel.addAttribute("locations", userLocations);
+
         if(locationCRUD.findAllByUserId(user) != null){
             viewModel2.addAttribute("edit", true);
         }
@@ -123,6 +123,7 @@ public class LocationController {
             for(int j = 0; j < userLocations.size(); j ++){
                 String locationZipCode = userLocations.get(j).getZipcode();
                 String locationTitle = userLocations.get(j).getTitle();
+                long userId = userLocations.get(j).getUser().getId();
 
                 if(currentZipCode.equals(locationZipCode)) {
 
@@ -132,6 +133,8 @@ public class LocationController {
                     aqiZipCode.setZipCode(locationZipCode);
                     aqiZipCode.setCategoryName(currentCatName);
                     aqiZipCode.setTitle(locationTitle);
+                    aqiZipCode.setId(user);
+
                     aqiZipCodes.add(aqiZipCode);
                 }
                 System.out.println(locationCRUD.findAllByUserId(user));
