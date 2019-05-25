@@ -54,7 +54,7 @@
 // });
 // bermudaTriangle.setMap(map);
 // }
-var currentURL = "http://localhost:8080/airquality";
+// var currentURL = "http://localhost:8080/airquality/currentdate";
 
 
 var zipcodes = ["78002","78006","78009","78015","78023","78039","78052","78056","78063","78064","78065","78066","78069","78073","78101","78108","78109","78112","78114","78121","78124","78148","78150","78152","78154","78155","78163","78201","78202","78203","78204","78205","78207","78208","78209","78210","78211","78212","78213","78214","78215","78216","78217","78218","78219","78220","78221","78222","78223","78224","78225","78226","78227","78228","78229","78230","78231","78232","78233","78234","78235","78236","78237","78238","78239","78240","78242","78244","78245","78247","78248","78249","78250","78251","78252","78253","78254","78255","78256","78257","78258","78259","78260","78261","78263","78264","78266"];
@@ -64,24 +64,117 @@ var airQualityName;
 var airQuality1;
 var airQuality2;
 var airQualityAvg;
+var restAQI;
+var restZip;
 
-$.get(currentURL).done(function(airInfo){
-        for(var i = 0; i < zipcodes.length; i++){
-        // console.log(airInfo[0]);
-        // console.log("airInfo" + airInfo);
-        airQualityName = airInfo[0];
+var restApiData = fetch('http://localhost:8080/airquality/currentdate');
+var geoJSONdata = fetch('https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson');
 
-        console.log("this is the entire airInfo object: " + airInfo[i]);
-        console.log("air quality category: " + airInfo[i].categoryName);
-            console.log("air quality: " + airInfo[i].aqi);
+Promise.all([geoJSONdata])
+    .then(function(data) {
+        // here data is an array of the resolved values from each promise
+        // we can now do something with both pieces of data
+        console.log("here is some data inside the promise: " + data);
+        initMap();
 
-        // airQuality1 = airInfo[0].AQI;
-        // airQuality2 = airInfo[1].AQI;
-        airQualityAvg = (airQuality1+airQuality2)/2;
+    }).then(function(data) {
 
-        // console.log(airQualityAvg);
-    }
-});
+        map.data.loadGeoJson('https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson')
+
+    }).then(function(data) {
+
+        for (var i = 0; i < testZip.length; i++) {
+
+            console.log("count inside the  " + i);
+
+            map.data.setStyle(function (data) {
+                var color;
+                if (restZip === data.getProperty('ZIP')) {
+                    if (restAQI >= 51 && restAQI <= 100) {
+                        console.log("second count: " + i);
+                        color = "yellow";
+                        return {
+                            fillColor: color,
+                            strokeWeight: 1
+                        };
+                    }
+                } else {
+                    color = "black";
+                }
+                // var color = ascii === "78002" ? 'red' : 'blue';
+                return {
+                    fillColor: color,
+                    strokeWeight: 1
+                };
+            });
+        }
+        return data;
+}).catch(function(error) {
+        // handle errors
+    });
+
+
+// $.get(currentURL).done(function(response){
+//         for(var i = 0; i < testZip.length; i++){
+//         // console.log(airInfo[0]);
+//         // console.log("airInfo" + airInfo);
+//         // airQualityName = airInfo[0];
+//
+//         // console.log("this is the date observed: " + ;
+//         // console.log("air quality category: " + data[i].categoryName);
+//         // console.log("air quality zip: " + data[i].zipCode);
+//
+//         //
+//         // restAQI = response[i].aqi;
+//         // restZip = response[i].zipCode;
+//
+//
+//
+//             console.log("first count " + i);
+//
+//             // console.log(restZip);
+//         // airQuality1 = airInfo[0].AQI;
+//         // airQuality2 = airInfo[1].AQI;
+//         // airQualityAvg = (airQuality1+airQuality2)/2;
+//
+//             map.data.setStyle(function(feature) {
+//                 var color;
+//                 if (restZip === feature.getProperty('ZIP')) {
+//                     if(restAQI >= 51 && restAQI <= 100) {
+//                         console.log("second count: " + i);
+//                         color = "yellow";
+//                         return {
+//                             fillColor: color,
+//                             strokeWeight: 1
+//                         };
+//                     }
+//                 }
+//
+//                 //
+//                 // if ((restAQI >= 0 && restAQI <= 50 && zipcode) && restZip === geoZip){
+//                 //     color = "green";
+//                 // }else if((restAQI >= 51 && restAQI <= 100) && restZip === geoZip){
+//                 //     color = "yellow";
+//                 // }else if((restAQI >= 101 && restAQI <= 150) && restZip === geoZip){
+//                 //     color = "orange";
+//                 // }else if((restAQI >= 151 && restAQI <= 200) && restZip === geoZip){
+//                 //     color = "red";
+//                 // }else if((restAQI >= 201 && restAQI <= 300) && restZip === geoZip){
+//                 //     color = "magenta";
+//                 // }else if((restAQI >= 301 && restAQI <= 500) && restZip === geoZip){
+//                 //     color = "maroon";
+//                 // }
+//                 else{
+//                     color = "black";
+//                 }
+//                 // var color = ascii === "78002" ? 'red' : 'blue';
+//                 return {
+//                     fillColor: color,
+//                     strokeWeight: 1
+//                 };
+//             });
+//     }
+// });
 
 
 // var airColorObj = [
@@ -116,45 +209,45 @@ $.get(currentURL).done(function(airInfo){
 
 
 
-
-console.log("Javascript is online");
 var map;
 function initMap() {
+console.log("This is inside the initMap function");
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 9,
         center: {lat: 29.4241, lng: -98.4936}
 
-        // mapTypeControlOptions: {
+
         //     mapTypeIds: ['satellite']
+        // mapTypeControlOptions: {
         // }
     });
 
 // grabs the properties in the geoJson data
 //     this is specifically grabbing the ZIP property and checking if it 78002.  If it is, it turns red.  Otherwise Blue
-    map.data.setStyle(function(feature) {
-        var zipCode = feature.getProperty('ZIP');
-        var color;
-        if (airQualityAvg >= 0 && airQualityAvg <= 50){
-            color = "green";
-        }else if(airQualityAvg >= 51 && airQualityAvg <= 100){
-            color = "yellow";
-        }else if(airQualityAvg >= 101 && airQualityAvg <= 150){
-            color = "orange";
-        }else if(airQualityAvg >= 151 && airQualityAvg <= 200){
-            color = "red";
-        }else if(airQualityAvg >= 201 && airQualityAvg <= 300){
-            color = "magenta";
-        }else if(airQualityAvg >= 301 && airQualityAvg <= 500){
-            color = "maroon";
-        }else{
-            color = "black";
-        }
-        // var color = ascii === "78002" ? 'red' : 'blue';
-        return {
-            fillColor: color,
-            strokeWeight: 1
-        };
-    });
+//     map.data.setStyle(function(feature) {
+//         var zipCode = feature.getProperty('ZIP');
+//         var color;
+//         if (airQualityAvg >= 0 && airQualityAvg <= 50){
+//             color = "green";
+//         }else if(airQualityAvg >= 51 && airQualityAvg <= 100){
+//             color = "yellow";
+//         }else if(airQualityAvg >= 101 && airQualityAvg <= 150){
+//             color = "orange";
+//         }else if(airQualityAvg >= 151 && airQualityAvg <= 200){
+//             color = "red";
+//         }else if(airQualityAvg >= 201 && airQualityAvg <= 300){
+//             color = "magenta";
+//         }else if(airQualityAvg >= 301 && airQualityAvg <= 500){
+//             color = "maroon";
+//         }else{
+//             color = "black";
+//         }
+//         // var color = ascii === "78002" ? 'red' : 'blue';
+//         return {
+//             fillColor: color,
+//             strokeWeight: 1
+//         };
+//     });
 
 
     // map.data.setStyle(function(feature) {
@@ -185,15 +278,9 @@ function initMap() {
 
 
     // NOTE: This uses cross-domain XHR, and may not work on older browsers.
-    map.data.loadGeoJson(
-        'https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson'
-    );
-    // var triangleCoords = [
-    //     {lat: 25.774, lng: -80.190},
-    //     {lat: 18.466, lng: -66.118},
-    //     {lat: 32.321, lng: -64.757},
-    //     {lat: 25.774, lng: -80.190}
-    // ];
+    // map.data.loadGeoJson(
+    //     'https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson'
+    // );
 
 
 
