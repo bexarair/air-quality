@@ -70,18 +70,25 @@ var restZip;
 var restApiData = fetch('http://localhost:8080/airquality/currentdate');
 var geoJSONdata = fetch('https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson');
 
-Promise.all([geoJSONdata])
-    .then(function(data) {
-        // here data is an array of the resolved values from each promise
-        // we can now do something with both pieces of data
-        console.log("here is some data inside the promise: " + data);
-        initMap();
 
-    }).then(function(data) {
+var geoJsonPromise = new Promise( function (resolve, reject) {
 
-        map.data.loadGeoJson('https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson')
+    var dataReceivedSuccessfully = false;
+if (dataReceivedSuccessfully)
+    resolve("You did things!");
+if (!dataReceivedSuccessfully)
+    reject('Data Corrupted!');
+});
 
-    }).then(function(data) {
+geoJsonPromise.then(function(data){
+    fetch('https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson');
+
+    console.log("Holy crap it worked!...look at this data --> " + data);
+    return data;
+}).then(function(data) {
+    map.data.loadGeoJson('https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson')
+})
+        .then(function(data) {
 
         for (var i = 0; i < testZip.length; i++) {
 
@@ -108,10 +115,53 @@ Promise.all([geoJSONdata])
                 };
             });
         }
-        return data;
-}).catch(function(error) {
+    }).catch(function(error) {
         // handle errors
+
     });
+
+//
+// Promise.all([geoJSONdata])
+//     .then(function(data) {
+//         // here data is an array of the resolved values from each promise
+//         initMap();
+//         // we can now do something with both pieces of data
+//         console.log("here is some data inside the promise: " + data);
+//
+//     }).then(function(data) {
+//         map.data.loadGeoJson('https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson')
+//
+//
+//     }).then(function(data) {
+//
+//         for (var i = 0; i < testZip.length; i++) {
+//
+//             console.log("count inside the  " + i);
+//
+//             map.data.setStyle(function (data) {
+//                 var color;
+//                 if (restZip === data.getProperty('ZIP')) {
+//                     if (restAQI >= 51 && restAQI <= 100) {
+//                         console.log("second count: " + i);
+//                         color = "yellow";
+//                         return {
+//                             fillColor: color,
+//                             strokeWeight: 1
+//                         };
+//                     }
+//                 } else {
+//                     color = "black";
+//                 }
+//                 // var color = ascii === "78002" ? 'red' : 'blue';
+//                 return {
+//                     fillColor: color,
+//                     strokeWeight: 1
+//                 };
+//             });
+//         }
+// }).catch(function(error) {
+//         // handle errors
+//     });
 
 
 // $.get(currentURL).done(function(response){

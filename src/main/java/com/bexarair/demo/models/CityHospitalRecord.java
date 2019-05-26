@@ -11,6 +11,9 @@ public class CityHospitalRecord {
     private int zipCode;
 
     @Column(nullable = false)
+    private int asthmaCases;
+
+    @Column(nullable = false)
     private int pediAsthmaCases;
 
     @Column(nullable = false)
@@ -31,6 +34,14 @@ public class CityHospitalRecord {
         this.pediAsthmaCases = pediAsthmaCases;
         this.pediPopulation = pediPopulation;
         this.pediAsthmaRate = pediAsthmaRate;
+    }
+
+    public int getAsthmaCases() {
+        return asthmaCases;
+    }
+
+    public void setAsthmaCases(int asthmaCases) {
+        this.asthmaCases = asthmaCases;
     }
 
     public long getId() {
