@@ -20,4 +20,5 @@ public interface AQRestRepository extends JpaRepository <AirQualityRecord, Long>
                 "WHERE date_observed >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY " +
                 "AND date_observed < curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY", nativeQuery = true)
         AirQualityRecord findByWeek();
+
 }

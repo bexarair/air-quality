@@ -148,6 +148,48 @@ public class RestController {
 
 
 
+
+
+    @GetMapping("/locations/user/{userId}")
+    @ResponseBody
+    public ResponseEntity<List<UserLocation>> getLocationsByUser(@PathVariable long userId)
+            throws ResourceNotFoundException {
+        // does the userid in the @getMapping request need to be changed into String format?
+
+//        User user = userCRUD.findById(userId);
+//        List<UserLocation> userLocations = user.getLocation();
+        List<UserLocation> locationsToReturn = new ArrayList<>();
+        List<UserLocation> locations = locationCRUD.findAll();
+//        List<AirQualityRecord> airQualityRecords = aqRecordRepository.findAll();
+
+        for (int i = 0; i < locations.size(); i++) {
+
+//            UserLocation userLocation = userLocations.get(i);
+//            for (int j = 0; j < locations.size(); j++) {
+            System.out.println("This is out of the if : " + locations.get(i).getUser().getId());
+            if (userId == locations.get(i).getUser().getId()) {
+
+                    System.out.println("location userId: " + locations.get(i).getUser().getId());
+                    System.out.println("THE location " + locations);
+
+//                    System.out.println("userLocations loop #: " + i );
+//                    System.out.println("airQualityRecords loop #: " + i);
+                    locationsToReturn.add(locations.get(i));
+
+                }
+            }
+//                        .orElseThrow(() -> new ResourceNotFoundException("Zipcode not found on :: " + zipCode));
+//        }
+        return ResponseEntity.ok().body(locationsToReturn);
+
+    }
+
+
+
+
+
+
+
 //    @PostMapping("/airquality")
 //    public AirQualityRecord createAirQuality(@Valid @RequestBody AirQualityRecord airQualityRecord) {
 //        return aqRecordRepository.save(airQualityRecord);

@@ -1,14 +1,14 @@
 package com.bexarair.demo.models;
 import javax.persistence.*;
 @Entity
-@Table(name = "CityHospitalRecords")
+@Table(name = "city_hospital_records")
 public class CityHospitalRecord {
     @Id
     @GeneratedValue
     private long id;
 
     @Column(nullable = false)
-    private int zipCode;
+    private String zipCode;
 
     @Column(nullable = false)
     private int asthmaCases;
@@ -20,7 +20,7 @@ public class CityHospitalRecord {
     private int pediPopulation;
 
     @Column(nullable = false)
-    private int pediAsthmaRate;
+    private String pediAsthmaRate;
 
 
     //creates a record
@@ -28,8 +28,10 @@ public class CityHospitalRecord {
 
     }
 
+
+
     //reads and updates a record
-    public CityHospitalRecord(int zipCode, int pediAsthmaCases, int pediPopulation, int pediAsthmaRate) {
+    public CityHospitalRecord(String zipCode, int pediAsthmaCases, int pediPopulation, String pediAsthmaRate) {
         this.zipCode = zipCode;
         this.pediAsthmaCases = pediAsthmaCases;
         this.pediPopulation = pediPopulation;
@@ -52,11 +54,11 @@ public class CityHospitalRecord {
         this.id = id;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
@@ -76,11 +78,11 @@ public class CityHospitalRecord {
         this.pediPopulation = pediPopulation;
     }
 
-    public int getPediAsthmaRate() {
+    public String getPediAsthmaRate() {
         return pediAsthmaRate;
     }
 
-    public void setPediAsthmaRate(int pediAsthmaRate) {
+    public void setPediAsthmaRate(String pediAsthmaRate) {
         this.pediAsthmaRate = pediAsthmaRate;
     }
 }//end of hospitalrecord class
