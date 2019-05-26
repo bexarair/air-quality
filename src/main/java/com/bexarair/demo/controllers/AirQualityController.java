@@ -4,23 +4,18 @@ import com.bexarair.demo.models.AirQualityRecord;
 import com.bexarair.demo.models.ForecastRecord;
 import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
-
-
 import com.bexarair.demo.repositories.*;
 import com.bexarair.demo.services.SmsSender;
-
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.context.config.ResourceNotFoundException;
@@ -74,7 +69,8 @@ public class AirQualityController {
 
 /********************Database Injection**********************/
 
-    @Scheduled(cron = "0 0 7 * * *") //grab at 7am everyday
+//    @Scheduled(cron = "0 0 7 * * *") //grab at 7am everyday
+//    @Scheduled(fixedRate = 20000)
     public void getAir() {
         try {
 

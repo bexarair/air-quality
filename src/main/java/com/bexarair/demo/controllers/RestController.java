@@ -1,9 +1,11 @@
 package com.bexarair.demo.controllers;
 
 import com.bexarair.demo.models.AirQualityRecord;
+import com.bexarair.demo.models.CityHospitalRecord;
 import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
 import com.bexarair.demo.repositories.AQRestRepository;
+import com.bexarair.demo.repositories.HospitalRecordRepository;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -22,18 +25,28 @@ public class RestController {
     private AQRestRepository aqRecordRepository;
     private UserRepository userCRUD;
     private LocationRepository locationCRUD;
+    private HospitalRecordRepository hospitalRecordCRUD;
 
 
-    public RestController(AQRestRepository aqRecordRepository, LocationRepository locationCRUD, UserRepository userCRUD) {
+    public RestController(AQRestRepository aqRecordRepository, LocationRepository locationCRUD, UserRepository userCRUD, HospitalRecordRepository hospitalRecordCRUD) {
         this.aqRecordRepository = aqRecordRepository;
         this.userCRUD = userCRUD;
         this.locationCRUD = locationCRUD;
+        this.hospitalRecordCRUD = hospitalRecordCRUD;
     }
 
-    @GetMapping("/airquality")
+    @GetMapping("/airquality/currentdate")
     @ResponseBody
     public List<AirQualityRecord> getAllAirQuality() {
-        return aqRecordRepository.findAll();    }
+
+        Date dt = new Date();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(dt);
+
+
+        return aqRecordRepository.findByDateObserved(date);
+    }
 
 
 
@@ -49,27 +62,41 @@ public class RestController {
          return ResponseEntity.ok().body(airQualityRecord);
     }
 
+    /**this filters out the locations of the user by the current date**/
 
-    /**this filters out the locations of the user**/
+    @GetMapping("/hospitalrecords/zipcode/{zipcode}")
+    @ResponseBody
+    public ResponseEntity<List<CityHospitalRecord>> getHospitalRecordsByZip(@PathVariable Integer zipcode)
+            throws ResourceNotFoundException {
+        List <CityHospitalRecord> cityHospitalRecord =
+                hospitalRecordCRUD
+                        .findByZipCode(zipcode);
+        return ResponseEntity.ok().body(cityHospitalRecord);
+    }
+
+    /**this filters out the locations of the user by the current date**/
 
     @GetMapping("/airquality/user/{userId}")
     @ResponseBody
     public ResponseEntity<List<AirQualityRecord>> getAirQualityByZipAndUser(@PathVariable long userId)
             throws ResourceNotFoundException {
-        // does the userid in the @getMapping request need to be changed into String format?
+
+        Date dt = new Date();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(dt);
 
         User user = userCRUD.findById(userId);
-
         List<UserLocation> userLocations = user.getLocation();
         List<AirQualityRecord> aqRecordToReturn = new ArrayList<>();
-        List<AirQualityRecord> airQualityRecords = aqRecordRepository.findAll();
+        List<AirQualityRecord> airQualityRecords = aqRecordRepository.findByDateObserved(date);
 
         for (int i = 0; i < userLocations.size(); i++) {
 
             UserLocation userLocation = userLocations.get(i);
             for (int j = 0; j < airQualityRecords.size(); j++) {
 
-                if (userLocation.getZipcode().equals(airQualityRecords.get(j).getZipCode())) {
+                if ((userLocation.getZipcode().equals(airQualityRecords.get(j).getZipCode()))) {
 
                             System.out.println("userLocations loop #: " + i );
                             System.out.println("airQualityRecords loop #: " + j );
@@ -82,6 +109,43 @@ public class RestController {
                 return ResponseEntity.ok().body(aqRecordToReturn);
 
     }
+
+    /** James' garbage **/
+
+//    @GetMapping("/locations/user/{userId}")
+//    @ResponseBody
+//    public ResponseEntity<List<UserLocation>> getLocationsByUser(@PathVariable long userId)
+//            throws ResourceNotFoundException {
+//        // does the userid in the @getMapping request need to be changed into String format?
+//
+////        User user = userCRUD.findById(userId);
+////        List<UserLocation> userLocations = user.getLocation();
+//        List<UserLocation> locationsToReturn = new ArrayList<>();
+//        List<UserLocation> locations = locationCRUD.findAll();
+////        List<AirQualityRecord> airQualityRecords = aqRecordRepository.findAll();
+//
+//        for (int i = 0; i < locations.size(); i++) {
+//
+////            UserLocation userLocation = userLocations.get(i);
+////            for (int j = 0; j < locations.size(); j++) {
+//            System.out.println("This is out of the if : " + locations.get(i).getUser().getId());
+//            if (userId == locations.get(i).getUser().getId()) {
+//
+//                System.out.println("location userId: " + locations.get(i).getUser().getId());
+//                System.out.println("THE location " + locations);
+//
+////                    System.out.println("userLocations loop #: " + i );
+////                    System.out.println("airQualityRecords loop #: " + i);
+//                locationsToReturn.add(locations.get(i));
+//
+//            }
+//        }
+////                        .orElseThrow(() -> new ResourceNotFoundException("Zipcode not found on :: " + zipCode));
+////        }
+//        return ResponseEntity.ok().body(locationsToReturn);
+//
+//    }
+
 
 
 
