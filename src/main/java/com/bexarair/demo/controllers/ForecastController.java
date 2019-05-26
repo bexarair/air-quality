@@ -152,7 +152,7 @@ public class ForecastController {
     }//end of future air
 
 
-    @Scheduled(cron = "0 0 8 * * ?")
+    @Scheduled(cron = "0 0 18 * * ?")
     public void sendDailyText() {
     Date dt = new Date();
     Calendar c = Calendar.getInstance();
