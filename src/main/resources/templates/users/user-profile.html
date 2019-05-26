@@ -12,20 +12,25 @@
                 <div class="col-12 col-md-4">
                     <!--<th:block th:each="catName : ${catName}">-->
                         <!--<th:block th:each="aqi : ${aqi}">-->
-                    <th:block th:each="location : ${locations}">
+                    <!--<th:block th:each="location : ${locations}">-->
+                    <th:block th:each="aqiZipCode : ${aqiZipCodes}">
                         <!--<th:block th:if="${users}">-->
                         <div class="contain-bg card" style="text-align: center; width: 100%">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${location.title}"></h5>
-                                <p class="card-text" th:text="${location.zipcode}"></p>
-                                <!--if no posts, dont show-->
-                                <!--<button class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${location.getId()}}">Edit</a></button>-->
-                                <!--<button class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${location.getId()}}">Delete</a></button>-->
+                                <h5 class="card-title" th:text="${aqiZipCode.title}"></h5>
+                                <p class="card-text" th:text="${aqiZipCode.zipCode}"></p>
+                                <p class="card-text" th:text="${aqiZipCode.aqi}"></p>
+                                <p class="card-text" th:text="${aqiZipCode.categoryName}"></p>
 
+                                    <!--<th:block th:each="location : ${locations}">-->
+                                        <button class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}">Edit</a></button>
+                                        <button class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}">Delete</a></button>
+                                    <!--</th:block>-->
                             </div>
                         </div>
                         <!--</th:block>-->
                     </th:block>
+                    <!--</th:block>-->
                             <!--<th:block th:each="aqiZipCode : ${aqiZipCodes}">-->
                                 <!--&lt;!&ndash;<th:block th:if="${users}">&ndash;&gt;-->
                                 <!--<div class="contain-bg card" style="text-align: center; width: 100%">-->

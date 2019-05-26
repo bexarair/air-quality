@@ -66,22 +66,26 @@ var airQuality2;
 var airQualityAvg;
 
 $.get(currentURL).done(function(airInfo){
-        for(var i = 0; i < zipcodes.length; i++){
+        for(var i = 0; i < testZip.length; i++){
         // console.log(airInfo[0]);
         // console.log("airInfo" + airInfo);
         airQualityName = airInfo[0];
 
-        console.log(airInfo[i]);
+            console.log(airQualityName);
+            console.log(airInfo[i]);
+
         console.log("air quality category: " + airInfo[i].categoryName);
             console.log("air quality: " + airInfo[i].aqi);
-
+            airQualityAvg = airInfo[i].categoryName;
         // airQuality1 = airInfo[0].AQI;
         // airQuality2 = airInfo[1].AQI;
-        airQualityAvg = (airQuality1+airQuality2)/2;
+        // airQualityAvg = (airQuality1+airQuality2)/2;
 
         // console.log(airQualityAvg);
     }
 });
+
+
 
 
 // var airColorObj = [
@@ -134,17 +138,17 @@ function initMap() {
     map.data.setStyle(function(feature) {
         var zipCode = feature.getProperty('ZIP');
         var color;
-        if (airQualityAvg >= 0 && airQualityAvg <= 50){
+        if (airQualityAvg === "Good"){
             color = "green";
-        }else if(airQualityAvg >= 51 && airQualityAvg <= 100){
+        }else if(airQualityAvg === "Moderate"){
             color = "yellow";
-        }else if(airQualityAvg >= 101 && airQualityAvg <= 150){
+        }else if(airQualityAvg === "Unhealthy for Sensitive Groups"){
             color = "orange";
-        }else if(airQualityAvg >= 151 && airQualityAvg <= 200){
+        }else if(airQualityAvg === "Unhealthy"){
             color = "red";
-        }else if(airQualityAvg >= 201 && airQualityAvg <= 300){
+        }else if(airQualityAvg === "Very Unhealthy"){
             color = "magenta";
-        }else if(airQualityAvg >= 301 && airQualityAvg <= 500){
+        }else if(airQualityAvg === "Hazardous"){
             color = "maroon";
         }else{
             color = "black";
@@ -157,30 +161,30 @@ function initMap() {
     });
 
 
-    map.data.setStyle(function(feature) {
-        var zipCode = feature.getProperty('ZIP');
-        var color;
-        if (zipCode.includes("1")){
-            color = "green";
-        }else if(zipCode.includes("9")){
-            color = "yellow";
-        }else if(zipCode.includes("0")){
-            color = "orange";
-        }else if(zipCode.includes("5")){
-            color = "red";
-        }else if(zipCode.includes("4") === "Very Unhealthy"){
-            color = "magenta";
-        }else if(zipCode.includes("6")){
-            color = "maroon";
-        }else{
-            color = "black";
-        }
-        // var color = ascii === "78002" ? 'red' : 'blue';
-        return {
-            fillColor: color,
-            strokeWeight: 1
-        };
-    });
+    // map.data.setStyle(function(feature) {
+    //     var zipCode = feature.getProperty('ZIP');
+    //     var color;
+    //     if (zipCode.includes("1")){
+    //         color = "green";
+    //     }else if(zipCode.includes("9")){
+    //         color = "yellow";
+    //     }else if(zipCode.includes("0")){
+    //         color = "orange";
+    //     }else if(zipCode.includes("5")){
+    //         color = "red";
+    //     }else if(zipCode.includes("4") === "Very Unhealthy"){
+    //         color = "magenta";
+    //     }else if(zipCode.includes("6")){
+    //         color = "maroon";
+    //     }else{
+    //         color = "black";
+    //     }
+    //     // var color = ascii === "78002" ? 'red' : 'blue';
+    //     return {
+    //         fillColor: color,
+    //         strokeWeight: 1
+    //     };
+    // });
 
 
 

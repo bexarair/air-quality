@@ -66,11 +66,27 @@ private String token;
 //        user.getPhone();
         Message message = Message.creator(new PhoneNumber("+1" + phone), // to
                 new PhoneNumber("+12103617392"), // from
-                "***Warning*** /n Current AQI for " + currentDate + " for "  + userTitle + "is showing an AQI of " + currentAqi + " this falls in the " + catName + " category." )
+                "***Warning*** /n Current AQI for " + currentDate + " for "  + userTitle + " is showing an AQI of " + currentAqi + " this falls in the " + catName + " category." )
                 .create();
 
         System.out.println(message.getSid());
     }
+
+    public void alertOneHour(String currentDate, int oneHourAqi, String catName, UserLocation locationTitle, User userPhone) {
+        Twilio.init(sid, token);
+        String userTitle = locationTitle.getTitle();
+        String phone = userPhone.getPhone();
+//        user.getPhone();
+        Message message = Message.creator(new PhoneNumber("+1" + phone), // to
+                new PhoneNumber("+12103617392"), // from
+                "***Warning*** /n Current AQI for " + currentDate + " for "  + userTitle + " is showing an AQI of " + oneHourAqi + " this falls in the " + catName + " category." )
+                .create();
+
+        System.out.println(message.getSid());
+    }
+
+
+
 
 
 }
