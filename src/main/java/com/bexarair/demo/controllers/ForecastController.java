@@ -64,8 +64,7 @@ public class ForecastController {
 
 
 
-    @Scheduled(cron = "0 0 7 * * * ")
-//    @Scheduled(fixedRate = 20000)
+    @Scheduled(cron = "0 0 7 * * ? ")
     public void setupFutureAir(){
         try {
 
@@ -153,7 +152,7 @@ public class ForecastController {
     }//end of future air
 
 
-    @Scheduled(cron = "0 0 8 * * *")
+    @Scheduled(cron = "0 0 18 * * ?")
     public void sendDailyText() {
     Date dt = new Date();
     Calendar c = Calendar.getInstance();
@@ -179,8 +178,8 @@ public class ForecastController {
         long userId = useLocation.get(i).getUser().getId();
         for (int j = 0; j < alertUsers.size(); j++) {
             long userLocationId = alertUsers.get(j).getId();
-            System.out.println("This should be the user IDS: " + useLocation.get(i).getUser().getId());
-            System.out.println("This should be the user ID of the location : " + alertUsers.get(j).getId());
+            System.out.println("LOCATION USER ID: " + useLocation.get(i).getUser().getId());
+            System.out.println("USER ID : " + alertUsers.get(j).getId());
             if (userLocationId == userId) {
                 textAlerts.aqiOverviewText(forecast.get(i), useLocation.get(i), alertUsers.get(j));
                 //this is putting the info into the text and then sending

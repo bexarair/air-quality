@@ -124,6 +124,7 @@ public class LocationController {
                 String locationZipCode = userLocations.get(j).getZipcode();
                 String locationTitle = userLocations.get(j).getTitle();
                 long userId = userLocations.get(j).getUser().getId();
+                long locId = userLocations.get(j).getId();
 
                 if(currentZipCode.equals(locationZipCode)) {
 
@@ -133,7 +134,7 @@ public class LocationController {
                     aqiZipCode.setZipCode(locationZipCode);
                     aqiZipCode.setCategoryName(currentCatName);
                     aqiZipCode.setTitle(locationTitle);
-                    aqiZipCode.setId(user);
+                    aqiZipCode.setId(locId);
 
                     aqiZipCodes.add(aqiZipCode);
                 }
