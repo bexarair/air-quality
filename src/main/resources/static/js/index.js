@@ -40,7 +40,7 @@ var delay2 = 500; // delay time in milliseconds
         for(var j = 0; j < restZipArray.length; j++) {
             map.data.setStyle(function (data) {
                 for (var i = 0; i < restZipArray.length; i++) {
-                    // var color;
+                    var color;
                     if (restZipArray[i] === data.getProperty('ZIP')) {
                         if (restAqiArray[i] >= 0 && restAqiArray[i] <= 50) {
                             color = "green";
