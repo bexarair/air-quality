@@ -35,10 +35,10 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED! Time to verify the results");
 
-            List<CityHospitalRecord> results = jdbcTemplate.query("SELECT zipCode, pediPopulation,pediAsthmaRate,pediAsthmaCases FROM city_hospital_records", new RowMapper<CityHospitalRecord>() {
+            List<CityHospitalRecord> results = jdbcTemplate.query("SELECT year,zipCode, pediPopulation,pediAsthmaRate,pediAsthmaCases FROM city_hospital_records", new RowMapper<CityHospitalRecord>() {
                 @Override
                 public CityHospitalRecord mapRow(ResultSet rs, int row) throws SQLException {
-                    return new CityHospitalRecord(rs.getString(1), rs.getInt(2),rs.getInt(3),rs.getString(4));
+                    return new CityHospitalRecord(rs.getString(1),rs.getString(2), rs.getInt(3),rs.getInt(4),rs.getString(5));
                 }
             });
 

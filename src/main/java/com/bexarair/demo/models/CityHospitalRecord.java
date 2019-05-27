@@ -8,6 +8,9 @@ public class CityHospitalRecord {
     private long id;
 
     @Column(nullable = false)
+    private String year;
+
+    @Column(nullable = false)
     private String zipCode;
 
     @Column(nullable = false)
@@ -31,11 +34,20 @@ public class CityHospitalRecord {
 
 
     //reads and updates a record
-    public CityHospitalRecord(String zipCode, int pediAsthmaCases, int pediPopulation, String pediAsthmaRate) {
+    public CityHospitalRecord(String year,String zipCode, int pediAsthmaCases, int pediPopulation, String pediAsthmaRate) {
+        this.year = year;
         this.zipCode = zipCode;
         this.pediAsthmaCases = pediAsthmaCases;
         this.pediPopulation = pediPopulation;
         this.pediAsthmaRate = pediAsthmaRate;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public int getAsthmaCases() {
@@ -61,6 +73,8 @@ public class CityHospitalRecord {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+
 
     public int getPediAsthmaCases() {
         return pediAsthmaCases;
