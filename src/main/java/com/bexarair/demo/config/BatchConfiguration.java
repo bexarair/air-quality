@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 import javax.sql.DataSource;
 
@@ -35,14 +36,15 @@ public class BatchConfiguration {
     @Autowired
     public DataSource dataSource;
 
+    public static final String uploadingDir = System.getProperty("user.dir") + "/src/main/resources/static/files/cityHospital.csv";
 
     @Bean
     public FlatFileItemReader<CityHospitalRecord> reader() {
         FlatFileItemReader<CityHospitalRecord> reader = new FlatFileItemReader<CityHospitalRecord>();
-        reader.setResource(new ClassPathResource("/static/files/cityHospital.csv"));
+        reader.setResource(new FileSystemResource(uploadingDir));
         reader.setLineMapper(new DefaultLineMapper<CityHospitalRecord>() {{
             setLineTokenizer(new DelimitedLineTokenizer(",") {{
-                setNames(new String[] { "zipCode", "pediAsthmaCases","pediPopulation","pediAsthmaRate" });
+                setNames(new String[] { "year","zipCode", "pediAsthmaCases","pediPopulation","pediAsthmaRate" });
             }});
             setFieldSetMapper(new BeanWrapperFieldSetMapper<CityHospitalRecord>() {{
                 setTargetType(CityHospitalRecord.class);
@@ -60,7 +62,7 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<CityHospitalRecord> writer() {
         JdbcBatchItemWriter<CityHospitalRecord> writer = new JdbcBatchItemWriter<CityHospitalRecord>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<CityHospitalRecord>());
-            writer.setSql("INSERT INTO city_hospital_records (zipCode,pediAsthmaCases,pediPopulation,pediAsthmaRate) VALUES (:zipCode,:pediAsthmaCases,:pediPopulation,:pediAsthmaRate)");
+            writer.setSql("INSERT INTO city_hospital_records (year,zipCode,pediAsthmaCases,pediPopulation,pediAsthmaRate) VALUES (:year,:zipCode,:pediAsthmaCases,:pediPopulation,:pediAsthmaRate)");
         writer.setDataSource(dataSource);
         return writer;
     }
