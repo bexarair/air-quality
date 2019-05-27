@@ -184,7 +184,7 @@ public class AirQualityController {
     public void sendAlertText() {
 
         try{
-            for(int i = 0; i < testZip.length; i++) {
+            for(int i = 0; i < zipcodes.length; i++) {
                 jsonNodeHttpResponse = Unirest.get(currentURL + zipcodes[i] + distanceURL + apiKey)
                         .asJson();
                 apiResponses.put(zipcodes[i], jsonNodeHttpResponse);
