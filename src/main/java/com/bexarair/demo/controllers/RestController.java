@@ -66,7 +66,7 @@ public class RestController {
 
     @GetMapping("/hospitalrecords/zipcode/{zipcode}")
     @ResponseBody
-    public ResponseEntity<List<CityHospitalRecord>> getHospitalRecordsByZip(@PathVariable Integer zipcode)
+    public ResponseEntity<List<CityHospitalRecord>> getHospitalRecordsByZip(@PathVariable String zipcode)
             throws ResourceNotFoundException {
         List <CityHospitalRecord> cityHospitalRecord =
                 hospitalRecordCRUD
