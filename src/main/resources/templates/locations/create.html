@@ -7,6 +7,9 @@
     <body>
         <th:block th:replace="fragments/navbar :: nav"/>
         <div class="container">
+            <div class="alert-danger" style="text-align: center" th:if="${error}">
+                Please enter a ZIP Code within Bexar County
+            </div>
             <h1>My Places</h1><button th:if="${create}" class="btn btn-dark"><a th:href="${'/locations/create/'}">Create</a></button>
             <div class="row">
                 <div class="card bg-light col-12 col-md-4">

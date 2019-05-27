@@ -180,7 +180,8 @@ public class AirQualityController {
 //    @Scheduled(cron = "0 0 14 * * ?")
 
 
-    @Scheduled(cron = "0 0 0/1 * * ?") //runs at the top of every hour
+//    @Scheduled(cron = "0 0 0/1 * * ?") //runs at the top of every hour
+    @Scheduled(fixedRate = 30000)
     public void sendAlertText() {
 
         try{
@@ -220,13 +221,13 @@ public class AirQualityController {
             long userLocationId = useLocation.get(j).getUser().getId();
             String locationZipCode = useLocation.get(j).getZipcode();
             System.out.println("We are on this iteration for user location: " + j);
-
+            System.out.println("LOCATION USER ID: " + userLocationId);
             for (int k = 0; k < alertUsers.size(); k++) {
                 long userId = alertUsers.get(k).getId();
-                System.out.println("LOCATION USER ID: " + userLocationId);
+//                System.out.println("LOCATION USER ID: " + userLocationId);
                 System.out.println("USER ID: " + userId);
-                if (userLocationId == userId && (zippy.contains(locationZipCode) && catNameOneHour.equals("Good") || catNameOneHour.equals("Moderate") || catNameOneHour.equals("Unhealthy for Sensitive Groups") || catNameOneHour.equals("Unhealthy") || catNameOneHour.equals("Very Unhealthy") || catNameOneHour.equals("Hazardous"))) {
-                    textAlerts.alertOneHour(dateObservedOneHour, aqiOneHour, catNameOneHour, useLocation.get(j), alertUsers.get(k));
+                if (userLocationId == userId && (zippy.contains(locationZipCode) && (catNameOneHour.equals("Good") || catNameOneHour.equals("Moderate") || catNameOneHour.equals("Unhealthy for Sensitive Groups") || catNameOneHour.equals("Unhealthy") || catNameOneHour.equals("Very Unhealthy") || catNameOneHour.equals("Hazardous")))) {
+//                    textAlerts.alertOneHour(dateObservedOneHour, aqiOneHour, catNameOneHour, useLocation.get(j), alertUsers.get(k));
                     System.out.println("MESSAGE SENT");
 //                    System.out.println("text message was sent");
                     //this is putting the info into the text and then sending

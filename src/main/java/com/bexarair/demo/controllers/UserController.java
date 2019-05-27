@@ -4,14 +4,13 @@ import com.bexarair.demo.models.User;
 import com.bexarair.demo.models.UserLocation;
 import com.bexarair.demo.repositories.LocationRepository;
 import com.bexarair.demo.repositories.UserRepository;
+import groovy.transform.Field;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 //
 //import java.time.LocalDate;
 
@@ -35,9 +34,9 @@ public class UserController {
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("location1", new UserLocation());
-        model.addAttribute("location2", new UserLocation());
-        model.addAttribute("location3", new UserLocation());
+//        model.addAttribute("location1", new UserLocation());
+//        model.addAttribute("location2", new UserLocation());
+//        model.addAttribute("location3", new UserLocation());
         return "users/sign-up";
     }
 
@@ -82,7 +81,26 @@ public class UserController {
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@ModelAttribute User user, Model viewModel){
+        if(user.getPassword().isEmpty()){
+            viewModel.addAttribute("passError", true);
+        }
+        if(user.getFirstName().isEmpty()){
+            viewModel.addAttribute("firstError", true);
+        }
+        if(user.getLastName().isEmpty()){
+            viewModel.addAttribute("lastError", true);
+        }
+        if(user.getEmail().isEmpty()){
+            viewModel.addAttribute("emailError", true);
+        }
+        if(user.getPhone().isEmpty()){
+            viewModel.addAttribute("phoneError", true);
+        }
+        if(user.getUsername().isEmpty()){
+            viewModel.addAttribute("userError", true);
+        }
+
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         userCRUD.save(user);
