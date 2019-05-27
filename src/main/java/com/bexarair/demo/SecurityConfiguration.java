@@ -35,6 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
+                .csrf()
+                .disable()
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
@@ -62,6 +64,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 )
                 .authenticated()
+//        .and()
+//        .authorizeRequests()
+//        .antMatchers("/uploadFile",
+//                                    "/load",
+//                "/downloadFile"
+//        )
+
         ;
     }
 }
