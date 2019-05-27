@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @Service
@@ -34,8 +37,17 @@ public class DBFileStorageService {
         }
     }
 
-//    public DBFile getFile(String fileId) {
-//        return dbFileRepository.findById(fileId)
-//                .orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
-//    }
+    public DBFile getFile(String fileId) {
+
+        try {
+
+            if (fileId.isEmpty()) {
+
+                throw new MyFileNotFoundException("File not found with id " + fileId);
+            }
+            return dbFileRepository.findById(fileId);
+        } catch (MyFileNotFoundException e) {
+            throw new MyFileNotFoundException("File not found with id " + fileId);
+        }
+    }
 }

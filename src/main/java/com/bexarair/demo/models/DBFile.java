@@ -3,6 +3,7 @@ package com.bexarair.demo.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "files")
@@ -15,6 +16,8 @@ public class DBFile {
     private String fileName;
 
     private String fileType;
+
+//    private Date date;
 
     @Lob
     private byte[] data;

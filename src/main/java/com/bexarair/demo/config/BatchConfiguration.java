@@ -2,7 +2,6 @@ package com.bexarair.demo.config;
 
 import com.bexarair.demo.listener.JobCompletionNotificationListener;
 import com.bexarair.demo.models.CityHospitalRecord;
-import com.bexarair.demo.models.StateHospitalRecord;
 import com.bexarair.demo.processor.CityItemProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -21,9 +20,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import javax.batch.api.chunk.ItemProcessor;
-import javax.batch.api.chunk.ItemReader;
-import javax.batch.api.chunk.ItemWriter;
 import javax.sql.DataSource;
 
 @Configuration
@@ -39,10 +35,11 @@ public class BatchConfiguration {
     @Autowired
     public DataSource dataSource;
 
+
     @Bean
     public FlatFileItemReader<CityHospitalRecord> reader() {
         FlatFileItemReader<CityHospitalRecord> reader = new FlatFileItemReader<CityHospitalRecord>();
-        reader.setResource(new ClassPathResource("cityHospital.csv"));
+        reader.setResource(new ClassPathResource("/static/files/cityHospital.csv"));
         reader.setLineMapper(new DefaultLineMapper<CityHospitalRecord>() {{
             setLineTokenizer(new DelimitedLineTokenizer(",") {{
                 setNames(new String[] { "zipCode", "pediAsthmaCases","pediPopulation","pediAsthmaRate" });
