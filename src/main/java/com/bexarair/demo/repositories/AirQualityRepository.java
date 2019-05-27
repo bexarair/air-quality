@@ -16,6 +16,8 @@ AirQualityRecord findByZipCodeAndHourObserved(String zipCode, String HourObserve
 AirQualityRecord findByZipCodeAndDateObserved(String zipCode, Date dateObserved);
 List<AirQualityRecord> findAllByCategoryName(String name);
 List<AirQualityRecord> findAllByDateObserved(String date);
+List<AirQualityRecord> findAllByZipCode(String zipCode);
+List<AirQualityRecord> findAll();
 
 
 
