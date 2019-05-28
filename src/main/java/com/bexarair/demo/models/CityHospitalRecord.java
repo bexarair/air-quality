@@ -19,6 +19,7 @@ public class CityHospitalRecord {
     @Column(nullable = false)
     private int pedi_population;
 
+
     @Column(nullable = false)
     private String pedi_asthma_rate;
 
@@ -28,9 +29,9 @@ public class CityHospitalRecord {
 
     }
 
-
     public String getZipcode() {
         return zipcode;
+
     }
 
     public void setZip_code(String zip_code) {

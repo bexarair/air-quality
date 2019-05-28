@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <th:block th:replace="fragments/head :: header('Upgrade-User')"/>
+    </head>
+    <body>
+        <th:block th:replace="fragments/navbar :: nav"/>
+        <div class="container">
+
+            <h1 style="text-align: center">Current Users</h1>
+            <th:block th:each="user : ${users}">
+                <div>First and Last Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></div>
+                <div>User Name: <span th:text="${user.username}"></span></div>
+                <div>Is the user currently an Admin: <span th:text="${user.isGodMode()}"></span></div>
+                <button><a th:href="@{'/editadmin/' + ${user.id}}">Edit Admin Rights</a></button>
+
+                <!--<form th:action="@{'/editadmin/' + ${user.id}}" th:method="POST" th:object="${users}">-->
+                    <!--<div class="form-check">-->
+                        <!--<input class="form-check-input" type="checkbox" value="" id="admin" th:value="*{admin}"/>-->
+                        <!--<label class="form-check-label" for="admin">-->
+                            <!--Select to Make User an Admin-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<button type="submit" class="btn btn-primary loginBtn">Submit</button>-->
+                <!--</form>-->
+
+
+            </th:block>
+
+
+
+
+        </div>
+        <footer th:replace="fragments/footer :: footer" />
+    </body>
+</html>

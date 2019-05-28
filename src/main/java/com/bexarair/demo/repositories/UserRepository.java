@@ -12,6 +12,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail(String email);
     User findById(long id);
     List<User> findAll();
+    List<User> findAllByGodMode(boolean godMode);
 
 
 

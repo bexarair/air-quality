@@ -91,7 +91,7 @@ public class LocationController {
 
 
     @GetMapping("/profile")
-    public String showUserLocations(Model viewModel, Model viewModel2, Model viewModel3){
+    public String showUserLocations(Model viewModel){
         Date dt = new Date();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -101,21 +101,21 @@ public class LocationController {
         long user = sessionUser.getId();
         List<UserLocation> userLocations = locationCRUD.findAllByUserId(user);
         List<AirQualityRecord> current = airCRUD.findAllByDateObserved(date);
-
-
+        List<User> allUsers = userCRUD.findAll();
+        List<User> allAdminUsers = userCRUD.findAllByGodMode(true);
 
         viewModel.addAttribute("locations", userLocations);
 
         if(locationCRUD.findAllByUserId(user) != null){
-            viewModel2.addAttribute("edit", true);
+            viewModel.addAttribute("edit", true);
         }
         if(locationCRUD.findAllByUserId(user).size() < 3){
-            viewModel3.addAttribute("create", true);
+            viewModel.addAttribute("create", true);
         }
 
         ArrayList<AqiZipCode> aqiZipCodes = new ArrayList<>();
 
-
+/******************** Shows Users Places *****************************/
         for(int i = 0; i < current.size(); i++){
             String currentZipCode = current.get(i).getZipCode();
             String currentCatName = current.get(i).getCategoryName();
@@ -144,6 +144,16 @@ public class LocationController {
         }
 
         viewModel.addAttribute("aqiZipCodes", aqiZipCodes);
+/********************** SHOWS ADMIN PAGE **********************************/
+    for(int i = 0; i < allAdminUsers.size(); i++){
+       long userAdmin = allAdminUsers.get(i).getId();
+       if(userAdmin == user){
+           viewModel.addAttribute("admin", true);
+       }
+//       else{
+//           viewModel.addAttribute("notAdmin", true);
+//       }
+    }
         return "users/user-profile";
 
     }
@@ -151,5 +161,5 @@ public class LocationController {
 
 
 
-}
+}//end of class
 
