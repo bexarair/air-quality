@@ -14,7 +14,7 @@ public class CityItemProcessor implements ItemProcessor<CityHospitalRecord, City
     @Override
     public CityHospitalRecord process(final CityHospitalRecord record) throws Exception {
 
-        final CityHospitalRecord transformedRecord = new CityHospitalRecord(record.getYear(),record.getZipCode(), record.getPediAsthmaCases(),record.getPediPopulation(),record.getPediAsthmaRate());
+        final CityHospitalRecord transformedRecord = new CityHospitalRecord(record.getYear(),record.getZipcode(),record.getPedi_asthma_cases(),record.getPedi_population(),record.getPedi_asthma_rate());
 
         log.info("Converting (" + record + ") into (" + transformedRecord + ")");
 

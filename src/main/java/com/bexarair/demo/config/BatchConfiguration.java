@@ -44,7 +44,7 @@ public class BatchConfiguration {
         reader.setResource(new FileSystemResource(uploadingDir));
         reader.setLineMapper(new DefaultLineMapper<CityHospitalRecord>() {{
             setLineTokenizer(new DelimitedLineTokenizer(",") {{
-                setNames(new String[] { "year","zipCode", "pediAsthmaCases","pediPopulation","pediAsthmaRate" });
+                setNames(new String[] { "year","zipcode","pedi_asthma_cases","pedi_population","pedi_asthma_rate" });
             }});
             setFieldSetMapper(new BeanWrapperFieldSetMapper<CityHospitalRecord>() {{
                 setTargetType(CityHospitalRecord.class);
@@ -62,7 +62,7 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<CityHospitalRecord> writer() {
         JdbcBatchItemWriter<CityHospitalRecord> writer = new JdbcBatchItemWriter<CityHospitalRecord>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<CityHospitalRecord>());
-            writer.setSql("INSERT INTO city_hospital_records (year,zipCode,pediAsthmaCases,pediPopulation,pediAsthmaRate) VALUES (:year,:zipCode,:pediAsthmaCases,:pediPopulation,:pediAsthmaRate)");
+            writer.setSql("INSERT INTO city_hospital_records (year,zipcode,pedi_asthma_cases,pedi_population,pedi_asthma_rate) VALUES (:year,:zipcode,:pedi_asthma_cases,:pedi_population,:pedi_asthma_rate)");
         writer.setDataSource(dataSource);
         return writer;
     }
