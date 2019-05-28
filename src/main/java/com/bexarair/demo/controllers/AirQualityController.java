@@ -75,8 +75,8 @@ public class AirQualityController {
 /********************Database Injection**********************/
 
 
-//    @Scheduled(cron = "0 0 7 * * ?") //grab at 7am everyday
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(cron = "0 0 7 * * ?") //grab at 7am everyday
+//    @Scheduled(fixedRate = 60000)
     public void getAir() {
         System.out.println("This is being ran");
         try {
