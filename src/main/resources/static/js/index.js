@@ -9,6 +9,7 @@ var zipcodes = ["78002","78006","78009","78015","78023","78039","78052","78056",
 var testZip = ["78002", "78006", "78009", "78015", "78023"];
 var restZipArray = [];
 var restAqiArray = [];
+var heatmapData = [];
 
 var restHospitalZip =[];
 var restHospitalRate = [];
@@ -28,8 +29,8 @@ $.get(currentDateURL).done(function(airInfo){
 /********* Hospital Record call to REST API *************************/
 $.get(hostpitalDataURL).done(function(hospitalData) {
     for(var i = 0; i < hospitalData.length; i++){
-        restHospitalZip.push(hospitalData[i].zipCode);
-        restHospitalRate.push(hospitalData[i].pediAsthmaRate);
+        restHospitalZip.push(hospitalData[i].zipcode);
+        restHospitalRate.push(hospitalData[i].pedi_asthma_rate);
     }
 });
 
@@ -80,8 +81,8 @@ var delay2 = 500; // delay time in milliseconds
     }, delay2);
 
 
-    var heatmapData = [
-        {location: new google.maps.LatLng(29.2948, -98.7261), zip: 78023},
+    heatmapData = [
+        {location: new google.maps.LatLng(29.6172, -98.7261), zip: 78023},
         {location: new google.maps.LatLng(29.6451, -98.4733), zip: 78258},
         {location: new google.maps.LatLng(29.5517, -98.4952), zip: 78216},
         {location: new google.maps.LatLng(29.3978, -98.7371), zip: 78245},
@@ -95,9 +96,54 @@ var delay2 = 500; // delay time in milliseconds
         {location: new google.maps.LatLng(29.5420, -98.5556), zip: 78230},
         {location: new google.maps.LatLng(29.4733, -98.8142), zip: 78253},
         {location: new google.maps.LatLng(29.5944, -98.4568), zip: 78232},
-        {location: new google.maps.LatLng(29.3028, -98.7442), zip: 78002},
-        {location: new google.maps.LatLng(29.2436, -98.6292), zip: 78073},
-        {location: new google.maps.LatLng(29.3378, -98.2344), zip: 78101}
+        {location: new google.maps.LatLng(29.7487, -98.6491), zip: 78015},
+        {location: new google.maps.LatLng(29.5886, -98.2760), zip: 78154},
+        {location: new google.maps.LatLng(29.4636, -98.5227), zip: 78201},
+        {location: new google.maps.LatLng(29.5270, -98.6106), zip: 78240},
+        {location: new google.maps.LatLng(29.5061, -98.5776), zip: 78229},
+        {location: new google.maps.LatLng(29.4671, -98.6766), zip: 78251},
+        {location: new google.maps.LatLng(29.3038, -98.4075), zip: 78223},
+        {location: new google.maps.LatLng(29.4896, -98.3855), zip: 78218},
+        {location: new google.maps.LatLng(29.4104, -98.6326), zip: 78227},
+        {location: new google.maps.LatLng(29.5390, -98.4239), zip: 78217},
+        {location: new google.maps.LatLng(29.4175, -98.5227), zip: 78207},
+        {location: new google.maps.LatLng(29.4596, -98.4952), zip: 78212},
+        {location: new google.maps.LatLng(29.4553, -98.5611), zip: 78228},
+        {location: new google.maps.LatLng(29.5004, -98.6656), zip: 78250},
+        {location: new google.maps.LatLng(29.4687, -98.6216), zip: 78238},
+        {location: new google.maps.LatLng(29.5201, -98.3581), zip: 78239},
+        {location: new google.maps.LatLng(29.4981, -98.5227), zip: 78213},
+        {location: new google.maps.LatLng(29.4747, -98.3472), zip: 78244},
+        {location: new google.maps.LatLng(29.6897, -98.4952), zip: 78260},
+        {location: new google.maps.LatLng(29.6249, -98.4294), zip: 78259},
+        {location: new google.maps.LatLng(29.4227, -98.4870), zip: 78205},
+        {location: new google.maps.LatLng(29.3980, -98.4678), zip: 78210},
+        {location: new google.maps.LatLng(29.2436, -98.6271), zip: 78073},
+        {location: new google.maps.LatLng(29.2982, -98.4952), zip: 78221},
+        {location: new google.maps.LatLng(29.4489, -98.3910), zip: 78219},
+        {location: new google.maps.LatLng(29.1706, -98.5062), zip: 78264},
+        {location: new google.maps.LatLng(29.4302, -98.4596), zip: 78202},
+        {location: new google.maps.LatLng(29.3744, -98.3855), zip: 78222},
+        {location: new google.maps.LatLng(29.3173, -98.4678), zip: 78214},
+        {location: new google.maps.LatLng(29.3185, -98.5391), zip: 78224},
+        {location: new google.maps.LatLng(29.4143, -98.3910), zip: 78220},
+        {location: new google.maps.LatLng(29.6611, -98.5831), zip: 78257},
+        {location: new google.maps.LatLng(29.4147, -98.5666), zip: 78237},
+        {location: new google.maps.LatLng(29.3542, -98.6106), zip: 78242},
+        {location: new google.maps.LatLng(29.4043, -98.5035), zip: 78204},
+        {location: new google.maps.LatLng(29.3455, -98.5666), zip: 78211},
+        {location: new google.maps.LatLng(29.5929, -98.5254), zip: 78248}
+
+
+
+
+
+
+
+
+        // {location: new google.maps.LatLng(29.3028, -98.7442), zip: 78002},
+        // {location: new google.maps.LatLng(29.2436, -98.6292), zip: 78073},
+        // {location: new google.maps.LatLng(29.3378, -98.2344), zip: 78101}
 
     ];
 

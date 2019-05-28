@@ -75,9 +75,10 @@ public class AirQualityController {
 /********************Database Injection**********************/
 
 
-    @Scheduled(cron = "0 0 7 * * ?") //grab at 7am everyday
-//    @Scheduled(fixedRate = 20000)
+//    @Scheduled(cron = "0 0 7 * * ?") //grab at 7am everyday
+    @Scheduled(fixedRate = 60000)
     public void getAir() {
+        System.out.println("This is being ran");
         try {
 
             for(int i = 0; i < zipcodes.length; i++) {
@@ -115,70 +116,16 @@ public class AirQualityController {
                     newAirQuality.setCategoryName(name);
                     newAirQuality.setZipCode(zipcodes[i]);
                     airCRUD.save(newAirQuality);
+
+
+                System.out.println("this is inside the record creater");
             }
 
         } catch (UnirestException e) {
             e.printStackTrace();
             }
 
-
-
-
-//        Date dt = new Date();
-//        String pattern = "yyyy-MM-dd";
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//        String date = simpleDateFormat.format(dt);
-//        System.out.println(date);
-//
-//
-////        List<ForecastRecord> forecast = forecastCRUD.findAllByForecastDate(date);
-//        List<AirQualityRecord> current = airCRUD.findAllByDateObserved(date);
-//        List<UserLocation> useLocation = locationCRUD.findAllByTextAlert(true);
-//        List<User> alertUsers = userCRUD.findAll();
-//
-////Used to send the Text Alerts
-//        int count = 0;
-//        for (int i=0; i < current.size(); i++) {
-//            count++;
-//            if(count > alertUsers.size()){
-//                break;
-//            }
-//            String currentZipCode = current.get(i).getZipCode();
-//            String currentCatName = current.get(i).getCategoryName();
-//            for(int j=0; j < useLocation.size(); j++) {
-//                long userLocationId = useLocation.get(j).getUser().getId();
-//                String locationZipCode = useLocation.get(j).getZipcode();
-//                for(int k=0; k < alertUsers.size(); k++){
-//                    long userId = alertUsers.get(k).getId();
-//                    if (userLocationId == userId && currentZipCode.equals(locationZipCode) && currentCatName.equals("Unhealthy for Sensitive Groups") || currentCatName.equals("Unhealthy") || currentCatName.equals("Very Unhealthy") || currentCatName.equals("Hazardous") ){
-//                        textAlerts.currentAlert(current.get(j), useLocation.get(j), alertUsers.get(k));
-////                    System.out.println("text message was sent");
-//                    //this is putting the info into the text and then sending
-//                    }
-//                }
-//            }
-//        }
-
-// look through all the airquality records...
-
-        // users are opted in to text messages..
-
-        // if they are... then what are their locations?
-
-        // compare the user locations zip codes against all of the air quality records zip codes
-
-            // if they match, and the air quality record has a bad AQI, then send a text message
-
-
-
-//
-// location zipCode to the current Zipcode/
-
-
     }//end of getAir
-
-//    @Scheduled(cron = "0 0 14 * * ?")
-
 
     @Scheduled(cron = "0 0 0/1 * * ?") //runs at the top of every hour
     public void sendAlertText() {
@@ -225,7 +172,7 @@ public class AirQualityController {
                 long userId = alertUsers.get(k).getId();
                 System.out.println("LOCATION USER ID: " + userLocationId);
                 System.out.println("USER ID: " + userId);
-                if (userLocationId == userId && (zippy.contains(locationZipCode) && catNameOneHour.equals("Good") || catNameOneHour.equals("Moderate") || catNameOneHour.equals("Unhealthy for Sensitive Groups") || catNameOneHour.equals("Unhealthy") || catNameOneHour.equals("Very Unhealthy") || catNameOneHour.equals("Hazardous"))) {
+                if (userLocationId == userId && (zippy.contains(locationZipCode) && catNameOneHour.equals("Unhealthy for Sensitive Groups") || catNameOneHour.equals("Unhealthy") || catNameOneHour.equals("Very Unhealthy") || catNameOneHour.equals("Hazardous"))) {
                     textAlerts.alertOneHour(dateObservedOneHour, aqiOneHour, catNameOneHour, useLocation.get(j), alertUsers.get(k));
                     System.out.println("MESSAGE SENT");
 //                    System.out.println("text message was sent");
