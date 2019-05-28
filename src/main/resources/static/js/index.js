@@ -2,19 +2,20 @@
 // // // $(document).ready(function() {
 
 console.log("Javascript is online");
-// var currentDateURL = "http://localhost:8080/airquality/currentdate.geojson";
-var currentDateURL = "https://bexarair.com/airquality/currentdate";
-// var hostpitalDataURL = "http://localhost:8080/hospitalrecords";
-var hospitalDataURL = "https://bexarair.com/hospitalrecords";
+var currentDateURL = "http://localhost:8080/airquality/currentdate";
+// var currentDateURL = "https://bexarair.com/airquality/currentdate";
+var hospitalDataURL = "http://localhost:8080/hospitalrecords";
+// var hospitalDataURL = "https://bexarair.com/hospitalrecords";
 var geoJson = 'https://opendata.arcgis.com/datasets/4e6c13c6d8054783aaae3d3bc495bdfd_0.geojson';
 var zipcodes = ["78002","78006","78009","78015","78023","78039","78052","78056","78063","78064","78065","78066","78069","78073","78101","78108","78109","78112","78114","78121","78124","78148","78150","78152","78154","78155","78163","78201","78202","78203","78204","78205","78207","78208","78209","78210","78211","78212","78213","78214","78215","78216","78217","78218","78219","78220","78221","78222","78223","78224","78225","78226","78227","78228","78229","78230","78231","78232","78233","78234","78235","78236","78237","78238","78239","78240","78242","78244","78245","78247","78248","78249","78250","78251","78252","78253","78254","78255","78256","78257","78258","78259","78260","78261","78263","78264","78266"];
 var testZip = ["78002", "78006", "78009", "78015", "78023"];
 var restZipArray = [];
 var restAqiArray = [];
-var heatmapData = [];
+var heatmapData = [{}];
+var googleData;
 
-var restHospitalZip =[];
-var restHospitalRate = [];
+var restHospitalArray =[];
+var restHospitalRateArray = [];
 var map;
 
 
@@ -30,11 +31,13 @@ $.get(currentDateURL).done(function(airInfo){
 
 /********* Hospital Record call to REST API *************************/
 $.get(hospitalDataURL).done(function(hospitalData) {
-    for(var i = 0; i < hospitalData.length; i++){
-        restHospitalZip.push(hospitalData[i].zipcode);
-        restHospitalRate.push(hospitalData[i].pedi_asthma_rate);
+    for(var i = 0; i < zipcodes.length; i++){
+        restHospitalArray.push(hospitalData[i].zipcode);
+        restHospitalRateArray.push(hospitalData[i].pedi_asthma_rate);
+        console.log("hospital data from rest api call: " + restHospitalArray)
     }
 });
+
 
 
 
@@ -51,12 +54,15 @@ function initMap() {
     map.data.loadGeoJson(geoJson);
 
 
-
-var delay2 = 500; // delay time in milliseconds
+    console.log("THis is the length of the array: " + restZipArray[restZipArray.length-1]);
+var delay2 = 2000; // delay time in milliseconds
         setTimeout(function () {
-        for(var j = 0; j < restZipArray.length; j++) {
-            map.data.setStyle(function (data) {
-                for (var i = 0; i < restZipArray.length; i++) {
+        // for(var j = 0; j < zipcodes.length; j++) {
+            map.data.setStyle(function(data) {
+                for (var i = 0; i < 87; i++) {
+                    console.log("INSIDE THE FIRST LOOP: " + restZipArray);
+                    console.log("Indiv zip: " + restZipArray[i]);
+                    console.log("Google Zips: " + data.getProperty('ZIP'));
                     var color;
                     if (restZipArray[i] === data.getProperty('ZIP')) {
                         if (restAqiArray[i] >= 0 && restAqiArray[i] <= 50) {
@@ -79,11 +85,10 @@ var delay2 = 500; // delay time in milliseconds
                     strokeWeight: 1
                 };
             });
-        }
+        // }
     }, delay2);
 
-
-    heatmapData = [
+    googleData = [
         {location: new google.maps.LatLng(29.6172, -98.7261), zip: 78023},
         {location: new google.maps.LatLng(29.6451, -98.4733), zip: 78258},
         {location: new google.maps.LatLng(29.5517, -98.4952), zip: 78216},
@@ -136,37 +141,65 @@ var delay2 = 500; // delay time in milliseconds
         {location: new google.maps.LatLng(29.3455, -98.5666), zip: 78211},
         {location: new google.maps.LatLng(29.5929, -98.5254), zip: 78248}
 
-
-
-
-
-
-
-
-        // {location: new google.maps.LatLng(29.3028, -98.7442), zip: 78002},
-        // {location: new google.maps.LatLng(29.2436, -98.6292), zip: 78073},
-        // {location: new google.maps.LatLng(29.3378, -98.2344), zip: 78101}
-
     ];
 
 
-for(var i = 0; i < restHospitalZip.length; i++){
-    if(heatmapData[i].zip === restHospitalZip[i]){
-        if(restHospitalRate[i] < 11){
-            heatmapData[i].weight = restHospitalRate[i];
-        }else if(restHospitalRate[i] >= 11 && restHospitalRate[i] < 20 ){
-            heatmapData[i].weight = restHospitalRate[i]
-        }else if(restHospitalRate[i] >= 21 && restHospitalRate[i] < 30 ){
-            heatmapData[i].weight = restHospitalRate[i]
-        }else if(restHospitalRate[i] >= 31 && restHospitalRate[i] < 40 ){
-            heatmapData[i].weight = restHospitalRate[i]
-        }else if(restHospitalRate[i] >= 41 && restHospitalRate[i] < 50){
-            heatmapData[i].weight = restHospitalRate[i];
-        } else if(restHospitalRate[i] > 50){
-            heatmapData[i].weight = restHospitalRate[i];
+    // console.log("This is in the map");
+    //
+    // console.log("Look at this hardcoded googleData3: " + googleData[3].zip);
+    //
+    setTimeout(function() {
+    console.log("Hospital Data array that stuff should be in: " + restHospitalArray[0]);
+    console.log("Hospital Data array that stuff should be in: " + restHospitalArray[1]);
+    console.log(restHospitalArray.length);
+        for (var i = 0; i < restHospitalArray.length; i++) {
+            var hospitalZip = restHospitalArray[i];
+                console.log("hospital ZIP code data: " + restHospitalArray[i]);
+
+            for (var j = 0; j < googleData.length; j++) {
+                console.log("GOOGLE " + googleData[j].zip);
+
+                if (hospitalZip === googleData[j].zip) {
+                    console.log("This is the googleData stuff : " + googleData[j]);
+                    heatmapData.push(googleData[j])
+                }
+            }
         }
-    }
-}
+    }, 10000);
+
+
+    // look through all the hospital record zip codes individual....
+
+        // compare the hospital record zip codes with all the bexar county zip codes
+
+            // if they match, push them into a heat map array to display on the map
+
+
+
+
+
+
+
+
+
+
+// for(var i = 0; i < restHospitalZip.length; i++){
+//     if(heatmapData[i].zip === restHospitalZip[i]){
+//         if(restHospitalRate[i] < 11){
+//             heatmapData[i].weight = restHospitalRate[i];
+//         }else if(restHospitalRate[i] >= 11 && restHospitalRate[i] < 20 ){
+//             heatmapData[i].weight = restHospitalRate[i]
+//         }else if(restHospitalRate[i] >= 21 && restHospitalRate[i] < 30 ){
+//             heatmapData[i].weight = restHospitalRate[i]
+//         }else if(restHospitalRate[i] >= 31 && restHospitalRate[i] < 40 ){
+//             heatmapData[i].weight = restHospitalRate[i]
+//         }else if(restHospitalRate[i] >= 41 && restHospitalRate[i] < 50){
+//             heatmapData[i].weight = restHospitalRate[i];
+//         } else if(restHospitalRate[i] > 50){
+//             heatmapData[i].weight = restHospitalRate[i];
+//         }
+//     }
+// }
 
 
     var heatmap = new google.maps.visualization.HeatmapLayer({

@@ -109,7 +109,7 @@ public class LocationController {
         if(locationCRUD.findAllByUserId(user) != null){
             viewModel.addAttribute("edit", true);
         }
-        if(locationCRUD.findAllByUserId(user).size() < 3){
+        if(locationCRUD.findAllByUserId(user).size() < 6){
             viewModel.addAttribute("create", true);
         }
 

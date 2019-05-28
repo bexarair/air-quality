@@ -76,7 +76,7 @@ public class AirQualityController {
 
 
     @Scheduled(cron = "0 0 7 * * ?") //grab at 7am everyday
-//    @Scheduled(fixedRate = 60000)
+//    @Scheduled(fixedRate = 20000)
     public void getAir() {
         System.out.println("This is being ran");
         try {
