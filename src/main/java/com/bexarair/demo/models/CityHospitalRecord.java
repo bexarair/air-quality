@@ -11,19 +11,16 @@ public class CityHospitalRecord {
     private String year;
 
     @Column(nullable = false)
-    private String zipCode;
+    private String zipcode;
 
     @Column(nullable = false)
-    private int asthmaCases;
+    private int pedi_asthma_cases;
 
     @Column(nullable = false)
-    private int pediAsthmaCases;
+    private int pedi_population;
 
     @Column(nullable = false)
-    private int pediPopulation;
-
-    @Column(nullable = false)
-    private String pediAsthmaRate;
+    private String pedi_asthma_rate;
 
 
     //creates a record
@@ -32,14 +29,45 @@ public class CityHospitalRecord {
     }
 
 
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZip_code(String zip_code) {
+        this.zipcode = zip_code;
+    }
+
+    public int getPedi_asthma_cases() {
+        return pedi_asthma_cases;
+    }
+
+    public void setPedi_asthma_cases(int pedi_asthma_cases) {
+        this.pedi_asthma_cases = pedi_asthma_cases;
+    }
+
+    public int getPedi_population() {
+        return pedi_population;
+    }
+
+    public void setPedi_population(int pedi_population) {
+        this.pedi_population = pedi_population;
+    }
+
+    public String getPedi_asthma_rate() {
+        return pedi_asthma_rate;
+    }
+
+    public void setPedi_asthma_rate(String pedi_asthma_rate) {
+        this.pedi_asthma_rate = pedi_asthma_rate;
+    }
 
     //reads and updates a record
-    public CityHospitalRecord(String year,String zipCode, int pediAsthmaCases, int pediPopulation, String pediAsthmaRate) {
+    public CityHospitalRecord(String year,String zipcode, int pedi_asthma_cases, int pedi_population, String pedi_asthma_rate) {
         this.year = year;
-        this.zipCode = zipCode;
-        this.pediAsthmaCases = pediAsthmaCases;
-        this.pediPopulation = pediPopulation;
-        this.pediAsthmaRate = pediAsthmaRate;
+        this.zipcode = zipcode;
+        this.pedi_asthma_cases = pedi_asthma_cases;
+        this.pedi_population = pedi_population;
+        this.pedi_asthma_rate = pedi_asthma_rate;
     }
 
     public String getYear() {
@@ -50,53 +78,5 @@ public class CityHospitalRecord {
         this.year = year;
     }
 
-    public int getAsthmaCases() {
-        return asthmaCases;
-    }
 
-    public void setAsthmaCases(int asthmaCases) {
-        this.asthmaCases = asthmaCases;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-
-
-    public int getPediAsthmaCases() {
-        return pediAsthmaCases;
-    }
-
-    public void setPediAsthmaCases(int pediAsthmaCases) {
-        this.pediAsthmaCases = pediAsthmaCases;
-    }
-
-    public int getPediPopulation() {
-        return pediPopulation;
-    }
-
-    public void setPediPopulation(int pediPopulation) {
-        this.pediPopulation = pediPopulation;
-    }
-
-    public String getPediAsthmaRate() {
-        return pediAsthmaRate;
-    }
-
-    public void setPediAsthmaRate(String pediAsthmaRate) {
-        this.pediAsthmaRate = pediAsthmaRate;
-    }
 }//end of hospitalrecord class
