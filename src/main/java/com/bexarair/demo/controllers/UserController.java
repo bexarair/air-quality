@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 //
 //import java.time.LocalDate;
 
@@ -39,6 +41,14 @@ public class UserController {
         model.addAttribute("location2", new UserLocation());
         model.addAttribute("location3", new UserLocation());
         return "users/sign-up";
+    }
+
+    @PostMapping("/sign-up")
+    public String saveUser(@ModelAttribute User user){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+        userCRUD.save(user);
+        return "redirect:/login";
     }
 
 //    @GetMapping("/profile")
@@ -80,14 +90,42 @@ public class UserController {
         return "redirect:/profile";
     }
 
-
-    @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        userCRUD.save(user);
-        return "redirect:/login";
+    @GetMapping("/viewusers")
+    public String viewUsers(Model model){
+        List<User> allUsers = userCRUD.findAll();
+        model.addAttribute("users", allUsers);
+        return "admin/view-users";
     }
+
+
+    @GetMapping("/editadmin/{id}")
+    public String updateUser(@PathVariable long id, Model viewModel) {
+        User user = userCRUD.findOne(id);
+        viewModel.addAttribute("userInfo", user);
+        return "admin/edit-users";
+    }
+
+    @PostMapping("/editadmin/{id}")
+    public String updateUser(@PathVariable long id, @ModelAttribute User userToUpgrade){
+//        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userCRUD.findOne(id);
+        System.out.println("This is the user we are trying to update: " + user);
+        userToUpgrade.setId(user.getId());
+        System.out.println("This is the user ID to change: " + user.getId());
+        userToUpgrade.setFirstName(user.getFirstName());
+        userToUpgrade.setLastName(user.getLastName());
+//        userToUpgrade.setGodMode(true);
+        userToUpgrade.setPassword(user.getPassword());
+        userToUpgrade.setEmail(user.getEmail());
+        userToUpgrade.setUsername(user.getUsername());
+        userToUpgrade.setPhone(user.getPhone());
+        userCRUD.save(userToUpgrade);
+        return "redirect:/viewusers";
+    }
+
+
+
+
 
 //    @GetMapping("/profile")
 //    public String showUserProfile(Model model){

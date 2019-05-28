@@ -59,8 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
 
-                        "/profile", // only authenticated users can create ads
-                        "/profile/{id}/edit", // only authenticated users can edit ads
+                        "/profile", // only authenticated users can view profile
+                        "/profile/{id}/edit", // only authenticated users can edit profile
                         "/uploader.html"//only authenticated users can upload files
 
 
