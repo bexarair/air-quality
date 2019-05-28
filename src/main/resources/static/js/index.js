@@ -12,6 +12,19 @@ var map;
 
 
 
+
+var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
+
+// map = new google.maps.Map(document.getElementById('map'), {
+//     center: sanFrancisco,
+//     zoom: 13,
+//     mapTypeId: 'satellite'
+// });
+
+
+
+
+
 /************** MAP INFORMATION ******************/
 $.get(currentURL).done(function(airInfo){
     for(var i = 0; i < zipcodes.length; i++){
@@ -26,8 +39,34 @@ function initMap() {
         zoom: 9,
         center: {lat: 29.4241, lng: -98.4936}
 
-
     });
+
+    /* Data points defined as an array of LatLng objects */
+    var heatmapData = [
+        new google.maps.LatLng(37.782, -122.447),
+        new google.maps.LatLng(37.782, -122.445),
+        new google.maps.LatLng(37.782, -122.443),
+        new google.maps.LatLng(37.782, -122.441),
+        new google.maps.LatLng(37.782, -122.439),
+        new google.maps.LatLng(37.782, -122.437),
+        new google.maps.LatLng(37.782, -122.435),
+        new google.maps.LatLng(37.785, -122.447),
+        new google.maps.LatLng(37.785, -122.445),
+        new google.maps.LatLng(37.785, -122.443),
+        new google.maps.LatLng(37.785, -122.441),
+        new google.maps.LatLng(37.785, -122.439),
+        new google.maps.LatLng(37.785, -122.437),
+        new google.maps.LatLng(37.785, -122.435)
+    ];
+
+
+
+
+
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+        data: heatmapData
+    });
+    heatmap.setMap(map);
 
 
     // NOTE: This uses cross-domain XHR, and may not work on older browsers.
@@ -66,4 +105,7 @@ var delay2 = 500; // delay time in milliseconds
     }, delay2);
 }
 /************************************&*****END OF MAP**************************************/
+
+
+
 

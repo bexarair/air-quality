@@ -35,11 +35,12 @@ function drawChart() {
             data.addColumn('number', 'Location 2');
             data.addColumn('number', 'Location 3');
             data.addRows([
-                ['2018/05/18', userAqi, userAqi, userAqi],   //date, AQI for user location
-                ['2018/05/17', 3.4, 4.2, 4.1],
-                ['2018/05/16', 4.4, 6.5, 8.8],
-                ['2018/05/15', 2.4, 6.4, 8.6],
+                [testUrl[i].]
                 ['2018/05/14', 3.4, 8.2, 4.3]
+                ['2018/05/15', 2.4, 6.4, 8.6],
+                ['2018/05/16', 4.4, 6.5, 8.8],
+                ['2018/05/17', 3.4, 4.2, 4.1],
+                ['2018/05/18', userAqi, userAqi, userAqi]   //date, AQI for user location
             ]);
 
             // Set chart options

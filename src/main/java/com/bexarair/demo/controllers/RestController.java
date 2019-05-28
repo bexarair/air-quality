@@ -62,6 +62,16 @@ public class RestController {
          return ResponseEntity.ok().body(airQualityRecord);
     }
 
+    /**this returns back all the hospital records**/
+
+    @GetMapping("/hospitalrecords")
+    @ResponseBody
+    public ResponseEntity<List<CityHospitalRecord>> getAllHospitalRecords()
+            throws ResourceNotFoundException {
+        List <CityHospitalRecord> cityHospitalRecord =
+                hospitalRecordCRUD.findAll();
+        return ResponseEntity.ok().body(cityHospitalRecord);
+    }
     /**this filters out the locations of the user by the current date**/
 
     @GetMapping("/hospitalrecords/zipcode/{zipcode}")
@@ -73,6 +83,7 @@ public class RestController {
                         .findByZipCode(zipcode);
         return ResponseEntity.ok().body(cityHospitalRecord);
     }
+
 
     /**this filters out the locations of the user by the current date**/
 
