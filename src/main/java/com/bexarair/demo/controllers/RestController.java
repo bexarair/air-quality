@@ -80,7 +80,7 @@ public class RestController {
             throws ResourceNotFoundException {
         List <CityHospitalRecord> cityHospitalRecord =
                 hospitalRecordCRUD
-                        .findByZipCode(zipcode);
+                        .findByzipcode(zipcode);
         return ResponseEntity.ok().body(cityHospitalRecord);
     }
 

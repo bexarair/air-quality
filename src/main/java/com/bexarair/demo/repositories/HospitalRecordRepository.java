@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface HospitalRecordRepository extends JpaRepository<CityHospitalRecord, Long> {
-    List<CityHospitalRecord> findByZipCode(String zipCode);
+    List<CityHospitalRecord> findByzipcode(Integer zipCode);
 }
