@@ -5,6 +5,14 @@ var singleFileUploadInput = document.querySelector('#singleFileUploadInput');
 var singleFileUploadError = document.querySelector('#singleFileUploadError');
 var singleFileUploadSuccess = document.querySelector('#singleFileUploadSuccess');
 
+
+// var processForm = document.querySelector('#processForm');
+// var processFormbutton = document.querySelector('#processFormbutton');
+// var formLoadResponseError = document.querySelector('#form-load-responseError');
+// var formLoadResponseSuccess = document.querySelector('#form-load-responseSuccess');
+
+
+
 function uploadSingleFile(file) {
     var formData = new FormData();
     formData.append("file", file);
@@ -29,6 +37,25 @@ function uploadSingleFile(file) {
     xhr.send(formData);
 }
 
+function processForm(file) {
+    var formData = new FormData();
+    formData.append("file", file);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/load");
+
+    xhr.onload = function() {
+        console.log(xhr.responseText);
+        var response = JSON.parse(xhr.responseText);
+        if(xhr.status == 200) {
+            formLoadResponseError.style.display = "none";
+            formLoadResponseSuccess.innerHTML = "<p>File Processed Successfully.</p>" + "<br>";
+            singleFileUploadSuccess.style.display = "block";
+        } else {
+            formLoadResponseSuccess.style.display = "none";
+            formLoadResponseError.innerHTML = (response && response.message) || "Some Error Occurred";
+        }
+    };
 
 
 singleUploadForm.addEventListener('submit', function(event){
@@ -40,5 +67,8 @@ singleUploadForm.addEventListener('submit', function(event){
     uploadSingleFile(files[0]);
     event.preventDefault();
 }, true);
+}
+
+
 
 
