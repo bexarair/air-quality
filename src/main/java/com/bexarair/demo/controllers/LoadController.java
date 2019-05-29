@@ -15,14 +15,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/load",params = "load",method = RequestMethod.POST)
+@RequestMapping(value = "/load",method = RequestMethod.GET)
 public class LoadController {
+
+
 
     @Autowired
     JobLauncher jobLauncher;
 
     @Autowired
     Job job;
+
 
     @GetMapping
     public BatchStatus load() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
@@ -42,4 +45,5 @@ public class LoadController {
 
         return jobExecution.getStatus();
     }
+
 }

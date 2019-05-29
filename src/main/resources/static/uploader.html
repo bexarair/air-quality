@@ -26,8 +26,8 @@
             </div>
         </div>
         <div>
-            <form id="processForm" name="processForm">
-                <button type="submit" class="primary submit-btn" id="processFormbutton" name="load" value="load" >Process the file...</button>
+            <form id="processForm" name="processForm" action="/load" method="get">
+                <button type="submit" class="primary submit-btn" id="processFormbutton">Process the file...</button>
                 <div class="form-load-response">
                     <div id="form-load-responseError"></div>
                     <div id="form-load-responseSuccess"></div>

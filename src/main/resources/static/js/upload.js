@@ -6,6 +6,12 @@ var singleFileUploadError = document.querySelector('#singleFileUploadError');
 var singleFileUploadSuccess = document.querySelector('#singleFileUploadSuccess');
 
 
+// var processForm = document.querySelector('#processForm');
+// var processFormbutton = document.querySelector('#processFormbutton');
+// var formLoadResponseError = document.querySelector('#form-load-responseError');
+// var formLoadResponseSuccess = document.querySelector('#form-load-responseSuccess');
+
+
 
 function uploadSingleFile(file) {
     var formData = new FormData();
@@ -31,47 +37,25 @@ function uploadSingleFile(file) {
     xhr.send(formData);
 }
 
+function processForm(file) {
+    var formData = new FormData();
+    formData.append("file", file);
 
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/load");
 
-// function processForm() {
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             document.getElementById("demo").innerHTML = this.responseText;
-//         }
-//     };
-//     xhttp.open("GET", "load", true);
-//     xhttp.send();
-// }
-
-//
-// (function() {
-//     var httpRequest;
-//     document.getElementById("processFormbutton").addEventListener('click', makeRequest);
-//
-//     function makeRequest() {
-//         httpRequest = new XMLHttpRequest();
-//
-//         if (!httpRequest) {
-//             alert('Giving up :( Cannot create an XMLHTTP instance');
-//             return false;
-//         }
-//         httpRequest.onreadystatechange = alertContents;
-//         httpRequest.open('GET', 'http://localhost:8080/load    ');
-//         httpRequest.send();
-//     }
-
-//     function alertContents() {
-//         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-//             if (httpRequest.status === 200) {
-//                 alert(httpRequest.responseText);
-//             } else {
-//                 alert('There was a problem with the request.');
-//             }
-//         }
-//     }
-// })();
-
+    xhr.onload = function() {
+        console.log(xhr.responseText);
+        var response = JSON.parse(xhr.responseText);
+        if(xhr.status == 200) {
+            formLoadResponseError.style.display = "none";
+            formLoadResponseSuccess.innerHTML = "<p>File Processed Successfully.</p>" + "<br>";
+            singleFileUploadSuccess.style.display = "block";
+        } else {
+            formLoadResponseSuccess.style.display = "none";
+            formLoadResponseError.innerHTML = (response && response.message) || "Some Error Occurred";
+        }
+    };
 
 
 singleUploadForm.addEventListener('submit', function(event){
@@ -83,30 +67,8 @@ singleUploadForm.addEventListener('submit', function(event){
     uploadSingleFile(files[0]);
     event.preventDefault();
 }, true);
+}
 
-// document.getElementById("processFormbutton").onclick = function () {
-//     location.href = "http://localhost:8080/load";
-// };
-
-// $(document).ready(function() {
-//     $("processFrombutton").click(function (e) {
-//         e.preventDefault();
-//         $.ajax({
-//             type: "POST",
-//             url: "/load",
-//             // data: {
-//             //     id: $(this).val(), // < note use of 'this' here
-//             //     access_token: $("#access_token").val()
-//             // },
-//             success: function (result) {
-//                 alert('ok');
-//             },
-//             error: function (result) {
-//                 alert('error');
-//             }
-//         });
-//     });
-// });
 
 
 
