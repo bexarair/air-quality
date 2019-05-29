@@ -6,13 +6,6 @@ var singleFileUploadError = document.querySelector('#singleFileUploadError');
 var singleFileUploadSuccess = document.querySelector('#singleFileUploadSuccess');
 
 
-// var processForm = document.querySelector('#processForm');
-// var processFormbutton = document.querySelector('#processFormbutton');
-// var formLoadResponseError = document.querySelector('#form-load-responseError');
-// var formLoadResponseSuccess = document.querySelector('#form-load-responseSuccess');
-
-
-
 function uploadSingleFile(file) {
     var formData = new FormData();
     formData.append("file", file);
@@ -22,11 +15,10 @@ function uploadSingleFile(file) {
 
     xhr.onload = function() {
         console.log(xhr.responseText);
-        var response = JSON.parse(xhr.responseText);
+        var response = xhr.responseText;
         if(xhr.status == 200) {
             singleFileUploadError.style.display = "none";
-            singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully.</p>" + "<br>" +
-                "<p>DownloadUrl : <a href='" + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>";
+            singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully.</p>" + "<br>" ;
             singleFileUploadSuccess.style.display = "block";
         } else {
             singleFileUploadSuccess.style.display = "none";
@@ -37,26 +29,8 @@ function uploadSingleFile(file) {
     xhr.send(formData);
 }
 
-function processForm(file) {
-    var formData = new FormData();
-    formData.append("file", file);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/load");
-
-    xhr.onload = function() {
-        console.log(xhr.responseText);
-        var response = JSON.parse(xhr.responseText);
-        if(xhr.status == 200) {
-            formLoadResponseError.style.display = "none";
-            formLoadResponseSuccess.innerHTML = "<p>File Processed Successfully.</p>" + "<br>";
-            singleFileUploadSuccess.style.display = "block";
-        } else {
-            formLoadResponseSuccess.style.display = "none";
-            formLoadResponseError.innerHTML = (response && response.message) || "Some Error Occurred";
-        }
-    };
-
+//For selecting a file from your machine
 
 singleUploadForm.addEventListener('submit', function(event){
     var files = singleFileUploadInput.files;
@@ -67,7 +41,59 @@ singleUploadForm.addEventListener('submit', function(event){
     uploadSingleFile(files[0]);
     event.preventDefault();
 }, true);
+
+
+
+//To submit the download and give a status of the processing
+$(document).ready(function () {
+
+    $("#processForm").submit(function (event) {
+
+        //stop submit the form, we send it manually.
+        event.preventDefault();
+
+        form_submit();
+
+    });
+
+});
+
+function form_submit() {
+
+    $("#processFormbutton").prop("disabled", true);
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/load",
+        data: JSON.stringify(status),
+        dataType: 'json',
+        cache: false,
+        timeout: 60000,
+        success: function (data) {
+
+            var json = "<h4>Status</h4><pre>"
+                + JSON.stringify(data, null, 4) + "</pre>";
+            $('#form-load-responseSuccess').html(json);
+
+            console.log("SUCCESS : ", data);
+            $("#processFormbutton").prop("disabled", false);
+
+        },
+        error: function (e) {
+
+            var json = "<h4>Status</h4><pre>"
+                + e.responseText + "</pre>";
+            $('#form-load-responseError').html(json);
+
+            console.log("ERROR : ", e);
+            $("#processFormbutton").prop("disabled", false);
+
+        }
+    });
+
 }
+
 
 
 
