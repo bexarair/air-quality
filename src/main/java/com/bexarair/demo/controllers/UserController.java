@@ -124,15 +124,6 @@ public class UserController {
     }
 
 
-
-
-
-//    @GetMapping("/profile")
-//    public String showUserProfile(Model model){
-//        model.addAttribute("user", new User());
-//        return "users/profile";
-//    }
-
     //should this be in a location controller?
     @GetMapping("/graph")
     public String showGraph(

@@ -1,11 +1,10 @@
-#map {
-    height: 600px;
-    width: 100%;
+body {
+    margin: 0;
+    padding: 0;
 }
 
-.air-chart{
-    /*width: 100%;*/
-    margin-left: 15em;
+.air-calculation{
+    background-color: lightgray;
 }
 
 .home-title{
@@ -19,4 +18,148 @@
 
 .about-us-container {
     max-width: 900px;
+}
+
+.blue-bg {
+    background-color: deepskyblue;
+}
+
+.map-container {
+    position: relative;
+}
+
+.aq-map-box {
+    background-color: white;
+    position: absolute;
+    display: inline-block;
+    z-index: 5;
+    bottom: 1em;
+    left: 2em;
+}
+
+.custom-nav {
+    background-color: #14213D;
+}
+
+.bexar-air {
+    color: white;
+    font-size: 2em;
+    font-family: 'Crushed', cursive;
+}
+
+.fa-chevron-circle-down {
+    position: absolute;
+    bottom: -0.5em;
+    left: 50%;
+    z-index: 5;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+
+i.homepage-icons {
+    text-align: center;
+}
+
+
+
+.centered-container {
+    background-color: #ededed;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid black
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+.air-calculation {
+    padding: 5em 3em;
+}
+
+.aq-map-box div {
+    display: inline-block;
+    height: 1.5em;
+    margin: 0;
+}
+
+.white-text {
+    color: #fff;
+}
+
+
+
+/********************* MAP *******************/
+
+#small-text {
+    font-size: .5em;
+}
+
+#floating-panel {
+    position: absolute;
+    top: 10px;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+#floating-panel {
+    background-color: #fff;
+    border: 1px solid #999;
+    left: 25%;
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    z-index: 5;
+}
+
+
+
+#green-bg {
+    background-color: green;
+}
+
+#yellow-bg {
+    background-color: yellow;
+}
+
+#orange-bg {
+    background-color: orange;
+}
+
+#red-bg {
+    background-color: red;
+}
+
+#purple-bg {
+    background-color: purple;
+}
+
+#maroon-bg {
+    background-color: maroon;
+}
+
+#green-bg, #yellow-bg, #orange-bg, #red-bg, #purple-bg, #maroon-bg {
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+#map {
+    height: 85vh;
+    width: 100%;
 }

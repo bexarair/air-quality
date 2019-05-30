@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <th:block th:replace="fragments/head :: header('Log-In')"/>
+    <link rel="stylesheet" href="/css/login.css"/>
+
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: nav"/>
-<div class="container">
+<div class="login-body-div">
+
     <div class="alert-danger" style="text-align: center" th:if="${param.error}">
         Invalid Username or Password.
     </div>
@@ -14,21 +17,27 @@
         You have been logged out.
     </div>
 
-    <h1 style="text-align: center">Log In</h1>
-    <form th:action="@{/login}" method="post">
-        <!--<div class="card login" style="text-align: center; width: 100%">-->
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Username"/>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
-        </div>
-        <!--</div>-->
-        <button type="submit" class="btn btn-primary loginBtn">Log In</button>
-    </form>
+    <div class="login-div">
+        <form th:action="@{/login}" method="post" class="vertical-center login-form">
+        <h3 style="text-align: center">Log In</h3>
+            <!--<div class="card login" style="text-align: center; width: 100%">-->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+            </div>
+            <!--</div>-->
+            <button type="submit" class="btn btn-primary loginBtn">Log In</button>
+        </form>
+    </div>
+
+
+
 </div>
+
 
 <footer th:replace="fragments/footer :: footer" />
 </body>
