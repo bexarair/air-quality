@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-image: url("/images/stripes-light.png");
 }
 
 .air-calculation{
@@ -62,6 +63,7 @@ body {
 
 .custom-nav {
     background-color: #14213D;
+    /*border-bottom: 5px solid #40A32F;*/
 }
 
 .bexar-air {
