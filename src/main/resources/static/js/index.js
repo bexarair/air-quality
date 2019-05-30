@@ -2,7 +2,7 @@
 // // // $(document).ready(function() {
 /*global google*/
 console.log("Javascript is online");
-var currentDateURL = "http://localhost:8080/airquality/currentdate.geojson";
+var currentDateURL = "http://localhost:8080/airquality/currentdate";
 // var currentDateURL = "https://bexarair.com/airquality/currentdate";
 var hospitalDataURL = "http://localhost:8080/hospitalrecords";
 // var hospitalDataURL = "https://bexarair.com/hospitalrecords";
@@ -77,7 +77,14 @@ var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 9,
             center: {lat: 29.4241, lng: -98.4936},
-            mapTypeId: 'terrain'
+            mapTypeId: 'terrain',
+            mapTypeControl: false,
+            draggable: false,
+            scaleControl: false,
+            scrollwheel: false,
+            navigationControl: false,
+            streetViewControl: false
+
 
 
         });
