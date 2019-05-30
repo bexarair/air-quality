@@ -7,24 +7,34 @@
     <body>
         <th:block th:replace="fragments/navbar :: nav"/>
         <div class="container">
-            <h1>My Places</h1><button th:if="${create}" class="btn btn-dark"><a th:href="${'/locations/create/'}">Create</a></button>
             <div class="row">
-                <div class="card bg-light col-12 col-md-4">
-                    <th:block th:each="location : ${locations}">
-                        <!--<th:block th:if="${users}">-->
-                        <div class="contain-bg card" style="text-align: center; width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${location.title}"></h5>
-                                <p class="card-text" th:text="${location.zipcode}"></p>
-                                <!--if no posts, dont show-->
-                                <button th:if="${edit}" class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${location.getId()}}">Edit</a></button>
-                                <button th:if="${edit}" class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${location.getId()}}">Delete</a></button>
-                            </div>
-                        </div>
-                        <!--</th:block>-->
-                    </th:block>
+                <div class="col-6">
+                    <h1>My Places</h1>
                 </div>
-                    <!--Create Form-->
+                <div class="col-6">
+
+                </div>
+            </div>
+            <div class="row">
+                <th:block th:each="location : ${locations}">
+                    <!--<div class="contain-bg card col-12 col-md-6" style="text-align: center">-->
+                    <!--<th:block th:if="${users}">-->
+                    <!--<div class="contain-bg card" style="text-align: center; width: 100%">-->
+                        <!--<div class="card-body">-->
+                            <!--<h5 class="card-title" th:text="${location.title}"></h5>-->
+                            <!--<p class="card-text" th:text="${location.zipcode}"></p>-->
+                            <!--if no posts, dont show-->
+                            <button th:if="${edit}" class="btn btn-primary"><a th:href="@{'/locations/edit/' + ${location.getId()}}">Edit</a></button>
+                            <button th:if="${edit}" class="btn btn-primary"><a th:href="@{'/locations/delete/' + ${location.getId()}}">Delete</a></button>
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--</th:block>-->
+                </th:block>
+                <div class="col-12 col-md-6">
+                    <img th:src="@{/images/phone-text-msg-removebg.png}"/>
+                </div>
+
+       <!--Create Form-->
                 <div class="card bg-light col-12 col-md-4 ">
                     <form th:action="@{/locations/create}" th:method="post" th:object="${location}">
 
