@@ -66,7 +66,7 @@ function form_submit() {
         type: "GET",
         contentType: "application/json",
         url: "/load",
-        data: JSON.stringify(status),
+        data: JSON.parse(status),
         dataType: 'json',
         cache: false,
         timeout: 60000,
