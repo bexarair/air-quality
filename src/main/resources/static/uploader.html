@@ -24,10 +24,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/sign-up">Register</a>
+                <a class="nav-link" href="/profile">Profile</a>
             </li>
         </ul>
     </div>
@@ -35,25 +32,34 @@
 <noscript>
     <h2>Sorry! Your browser doesn't support Javascript</h2>
 </noscript>
-<div class="upload-container">
+<div class="container">
+    <br/>
     <div class="upload-header">
-        <h2>File Upload</h2>
+        <h1>City Records Data Processing </h1>
     </div>
+    <br/>
+    <br/>
     <div class="upload-content">
         <div class="single-upload">
             <h3>Upload File</h3>
             <form id="singleUploadForm" name="singleUploadForm">
-                <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
-                <button type="submit" class="primary submit-btn">Submit</button>
+                <input id="singleFileUploadInput" type="file" name="file" class="file-input input-group-text" required />
+                <br/>
+                <button type="submit" class="btn btn-secondary">Submit</button>
             </form>
             <div class="upload-response">
                 <div id="singleFileUploadError"></div>
                 <div id="singleFileUploadSuccess"></div>
             </div>
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <div>
+            <h3>Batch Process Records</h3>
             <form id="processForm" >
-                <button type="submit" class="primary submit-btn" id="processFormbutton">Process the file...</button>
+                <button type="submit" class="btn btn-secondary" id="processFormbutton"> Run </button>
                 <div class="form-load-response">
                     <div id="form-load-responseError"></div>
                     <div id="form-load-responseSuccess"></div>
