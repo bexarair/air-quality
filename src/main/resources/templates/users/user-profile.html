@@ -3,13 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         <th:block th:replace="fragments/head :: header('Sign-Up')"/>
+        <link rel="stylesheet" href="/css/profile.css"/>
+
     </head>
     <body>
         <th:block th:replace="fragments/navbar :: nav"/>
         <div class="container">
 
             <!--<th:block th:if="${notAdmin}">-->
-                <h1>My Places</h1><button th:if="${create}" class="btn btn-dark"><a th:href="${'/locations/create/'}">Create</a></button>
+                <h2>My Places</h2>
+            <hr/>
+            <button th:if="${create}" class="btn btn-dark"><a th:href="${'/locations/create/'}">Add a Place</a></button>
                 <div class="row">
 
                         <th:block th:each="aqiZipCode : ${aqiZipCodes}">
@@ -20,13 +24,17 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text" th:text="${aqiZipCode.zipCode}"></p>
-                                    <p class="card-text" th:text="${aqiZipCode.aqi}"></p>
-                                    <p class="card-text" th:text="${aqiZipCode.categoryName}"></p>
-
+                                    <p class="aqi-text" th:text="${aqiZipCode.aqi}"></p>
+                                    <br/>
+                                    <span class="badge badge-warning" th:text="${aqiZipCode.categoryName}"></span>
+                                    <br/>
                                         <!--<th:block th:each="location : ${locations}">-->
-                                            <button class="btn btn-dark"><a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}">Edit</a></button>
-                                            <button class="btn btn-dark"><a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}">Delete</a></button>
-                                        <!--</th:block>-->
+                                            <button class="btn btn-primary"><a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}">Edit</a></button>
+                                            <button class="btn btn-primary"><a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}">Delete</a></button>
+                                    <div>
+
+                                    </div>
+                                    <!--</th:block>-->
                                 </div>
                             </div>
                             <!--</th:block>-->
@@ -39,7 +47,7 @@
               <button class="btn btn-dark"><a th:href="@{'/viewusers'}">Upgrade User to Admin</a></button>
             </th:block>
 
-            <div id="chart_div">CHART HERE</div>
+            <!--<div id="chart_div">CHART HERE</div>-->
         </div>
 
         <footer th:replace="fragments/footer :: footer" />
