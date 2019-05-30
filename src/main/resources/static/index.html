@@ -29,9 +29,58 @@
                     </ul>
                 </div>
             </nav>
+
+        <div class="container-fluid">
+            <div class="logo">
+                <img class="home-logo" src="images/airPollution2.png"/>
+            </div>
+            <div class="air-calculation">
+                <h2>Bexar Air Mission</h2>
+                <p>Bexar Air aims to create awareness of how our local air quality impacts the health of children within our community by creating a visual representation of the current air quality in Bexar County and comparing that information with city hospital data for pediatric asthma hospitalizations.</p>
+            </div>
+
+
+            <!--<div class="air-calculation">-->
+                <!--<h2>Air Quality Index (AQI) Calculation</h2>-->
+                <!--<p>The Air Quality Index is based on measurement of particulate matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and Carbon Monoxide (CO) emissions. Most of the stations on the map are monitoring both PM2.5 and PM10 data, but there are few exceptions where only PM10 is available.</p>-->
+
+                <!--<p>All measurements are based on hourly readings: For instance, an AQI reported at 8AM means that the measurement was done from 7AM to 8AM.</p>-->
+            <!--</div>-->
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <i class="homepage-icons fas fa-wind fa-3x"></i>
+                    <ul>
+                        <li>The Air Quality Index is based on measurement of particulate matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and Carbon Monoxide (CO) emissions.</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4">
+                    <i class="homepage-icons fas fa-mobile-alt fa-3x"></i>
+                    <ul>
+                        <li>Receive text message alerts when a locations falls at or below an unhealthy level</li>
+                        <li>Receive a daily text message at 5PM for tomorrow's AQI</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4">
+                    <i class="homepage-icons fas fa-home fa-3x"></i>
+                    <ul>
+                        <li>Create custom locations to track the Air Quality of those locations</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div>
+                <a href="#middle"><i class="fas fa-chevron-circle-down fa-3x"></i></a>
+            </div>
+            <div class="map-title">
+                <p>Current Air Quality in Bexar County</p>
+            </div>
+        </div>
+
             <!--<h3 class="home-title">Current Air Quality in Bexar County</h3>-->
         <!--The div element for the map -->
-            <div class="container-fluid map-container">
+            <div id="middle" class="container-fluid map-container">
                 <!--<div id="floating-panel">-->
                     <!--<button id="toggle-heatmap">Toggle Heatmap</button>-->
                     <!--<button onclick="changeGradient()">Change gradient</button>-->
@@ -50,32 +99,32 @@
                     <div id="purple-bg" class="white-text">Very Unhealthy</div>
                     <div id="maroon-bg" class="white-text">Hazardous</div>
                 </div>
-                <i class="fas fa-chevron-circle-down fa-3x"></i>
+
                 <div id="map"></div>
             </div>
-            <div class="container-fluid">
-                <div class="air-calculation">
-                    <h2>Air Quality Index (AQI) Calculation</h2>
-                    <p>The Air Quality Index is based on measurement of particulate matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and Carbon Monoxide (CO) emissions. Most of the stations on the map are monitoring both PM2.5 and PM10 data, but there are few exceptions where only PM10 is available.</p>
+            <!--<div class="container-fluid">-->
+                <!--<div class="air-calculation">-->
+                    <!--<h2>Air Quality Index (AQI) Calculation</h2>-->
+                    <!--<p>The Air Quality Index is based on measurement of particulate matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and Carbon Monoxide (CO) emissions. Most of the stations on the map are monitoring both PM2.5 and PM10 data, but there are few exceptions where only PM10 is available.</p>-->
 
-                    <p>All measurements are based on hourly readings: For instance, an AQI reported at 8AM means that the measurement was done from 7AM to 8AM.</p>
+                    <!--<p>All measurements are based on hourly readings: For instance, an AQI reported at 8AM means that the measurement was done from 7AM to 8AM.</p>-->
 
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-4">
-                        <i class="homepage-icons fas fa-wind fa-3x"></i>
-                        <p>Here are some words about air quality.  And Carbon Monoxide (CO) emissions. Most of the stations on the map are monitoring both PM2.5 and PM10 data</p>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <i class="homepage-icons fas fa-mobile-alt fa-3x"></i>
-                        <p>Here are some other words about text messages.  Matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and</p>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <i class="homepage-icons fas fa-home fa-3x"></i>
-                        <p>Here are some other words about places.  For instance, an AQI reported at 8AM means that the measurement was done from 7AM to 8AM</p>
-                    </div>
-                </div>
-            </div>
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-12 col-md-4">-->
+                        <!--<i class="homepage-icons fas fa-wind fa-3x"></i>-->
+                        <!--<p>Here are some words about air quality.  And Carbon Monoxide (CO) emissions. Most of the stations on the map are monitoring both PM2.5 and PM10 data</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-12 col-md-4">-->
+                        <!--<i class="homepage-icons fas fa-mobile-alt fa-3x"></i>-->
+                        <!--<p>Here are some other words about text messages.  Matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-12 col-md-4">-->
+                        <!--<i class="homepage-icons fas fa-home fa-3x"></i>-->
+                        <!--<p>Here are some other words about places.  For instance, an AQI reported at 8AM means that the measurement was done from 7AM to 8AM</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         <!--</div>-->
 
 
