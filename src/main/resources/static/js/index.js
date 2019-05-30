@@ -25,41 +25,41 @@ var heatmap;
 
 /************** AirQuality Record call to REST API ******************/
 
-
-var aqiPromise = fetch(currentDateURL).then(function(response){
-    response.json()
-        .then(function(airInfo){
+//
+// var aqiPromise = fetch(currentDateURL).then(function(response){
+//     response.json()
+//         .then(function(airInfo){
+//         for (var i = 0; i < zipcodes.length; i++) {
+//             restZipArray.push(airInfo[i].zipCode);
+//             restAqiArray.push(airInfo[i].aqi);
+//         }
+//     })
+// });
+    $.get(currentDateURL).done(function (airInfo) {
         for (var i = 0; i < zipcodes.length; i++) {
             restZipArray.push(airInfo[i].zipCode);
             restAqiArray.push(airInfo[i].aqi);
         }
-    })
-});
-    // $.get(currentDateURL).done(function (airInfo) {
-    //     for (var i = 0; i < zipcodes.length; i++) {
-    //         restZipArray.push(airInfo[i].zipCode);
-    //         restAqiArray.push(airInfo[i].aqi);
-    //     }
-    // });
-    /********* Hospital Record call to REST API *************************/
-var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
-        response.json()
-            .then(function(hospitalData){
-            for (var i = 0; i < hospitalData.length; i++) {
-                restHospitalZip.push(hospitalData[i].zipcode);
-                restHospitalRate.push(hospitalData[i].pedi_asthma_rate);
-                restHospitalDate.push(hospitalData[i].year);
-            }
-        })
     });
+    /********* Hospital Record call to REST API *************************/
+// var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
+//         response.json()
+//             .then(function(hospitalData){
+//             for (var i = 0; i < hospitalData.length; i++) {
+//                 restHospitalZip.push(hospitalData[i].zipcode);
+//                 restHospitalRate.push(hospitalData[i].pedi_asthma_rate);
+//                 restHospitalDate.push(hospitalData[i].year);
+//             }
+//         })
+//     });
 
-    // $.get(hospitalDataURL).done(function(hospitalData) {
-    // for(var i = 0; i < hospitalData.length; i++){
-    //     restHospitalZip.push(hospitalData[i].zipcode);
-    //     restHospitalRate.push(hospitalData[i].pedi_asthma_rate);
-    //     restHospitalDate.push(hospitalData[i].year);
-    //     }
-    // });
+    $.get(hospitalDataURL).done(function(hospitalData) {
+    for(var i = 0; i < hospitalData.length; i++){
+        restHospitalZip.push(hospitalData[i].zipcode);
+        restHospitalRate.push(hospitalData[i].pedi_asthma_rate);
+        restHospitalDate.push(hospitalData[i].year);
+        }
+    });
 
 
 
@@ -73,7 +73,7 @@ var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
 
 /**************************** MAP STUFF*****************************/
     function initMap() {
-        Promise.all([aqiPromise, hostpitalPromise]).then(function(data){
+        // Promise.all([aqiPromise, hostpitalPromise]).then(function(data){
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 9,
             center: {lat: 29.4241, lng: -98.4936},
@@ -95,8 +95,8 @@ var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
 
 
 
-        // var delay2 = 500; // delay time in milliseconds
-        //     setTimeout(function () {
+        var delay2 = 500; // delay time in milliseconds
+            setTimeout(function () {
             for(var j = 0; j < restZipArray.length; j++) {
                 map.data.setStyle(function (data) {
                     for (var i = 0; i < restZipArray.length; i++) {
@@ -123,7 +123,7 @@ var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
                     };
                 });
             }
-        // }, delay2);
+        }, delay2);
 
 
         googleZips = [
@@ -280,7 +280,7 @@ var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
 
 
         ];
-    // setTimeout(function(){
+    setTimeout(function(){
         for(var i = 0; i < restHospitalZip.length; i++) {
             console.log(googleZips[i]);
             console.log("These are the rest Zip: " + restHospitalZip[i]);
@@ -340,10 +340,10 @@ var hostpitalPromise = fetch(hospitalDataURL).then(function (response) {
         heatmap.setMap(map);
         heatmap.set('radius', 30);
         heatmap.set('maxIntensity', 15)
-    // },500);
+    },500);
 
 
-    })
+    // })
 }
 
 
@@ -379,7 +379,7 @@ function changeGradient() {
         'rgba(127, 0, 63, 1)',
         'rgba(191, 0, 31, 1)',
         'rgba(255, 0, 0, 1)'
-    ]
+    ];
     heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 

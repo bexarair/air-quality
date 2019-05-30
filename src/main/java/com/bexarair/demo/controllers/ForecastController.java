@@ -65,6 +65,7 @@ public class ForecastController {
 
 
     @Scheduled(cron = "0 0 7 * * ? ")
+//    @Scheduled(fixedRate = 60000)
     public void setupFutureAir(){
         try {
 

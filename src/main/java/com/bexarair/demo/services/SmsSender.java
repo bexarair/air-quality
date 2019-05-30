@@ -50,27 +50,27 @@ private String token;
 
         Message message = Message.creator(new PhoneNumber("+1" + phone), // to
                         new PhoneNumber("+12103617392"), // from
-                        "Forecast for " + forecastDate + " for "  + userTitle + " is showing an AQI of " + forecastAqi + " this falls in the " + catName + " category." )
+                        "Forecast for " + forecastDate + " for "  + userTitle + " is showing an AQI in the " + catName + " category." )
                 .create();
 
         System.out.println(message.getSid());
     }
 
-    public void currentAlert(AirQualityRecord record, UserLocation locationTitle, User userPhone) {
-        Twilio.init(sid, token);
-        int currentAqi = record.getAQI();
-        String catName = record.getCategoryName();
-        String userTitle = locationTitle.getTitle();
-        String currentDate = record.getDateObserved();
-        String phone = userPhone.getPhone();
-//        user.getPhone();
-        Message message = Message.creator(new PhoneNumber("+1" + phone), // to
-                new PhoneNumber("+12103617392"), // from
-                "***Warning*** /n Current AQI for " + currentDate + " for "  + userTitle + " is showing an AQI of " + currentAqi + " this falls in the " + catName + " category." )
-                .create();
-
-        System.out.println(message.getSid());
-    }
+//    public void currentAlert(AirQualityRecord record, UserLocation locationTitle, User userPhone) {
+//        Twilio.init(sid, token);
+//        int currentAqi = record.getAQI();
+//        String catName = record.getCategoryName();
+//        String userTitle = locationTitle.getTitle();
+//        String currentDate = record.getDateObserved();
+//        String phone = userPhone.getPhone();
+////        user.getPhone();
+//        Message message = Message.creator(new PhoneNumber("+1" + phone), // to
+//                new PhoneNumber("+12103617392"), // from
+//                "***Warning*** \n Current AQI for " + currentDate + " for "  + userTitle + " is showing an AQI of " + currentAqi + " this falls in the " + catName + " category." )
+//                .create();
+//
+//        System.out.println(message.getSid());
+//    }
 
     public void alertOneHour(String currentDate, int oneHourAqi, String catName, UserLocation locationTitle, User userPhone) {
         Twilio.init(sid, token);
@@ -79,7 +79,7 @@ private String token;
 //        user.getPhone();
         Message message = Message.creator(new PhoneNumber("+1" + phone), // to
                 new PhoneNumber("+12103617392"), // from
-                "***Warning*** /n Current AQI for " + currentDate + " for "  + userTitle + " is showing an AQI of " + oneHourAqi + " this falls in the " + catName + " category." )
+                "***Warning*** \n Current AQI for " + currentDate + " for "  + userTitle + " is showing an AQI of " + oneHourAqi + " this falls in the " + catName + " category." )
                 .create();
 
         System.out.println(message.getSid());
