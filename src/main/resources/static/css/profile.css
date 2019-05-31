@@ -1,6 +1,27 @@
 
-p.aqi-text {
+.orange-btn {
+    background-color: #ff5722;
+}
+
+p.aqi-number {
     font-size: 4em;
     font-weight: lighter;
+}
+
+.custom-card {
+    /*border: 4px solid #607d8b;*/
+    border-radius: 10px;
+}
+
+.card-header {
+    background-color: #fff;
+}
+
+.top-row {
+    margin-top: 2em;
+}
+
+.right-column {
+    text-align: right;
 }
 
