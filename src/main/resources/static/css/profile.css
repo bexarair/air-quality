@@ -1,6 +1,8 @@
 
 .orange-btn {
     background-color: #ff5722;
+    border: 1px solid #ff5722;
+    color: #fff;
 }
 
 p.aqi-number {

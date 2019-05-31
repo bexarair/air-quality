@@ -36,7 +36,8 @@
                 </th:block>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button class="btn-link btn">Logout</button>
+                        <!--<button class="btn-link btn">Logout</button>-->
+                        <a href="/logout"><i class="fas fa-sign-out-alt fa-2x nav-icon"></i></a>
                     </form>
                 </li>
             </ul>

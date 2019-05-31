@@ -32,11 +32,12 @@
 
                                     <p class="aqi-number" th:text="${aqiZipCode.aqi}"></p><span class="aqi" th:text="AQI"></span>
 
-                                    <span class="badge badge-warning" th:text="${aqiZipCode.categoryName}"></span>
+                                    <span class="badge badge-success" th:text="${aqiZipCode.categoryName}"></span>
                                         <!--<th:block th:each="location : ${locations}">-->
-                                            <button class="btn btn-primary "><a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}">Edit</a></button>
-                                            <button class="btn btn-primary"><a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}">Delete</a></button>
+                                    <br /><br />
 
+                                        <a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}"><i class="far fa-edit fa-2x"></i></a>
+                                        <a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}"><i class="far fa-trash-alt fa-2x"></i></a>
                                     <!--</th:block>-->
                                 </div>
                             </div>
