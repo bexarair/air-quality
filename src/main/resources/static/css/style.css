@@ -49,13 +49,13 @@ input {
     padding-bottom: 2em;
     padding-top: 4em;
     width: 175px;
-    margin-left: calc(50% - 87.5px);
+    /*margin-left: calc(50% - 87.5px);*/
     color: white;
 }
 
-.logo{
-    background-color: lightgray;
-}
+/*.logo{*/
+    /*background-color: lightgray;*/
+/*}*/
 
 .home-title{
     text-align: center;
