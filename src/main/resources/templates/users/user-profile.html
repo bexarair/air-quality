@@ -9,31 +9,33 @@
     <body>
         <th:block th:replace="fragments/navbar :: nav"/>
         <div class="container">
-
+            <div class="row top-row">
             <!--<th:block th:if="${notAdmin}">-->
-                <h2>My Places</h2>
+                <div class="col-6">
+                    <h2>My Places</h2>
+                </div>
+                <div class="col-6 right-column">
+                    <a th:if="${create}" th:href="${'/locations/create/'}">Add a Location </a><a th:href="${'/locations/create/'}"><i class="fas fa-plus-square fa-2x"></i></a>
+                </div>
+            </div>
             <hr/>
-            <button th:if="${create}" class="btn btn-dark"><a th:href="${'/locations/create/'}">Add a Place</a></button>
-                <div class="row">
+                <div class="row top-row">
 
                         <th:block th:each="aqiZipCode : ${aqiZipCodes}">
                             <!--<th:block th:if="${users}">-->
-                            <div class="contain-bg card col-12 col-md-4" style="text-align: center">
+                            <div class="contain-bg card col-12 col-md-4 custom-card" style="text-align: center">
                                 <div class="card-header">
                                     <h3 class="card-title" th:text="${aqiZipCode.title}"></h3>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text" th:text="${aqiZipCode.zipCode}"></p>
-                                    <p class="aqi-text" th:text="${aqiZipCode.aqi}"></p>
-                                    <br/>
-                                    <span class="badge badge-warning" th:text="${aqiZipCode.categoryName}"></span>
-                                    <br/>
-                                        <!--<th:block th:each="location : ${locations}">-->
-                                            <button class="btn btn-primary"><a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}">Edit</a></button>
-                                            <button class="btn btn-primary"><a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}">Delete</a></button>
-                                    <div>
+                                    <p class="aqi-number" th:text="${aqiZipCode.aqi}"></p><span class="aqi" th:text="AQI"></span>
 
-                                    </div>
+                                    <span class="badge badge-warning" th:text="${aqiZipCode.categoryName}"></span>
+                                        <!--<th:block th:each="location : ${locations}">-->
+                                            <button class="btn btn-primary "><a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}">Edit</a></button>
+                                            <button class="btn btn-primary"><a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}">Delete</a></button>
+
                                     <!--</th:block>-->
                                 </div>
                             </div>
