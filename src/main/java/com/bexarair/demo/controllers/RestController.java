@@ -35,17 +35,35 @@ public class RestController {
         this.hospitalRecordCRUD = hospitalRecordCRUD;
     }
 
+//    @GetMapping("/airquality/currentdate")
+//    @ResponseBody
+//    public List<AirQualityRecord> getAllAirQuality() {
+//
+//        Date dt = new Date();
+//        String pattern = "yyyy-MM-dd";
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+//        String date = simpleDateFormat.format(dt);
+//
+//
+//        return aqRecordRepository.findByDateObserved(date);
+//    }
+
     @GetMapping("/airquality/currentdate")
     @ResponseBody
-    public List<AirQualityRecord> getAllAirQuality() {
+    public ResponseEntity<List<AirQualityRecord>> getAllAirQuality() {
 
         Date dt = new Date();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(dt);
+        System.out.println(date);
 
+        List <AirQualityRecord> airQualityRecord =
+                aqRecordRepository.findByDateObserved(date);
 
-        return aqRecordRepository.findByDateObserved(date);
+        System.out.println(airQualityRecord);
+
+        return ResponseEntity.ok().body(airQualityRecord);
     }
 
 

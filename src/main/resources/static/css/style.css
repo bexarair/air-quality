@@ -13,6 +13,11 @@ body {
     padding-bottom: 3em;
     text-align: center;
     color: white;
+    height: 60vh;
+}
+
+.icon-row {
+    height: 30vh;
 }
 
 .test{
@@ -102,6 +107,7 @@ input {
 
 .custom-nav {
     background-color: #14213D;
+    height: 10vh;
     /*border-bottom: 5px solid #40A32F;*/
 }
 
