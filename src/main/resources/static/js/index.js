@@ -1,4 +1,4 @@
-// // "use strict";
+"use strict";
 // // // $(document).ready(function() {
 /*global google*/
 console.log("Javascript is online");
@@ -79,7 +79,6 @@ var heatmap;
             center: {lat: 29.4241, lng: -98.4936},
             mapTypeId: 'terrain',
             mapTypeControl: false,
-            draggable: false,
             scaleControl: false,
             scrollwheel: false,
             navigationControl: false,

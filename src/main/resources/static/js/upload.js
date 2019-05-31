@@ -18,7 +18,7 @@ function uploadSingleFile(file) {
         var response = xhr.responseText;
         if(xhr.status == 200) {
             singleFileUploadError.style.display = "none";
-            singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully.</p>" + "<br>" ;
+            singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully!</p>" + "<br>" ;
             singleFileUploadSuccess.style.display = "block";
         } else {
             singleFileUploadSuccess.style.display = "none";
@@ -66,14 +66,14 @@ function form_submit() {
         type: "GET",
         contentType: "application/json",
         url: "/load",
-        data: JSON.stringify(status),
+        data: JSON.parse(status),
         dataType: 'json',
         cache: false,
         timeout: 60000,
         success: function (data) {
 
-            var json = "<h4>Status</h4><pre>"
-                + JSON.stringify(data, null, 4) + "</pre>";
+            var json = "<h5>Status:</h5><pre>"
+                + JSON.parse(data, null, 4) + "</pre>";
             $('#form-load-responseSuccess').html(json);
 
             console.log("SUCCESS : ", data);
