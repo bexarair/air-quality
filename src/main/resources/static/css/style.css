@@ -5,18 +5,51 @@ body {
 }
 
 .air-calculation{
-    background-color: lightgray;
+    background-image: url("https://images.unsplash.com/photo-1495490311930-678c8ecdd120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80");
+    /*background-color: lightgray;*/
     /*padding: 3em;*/
     padding-top: 1em;
     padding-bottom: 3em;
     text-align: center;
+    color: white;
 }
+
+.test{
+    font-size: 5em;
+}
+
+
+.login-body{
+    background-image: url("https://images.unsplash.com/photo-1495490311930-678c8ecdd120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80");
+}
+
+.register-body {
+    background-image: url("http://www.pptbackgrounds.org/uploads/beautiful-lonely-tree-wallpapers.jpg");
+}
+
+
+input {
+    padding:10px;
+    font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    width: 300px;
+    /*height: 25px;*/
+}
+
+
+
+
+
+
 
 .home-logo{
     padding-bottom: 2em;
     padding-top: 4em;
     width: 175px;
     margin-left: calc(50% - 87.5px);
+    color: white;
 }
 
 .logo{
@@ -29,10 +62,11 @@ body {
 
 .map-title{
     height: 50px;
-    font-size: 20px;
+    font-size: 28px;
     background-color: #14213D;
     color: white;
     text-align: center;
+    line-height: 44px;
 }
 
 .james-card, .anwar-card, .bethany-card {
@@ -73,8 +107,9 @@ body {
 }
 
 .fa-chevron-circle-down {
-    position: absolute;
+    /*position: absolute;*/
     /*bottom: -0.5em;*/
+    margin-left: calc(50% - 5px);
     bottom: 1em;
     left: 50%;
     z-index: 5;
@@ -121,6 +156,7 @@ i.homepage-icons.fas {
 
 
 
+
 /********************* MAP *******************/
 
 #small-text {
@@ -140,15 +176,15 @@ i.homepage-icons.fas {
     line-height: 30px;
     padding-left: 10px;
 }
-#floating-panel {
-    background-color: #fff;
-    border: 1px solid #999;
-    left: 25%;
-    padding: 5px;
-    position: absolute;
-    top: 10px;
-    z-index: 5;
-}
+/*#floating-panel {*/
+    /*!*background-color: #fff;*!*/
+    /*!*border: 1px solid #999;*!*/
+    /*!*left: 25%;*!*/
+    /*!*padding: 5px;*!*/
+    /*!*position: absolute;*!*/
+    /*!*top: 10px;*!*/
+    /*!*z-index: 5;*!*/
+/*}*/
 
 
 
@@ -182,7 +218,7 @@ i.homepage-icons.fas {
 }
 
 #map {
-    height: 85vh;
+    height: 94vh;
     width: 100%;
 }
 

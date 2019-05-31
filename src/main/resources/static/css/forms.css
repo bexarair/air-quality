@@ -5,12 +5,46 @@
 /*}*/
 
 .centered-form {
+    border-radius: 25px;
     padding: 1em;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     width: 40em;
     height: auto;
-    background-color: #ededed;
+    background-color: #2b2e2f7a;
     margin-left: calc(50% - 20em);
 }
 
+.register-container{
+    margin-top: 15%;
+    width: 40em;
+    background-color: #2b2e2f7a;
+}
 
+.form-title{
+    /*color: #ff5722;*/
+    color: white;
+    /*color: #de9a36;*/
+    font-weight: lighter;
+    text-align: center;
+    background-color: #14213D;
+    margin-bottom: .5em;
+    border-radius: 25px;
+}
+
+.form-header{
+    background-color: #14213D;
+    padding: 0;
+}
+
+.form-btn{
+    background-color: #de9a36;
+    /*background-color: #96f8ff;*/
+    width: 25%;
+    margin-left: calc(50% - 4em);
+    color: #000;
+}
+
+/*::placeholder {*/
+    /*color: grey;*/
+    /*!*font-size: 1.5em;*!*/
+/*}*/

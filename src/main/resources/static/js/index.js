@@ -79,7 +79,6 @@ var heatmap;
             center: {lat: 29.4241, lng: -98.4936},
             mapTypeId: 'terrain',
             mapTypeControl: false,
-            draggable: false,
             scaleControl: false,
             scrollwheel: false,
             navigationControl: false,
