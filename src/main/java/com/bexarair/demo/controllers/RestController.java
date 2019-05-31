@@ -56,9 +56,12 @@ public class RestController {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(dt);
+        System.out.println(date);
 
         List <AirQualityRecord> airQualityRecord =
                 aqRecordRepository.findByDateObserved(date);
+
+        System.out.println(airQualityRecord);
 
         return ResponseEntity.ok().body(airQualityRecord);
     }
