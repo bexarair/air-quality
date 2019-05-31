@@ -10,9 +10,13 @@
 
             <h1 style="text-align: center">Current Users</h1>
             <th:block th:each="user : ${users}">
-                <div>First and Last Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></div>
-                <div>User Name: <span th:text="${user.username}"></span></div>
-                <div>Is the user currently an Admin: <span th:text="${user.isGodMode()}"></span></div>
+                <div class="card-header">
+                    <div>Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></div>
+                </div>
+                <div class="card-body">
+                    <div><span style="font-weight: bold"> User Name: </span><span th:text="${user.username}"></span></div>
+                    <div>Current Admin Rights: <span th:text="${user.isGodMode()}"></span></div>
+                </div>
                 <button><a th:href="@{'/editadmin/' + ${user.id}}">Edit Admin Rights</a></button>
 
                 <!--<form th:action="@{'/editadmin/' + ${user.id}}" th:method="POST" th:object="${users}">-->
