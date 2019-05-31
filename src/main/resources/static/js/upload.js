@@ -66,14 +66,14 @@ function form_submit() {
         type: "GET",
         contentType: "application/json",
         url: "/load",
-        data: JSON.parse(status),
+        data: JSON.stringify(status),
         dataType: 'json',
         cache: false,
         timeout: 60000,
         success: function (data) {
 
             var json = "<h5>Status:</h5><pre>"
-                + JSON.parse(data, null, 4) + "</pre>";
+                + JSON.stringify(data, null, 4) + "</pre>";
             $('#form-load-responseSuccess').html(json);
 
             console.log("SUCCESS : ", data);
