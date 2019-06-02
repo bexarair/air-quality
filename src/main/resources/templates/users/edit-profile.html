@@ -6,11 +6,11 @@
         <link rel="stylesheet" href="/css/forms.css"/>
 
     </head>
-    <body>
+    <body class="login-body">
         <th:block th:replace="fragments/navbar :: nav"/>
         <!--<div class="container">-->
 
-            <div class="custom-form-div">
+            <div class="custom-form-div register-container">
                 <form th:action="@{'/profile/edit'}" class="centered-form" method="POST" th:object="${user}">
                 <h1 style="text-align: center">Edit Your Profile</h1>
 
