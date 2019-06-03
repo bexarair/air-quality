@@ -2,11 +2,14 @@ body {
     margin: 0;
     padding: 0;
     background-image: url("/images/stripes-light.png");
+    /*background-image: url("https://images.unsplash.com/photo-1495490311930-678c8ecdd120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80");*/
+    font-family: 'Didact Gothic', sans-serif;
+
 }
 
 .air-calculation{
 
-    background-image: url("https://images.unsplash.com/photo-1495490311930-678c8ecdd120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80");
+
     /*background-color: lightgray;*/
     /*padding: 3em;*/
     padding-top: 1em;
@@ -48,10 +51,6 @@ input {
 .iphone {
     margin-left: calc(50% - 125px);
 }
-
-
-
-
 
 
 .home-logo{
@@ -99,10 +98,11 @@ input {
 .aq-map-box {
     background-color: white;
     position: absolute;
-    display: inline-block;
+    /*display: inline-block;*/
     z-index: 5;
     bottom: 1em;
     left: 2em;
+    border: 2px solid #45474f;
 }
 
 .custom-nav {
@@ -163,16 +163,23 @@ i.homepage-icons.fas {
 }
 
 .aq-map-box div {
-    display: inline-block;
-    height: 1.5em;
+    /*display: inline-block;*/
     margin: 0;
+    height: 2.5em;
 }
 
 .white-text {
     color: #fff;
 }
 
+.blue-btn {
+    background-color: #307fbe;
+    /*background-color: #307e34;*/
+}
 
+.centered-btn {
+    margin-left: calc(50% - 57.5px);
+}
 
 
 /********************* MAP *******************/
@@ -204,14 +211,22 @@ i.homepage-icons.fas {
     /*!*z-index: 5;*!*/
 /*}*/
 
+#air-quality-title, #green-bg, #yellow-bg, #orange-bg, #red-bg, #purple-bg, #maroon-bg {
+    padding-left: .5em;
+    padding-right: .5em;
+    line-height: 38px
+}
 
+#air-quality-title {
+    color: #14213D;
+}
 
 #green-bg {
-    background-color: green;
+    background-color: #008000bd;
 }
 
 #yellow-bg {
-    background-color: yellow;
+    background-color: #ffff0087;
 }
 
 #orange-bg {
@@ -219,20 +234,15 @@ i.homepage-icons.fas {
 }
 
 #red-bg {
-    background-color: red;
+    background-color: #ff0000d1;
 }
 
 #purple-bg {
-    background-color: purple;
+    background-color: #800080d9;
 }
 
 #maroon-bg {
-    background-color: maroon;
-}
-
-#green-bg, #yellow-bg, #orange-bg, #red-bg, #purple-bg, #maroon-bg {
-    padding-left: .5em;
-    padding-right: .5em;
+    background-color: #800000e6;
 }
 
 #map {
