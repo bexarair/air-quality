@@ -9,10 +9,7 @@ body {
     color: #fff;
 }
 
-p.aqi-number {
-    font-size: 4em;
-    font-weight: lighter;
-}
+
 
 .custom-card {
     /*border: 4px solid #607d8b;*/
@@ -23,22 +20,38 @@ p.aqi-number {
     background-color: #fff;
 }
 
-/*.top-row {*/
-    /*margin-top: 2em;*/
-/*}*/
+.top-row {
+    margin-top: 2em;
+}
 
 .right-column {
     text-align: right;
 }
 
 .profile-body{
-    background-image: url("/images/skyBackground.jpeg");
+    background-image: url("/images/grass.gif");
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
 }
 
-.background-container{
+.background-container {
     background-color: #b3c0c9;
     height: 90vh;
     margin-top: 0;
 }
+
+.profile-background-container {
+    background-color: #d4d4d4;
+    opacity: 100%;
+}
+
+.profile-icons {
+    text-align: right;
+}
+
+span.aqi-number {
+    font-size: 4em;
+    font-weight: lighter;
+}
+
