@@ -31,12 +31,7 @@
                     <!--</div>-->
                     <!--</th:block>-->
                 </th:block>
-                <div class="col-12 col-md-6">
-                    <img class="iphone" th:src="@{/images/phone-text-msg-removebg.png}"/>
-                </div>
-
-       <!--Create Form-->
-                <div class="card bg-light col-12 col-md-4 ">
+                <div class="card bg-light col-12 col-md-6">
                     <form th:action="@{/locations/create}" th:method="post" th:object="${location}">
 
                         <div class="card-header">My Locations</div>
@@ -44,13 +39,13 @@
                             <!--<h5 class="card-title">AQI</h5>-->
 
                             <div class="form-group">
-                            <label for="loc-title">Title</label>
-                            <input id="loc-title" class="form-control" th:field="*{title}" />
+                                <label for="loc-title">Title</label>
+                                <input id="loc-title" class="form-control" th:field="*{title}" />
                             </div>
 
                             <div class="form-group">
-                            <label for="zipcode">Zipcode</label>
-                            <input id="zipcode" class="form-control" th:field="*{zipcode}" />
+                                <label for="zipcode">Zipcode</label>
+                                <input id="zipcode" class="form-control" th:field="*{zipcode}" />
                             </div>
 
                             <div class="form-check">
@@ -68,8 +63,13 @@
                             </div>
 
                         </div>
-                        <button type="submit" class="btn orange-btn">Create Location</button>
+                        <button type="submit" class="btn blue-btn white-text centered-btn">Create Location</button>
                     </form>
+                </div>
+
+       <!--Create Form-->
+                <div class="col-12 col-md-4 ">
+                    <img class="iphone" th:src="@{/images/phone-text-msg-removebg.png}"/>
                 </div>
             </div>
         </div>
