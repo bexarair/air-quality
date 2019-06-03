@@ -105,7 +105,6 @@ gMapScript.setAttribute('src', "//maps.googleapis.com/maps/api/js?key=AIzaSyChqv
 document.body.appendChild(gMapScript);
 
 
-
     function initMap() {
         // Promise.all([aqiPromise, hostpitalPromise]).then(function(data){
         map = new google.maps.Map(document.getElementById('map'), {
@@ -127,7 +126,7 @@ document.body.appendChild(gMapScript);
         map.data.loadGeoJson(geoJson);
 
 
-
+    //Sets color for each zip code boundry based on current AQI for location
         var delay2 = 500; // delay time in milliseconds
             setTimeout(function () {
             for(var j = 0; j < restZipArray.length; j++) {
@@ -257,6 +256,8 @@ document.body.appendChild(gMapScript);
             {location: new google.maps.LatLng(29.655470, -98.33075), zip: 78266}
 
         ];
+
+        //Puts data in heatmap variable based on rate
     setTimeout(function(){
         for(var i = 0; i < restHospitalZip.length; i++) {
             console.log(googleZips[i]);
@@ -375,10 +376,10 @@ document.body.appendChild(gMapScript);
 
 /**** floating table on map ****/
 
-$("#toggle-heatmap").on("click", function(){
-    heatmap.setMap(heatmap.getMap() ? null : map);  // this isn't defined :(
-    console.log("you clicked toggle heat map");
-});
+// $("#toggle-heatmap").toggle("click", function(){
+//     heatmap.setMap(null);  // this isn't defined :(
+//     console.log("you clicked toggle heat map");
+// });
 
 
 
@@ -411,4 +412,10 @@ function changeRadius() {
 function changeOpacity() {
     heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 }
+
+function toggleHeatmap() {
+    heatmap.setMap(heatmap.getMap() ? null : map);
+}
+
+
 
