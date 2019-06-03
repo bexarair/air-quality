@@ -2,41 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <th:block th:replace="fragments/head :: header('Sign-Up')"/>
-        <link rel="stylesheet" href="/css/forms.css"/>
+        <th:block th:replace="fragments/head :: header('Edit Profile')"/>
+        <!--<link rel="stylesheet" href="/css/forms.css"/>-->
 
     </head>
-    <body class="login-body">
+    <body class="min-vh-100 login-body">
         <th:block th:replace="fragments/navbar :: nav"/>
         <!--<div class="container">-->
 
-            <div class="custom-form-div register-container">
-                <form th:action="@{'/profile/edit'}" class="centered-form" method="POST" th:object="${user}">
-                <h1 style="text-align: center">Edit Your Profile</h1>
+        <div class="custom-form-div register-container">
+            <form th:action="@{'/profile/edit'}" class="vertical-center centered-form" method="POST" th:object="${user}">
+            <h3 class="form-title">Edit Your Profile</h3>
 
-                    <div class="form-group">
-                        <label for="username">User Name</label>
-                        <input id="username" class="form-control" th:field="*{username}" />
-                    </div>
+                <div class="form-group">
+                    <label for="username">User Name</label>
+                    <input id="username" class="form-control" th:field="*{username}" />
+                </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" class="form-control" th:field="*{email}" />
-                    </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" th:field="*{email}" />
+                </div>
 
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input id="phone" class="form-control" th:field="*{phone}" />
-                    </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input id="phone" class="form-control" th:field="*{phone}" />
+                </div>
 
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input id="password" class="form-control" type="password" th:field="*{password}" />
-                    </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" class="form-control" type="password" th:field="*{password}" />
+                </div>
 
-                    <button type="submit" class="btn btn-primary loginBtn">Submit</button>
-                </form>
-            </div>
+                <button type="submit" class="btn form-btn">Submit</button>
+            </form>
+        </div>
         <!--</div>-->
 
         <footer th:replace="fragments/footer :: footer" />

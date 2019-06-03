@@ -14,11 +14,11 @@
     margin-left: calc(50% - 20em);
 }
 
-.register-container{
-    margin-top: 15%;
-    width: 40em;
-    background-color: #2b2e2f7a;
-}
+/*.register-container{*/
+    /*margin-top: 15%;*/
+    /*width: 40em;*/
+    /*background-color: #2b2e2f7a;*/
+/*}*/
 
 .form-title{
     /*color: #ff5722;*/
@@ -31,10 +31,10 @@
     border-radius: 25px;
 }
 
-.form-header{
-    background-color: #14213D;
-    padding: 0;
-}
+/*.form-header{*/
+    /*background-color: #14213D;*/
+    /*padding: 0;*/
+/*}*/
 
 .form-btn{
     background-color: #de9a36;

@@ -19,11 +19,22 @@ p.aqi-number {
     background-color: #fff;
 }
 
-.top-row {
-    margin-top: 2em;
-}
+/*.top-row {*/
+    /*margin-top: 2em;*/
+/*}*/
 
 .right-column {
     text-align: right;
 }
 
+.profile-body{
+    background-image: url("/images/skyBackground.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.background-container{
+    background-color: #b3c0c9;
+    height: 90vh;
+    margin-top: 0;
+}
