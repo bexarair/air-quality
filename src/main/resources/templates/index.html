@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>Home</title>
         <link rel="shortcut icon"  href="/img/dancingBear.gif" type="image/x-icon"/>
         <link href="https://fonts.googleapis.com/css?family=Crushed" rel="stylesheet"/>
@@ -9,38 +10,38 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         <link rel="stylesheet" href="/css/style.css"/>
     </head>
-    <body>
+    <body class="grass-background">
         <th:block th:replace="fragments/navbar :: nav"/>
         <div class="container-fluid">
             <div class="gradient">
-                <div class="air-calculation">
-                    <img class="home-logo logo" src="images/windy.png"/>
-                    <h2>Bexar Air Mission</h2>
-                    <p>To provide awareness of how our local air quality affects the health of children in our community</p>
-                </div>
-            </div>
-            <div class="row icon-row grass-background">
-                <div class="col-12 col-md-4">
-                    <i class="homepage-icons fas fa-wind fa-3x"></i>
-                    <ul>
-                        <li>The Air Quality Index is based on measurement of particulate matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and Carbon Monoxide (CO) emissions.</li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-4">
-                    <i class="homepage-icons fas fa-mobile-alt fa-3x"></i>
-                    <ul>
-                        <li>Receive text message alerts when a locations falls at or below an unhealthy level</li>
-                        <li>Receive a daily text message at 5PM for tomorrow's AQI</li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-4">
-                    <i class="homepage-icons fas fa-home fa-3x"></i>
-                    <ul>
-                        <li>Create custom locations to track the Air Quality of those locations</li>
-                    </ul>
-                </div>
-            </div>
+                    <div class="air-calculation">
+                        <img class="home-logo logo" src="images/windy.png"/>
+                        <h2>Bexar Air Mission</h2>
+                        <p>To provide awareness of how our local air quality affects the health of children in our community</p>
+                    </div>
 
+                <div class="row icon-row">
+                    <div class="col-12 col-md-4">
+                        <i class="homepage-icons fas fa-wind fa-3x"></i>
+                        <ul>
+                            <li>The Air Quality Index is based on measurement of particulate matter (PM2.5 and PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2) and Carbon Monoxide (CO) emissions.</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <i class="homepage-icons fas fa-mobile-alt fa-3x"></i>
+                        <ul>
+                            <li>Receive text message alerts when a locations falls at or below an unhealthy level.</li>
+                            <li>Receive a daily text message at 5PM for tomorrow's AQI.</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <i class="homepage-icons fas fa-home fa-3x"></i>
+                        <ul>
+                            <li>Create custom locations to track the Air Quality of those locations.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <!--<div>-->
                 <!--<a href="#middle"><i class="fas fa-chevron-circle-down fa-2x"></i></a>-->
             <!--</div>-->
