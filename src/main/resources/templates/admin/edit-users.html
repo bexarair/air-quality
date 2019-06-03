@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <th:block th:replace="fragments/head :: header('Upgrade-User')"/>
+        <link rel="stylesheet" href="/css/profile.css"/>
     </head>
-    <body>
+    <body class="profile-body">
         <th:block th:replace="fragments/navbar :: nav"/>
-        <div class="container">
+        <div class="container background-container centered-form top-row">
 
-            <h1 style="text-align: center">Current Users</h1>
+            <h1 class="form-title">Current Users</h1>
             <!--<th:block th:each="user : ${userInfo}">-->
                 <div>Name: <span th:text="${userInfo.firstName} + ' ' + ${userInfo.lastName}"></span></div>
                 <div>User Name: <span th:text="${userInfo.username}"></span></div>
@@ -24,7 +25,7 @@
                 Select to Make User an Admin
                 </label>
                 </div>
-                <button type="submit" class="btn btn-dark loginBtn">Submit</button>
+                <button type="submit" class="btn form-btn">Submit</button>
             </form>
 
         </div>
