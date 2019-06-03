@@ -14,7 +14,12 @@
                     <h2 class="form-title">My Places</h2>
             <hr/>
             <div class="right-column">
-                <a th:if="${create}" th:href="${'/locations/create/'}">Add a Location </a><a th:href="${'/locations/create/'}"><i class="fas fa-plus-square fa-2x"></i></a>
+                <th:block th:if="${admin}">
+                    <button class="btn admin-btn"><a th:href="@{'/uploader.html'}">Upload a New Record</a></button>
+                    <button class="btn admin-btn"><a th:href="@{'/viewusers'}">Upgrade User to Admin</a></button>
+                </th:block>
+                <a th:if="${create}" th:href="${'/locations/create/'}">Add a Location<i class="fas fa-plus-square fa-1x"></i></a>
+                <!--<a th:href="${'/locations/create/'}"><i class="fas fa-plus-square fa-2x"></i></a>-->
             </div>
                 <div class="row top-row">
 
@@ -44,10 +49,10 @@
                 </div>
             <!--</th:block>-->
 
-            <th:block th:if="${admin}">
-              <button class="btn btn-dark"><a th:href="@{'/uploader.html'}">Upload a New Record</a></button>
-              <button class="btn btn-dark"><a th:href="@{'/viewusers'}">Upgrade User to Admin</a></button>
-            </th:block>
+            <!--<th:block th:if="${admin}">-->
+              <!--<button class="btn btn-dark"><a th:href="@{'/uploader.html'}">Upload a New Record</a></button>-->
+              <!--<button class="btn btn-dark"><a th:href="@{'/viewusers'}">Upgrade User to Admin</a></button>-->
+            <!--</th:block>-->
 
             <!--<div id="chart_div">CHART HERE</div>-->
 

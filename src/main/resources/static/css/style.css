@@ -7,9 +7,11 @@
 /*}*/
 
 
-.link-color{
+.link-color:hover{
+    text-decoration: none;
     color: inherit;
 }
+
 
 table {
     background-color: #fff;
