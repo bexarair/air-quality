@@ -5,9 +5,9 @@
         <th:block th:replace="fragments/head :: header('Create Location')"/>
         <link rel="stylesheet" href="/css/profile.css"/>
     </head>
-    <body>
+    <body class="profile-body">
         <th:block th:replace="fragments/navbar :: nav"/>
-        <div class="container">
+        <div class="container centered-container top-row">
             <div class="row top-row">
                 <div class="col-6">
 
@@ -68,7 +68,7 @@
                 </div>
 
        <!--Create Form-->
-                <div class="col-12 col-md-4 ">
+                <div class="col-12 col-md-6 ">
                     <img class="iphone" th:src="@{/images/phone-text-msg-removebg.png}"/>
                 </div>
             </div>
