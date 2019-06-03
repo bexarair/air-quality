@@ -143,6 +143,9 @@ input {
     width: 100%;
     background-repeat: no-repeat;
 }
+.centered-card {
+    margin-left: calc(50% - 143px);
+}
 
 .about-us-container {
     max-width: 900px;
@@ -154,6 +157,17 @@ input {
 
 .map-container {
     position: relative;
+}
+
+.heatmap-container {
+    position: absolute;
+    z-index: 5;
+    bottom: 1em;
+    left: 12em;
+    border: 2px solid #45474f;
+    background-color: #fff;
+    width: fit-content;
+
 }
 
 .aq-map-box {
@@ -215,7 +229,8 @@ i.homepage-icons.fas {
     background-color: #ededed;
     max-width: 800px;
     margin: 0 auto;
-    border: 1px solid black
+    padding-top: .75em;
+    padding-bottom: 1em;
 }
 
 .container-fluid {
@@ -228,6 +243,7 @@ i.homepage-icons.fas {
     margin: 0;
     height: 2.5em;
 }
+
 
 .white-text {
     color: #fff;
@@ -245,9 +261,7 @@ i.homepage-icons.fas {
 
 /********************* MAP *******************/
 
-#small-text {
-    font-size: .5em;
-}
+
 
 /*#floating-panel {*/
     /*position: absolute;*/
@@ -274,14 +288,19 @@ i.homepage-icons.fas {
 
 
 
-#air-quality-title, #green-bg, #yellow-bg, #orange-bg, #red-bg, #purple-bg, #maroon-bg {
+.legend-title, .green-bg, .yellow-bg, .orange-bg, .red-bg, .purple-bg, .maroon-bg {
     padding-left: .5em;
     padding-right: .5em;
-    line-height: 38px
+    /*line-height: 38px*/
 }
 
-#air-quality-title {
+.legend-title {
     color: #14213D;
+}
+
+.small-text {
+    font-size: .5em;
+    line-height: 58px;
 }
 
 .green-bg {
