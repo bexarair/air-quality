@@ -23,8 +23,7 @@ th {
 }
 
 .gradient{
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgb(86, 103, 115));
-    background-color: gray;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(14,14,14,1));
 }
 
 
@@ -50,10 +49,10 @@ th {
 .air-calculation{
     /*background-image: url("/images/skyBackground.jpeg");*/
     /*background-image: url("/images/cloudsMoving.gif");*/
-    background-image: url("/images/grass.gif");
+    /*background-image: url("/images/grass.gif");*/
     /*background-image: url("/images/leaves.gif");*/
-    background-repeat: no-repeat;
-    background-size: cover;
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
     /*background-color: lightgray;*/
     /*padding: 3em;*/
     padding-top: 1em;
@@ -64,16 +63,17 @@ th {
 }
 
 .grass-background{
-    background-color: #e7e7e7;
-    /*background-image: url("/images/grass.gif");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: 100%;*/
-    /*!*background-size: cover;*!*/
+    /*background-color: #e7e7e7;*/
+    background-image: url("/images/grass.gif");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    /*background-size: cover;*/
 }
 
 .icon-row {
     height: 30vh;
     color: #14213d;
+    background-color: #ebebeb;
 }
 
 .test{
