@@ -6,6 +6,15 @@ body {
     font-family: 'Didact Gothic', sans-serif;
 }
 
+table {
+    background-color: #fff;
+    margin-top: 2em;
+}
+
+th {
+    width: 100px;
+}
+
 .gradient{
     background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgb(86, 103, 115));
     background-color: gray;
@@ -256,6 +265,8 @@ i.homepage-icons.fas {
     /*!*z-index: 5;*!*/
 /*}*/
 
+
+
 #air-quality-title, #green-bg, #yellow-bg, #orange-bg, #red-bg, #purple-bg, #maroon-bg {
     padding-left: .5em;
     padding-right: .5em;
@@ -266,27 +277,27 @@ i.homepage-icons.fas {
     color: #14213D;
 }
 
-#green-bg {
+.green-bg {
     background-color: #008000bd;
 }
 
-#yellow-bg {
+.yellow-bg {
     background-color: #ffff0087;
 }
 
-#orange-bg {
+.orange-bg {
     background-color: orange;
 }
 
-#red-bg {
+.red-bg {
     background-color: #ff0000d1;
 }
 
-#purple-bg {
+.purple-bg {
     background-color: #800080d9;
 }
 
-#maroon-bg {
+.maroon-bg {
     background-color: #800000e6;
 }
 
