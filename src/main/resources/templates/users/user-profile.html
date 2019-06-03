@@ -8,17 +8,14 @@
     </head>
     <body class="profile-body">
         <th:block th:replace="fragments/navbar :: nav"/>
-        <div class="container background-container">
-            <div class="row top-row">
+        <div class="container profile-background-container top-row">
             <!--<th:block th:if="${notAdmin}">-->
-                <!--<div class="col-6">-->
-                    <h1 class="form-title">My Places</h1>
-                <!--</div>-->
-                <div class="col-6 right-column">
-                    <a th:if="${create}" th:href="${'/locations/create/'}">Add a Location </a><a th:href="${'/locations/create/'}"><i class="fas fa-plus-square fa-2x"></i></a>
-                </div>
-            </div>
+
+                    <h2 class="form-title">My Places</h2>
             <hr/>
+            <div class="right-column">
+                <a th:if="${create}" th:href="${'/locations/create/'}">Add a Location </a><a th:href="${'/locations/create/'}"><i class="fas fa-plus-square fa-2x"></i></a>
+            </div>
                 <div class="row top-row">
 
                         <th:block th:each="aqiZipCode : ${aqiZipCodes}">
@@ -28,16 +25,17 @@
                                     <h3 class="card-title" th:text="${aqiZipCode.title}"></h3>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text" th:text="${aqiZipCode.zipCode}"></p>
-
-                                    <p class="aqi-number" th:text="${aqiZipCode.aqi}"></p><span class="aqi" th:text="AQI"></span>
-
+                                    <span class="aqi" th:text="AQI"></span>
+                                    <br />
+                                    <h4 class="aqi-number" th:text="${aqiZipCode.aqi}"></h4>
                                     <span class="badge badge-success" th:text="${aqiZipCode.categoryName}"></span>
                                         <!--<th:block th:each="location : ${locations}">-->
-                                    <br /><br />
-
-                                        <a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}"><i class="far fa-edit fa-2x"></i></a>
-                                        <a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}"><i class="far fa-trash-alt fa-2x"></i></a>
+                                    <br />
+                                    <span class="card-text" th:text="${aqiZipCode.zipCode}"></span>
+                                    <div class="profile-icons">
+                                        <a th:href="@{'/locations/edit/' + ${aqiZipCode.id}}"><i class="far fa-edit fa-1.5x"></i></a>
+                                        <a th:href="@{'/locations/delete/' + ${aqiZipCode.id}}"><i class="far fa-trash-alt fa-1.5x"></i></a>
+                                    </div>
                                     <!--</th:block>-->
                                 </div>
                             </div>
@@ -52,6 +50,50 @@
             </th:block>
 
             <!--<div id="chart_div">CHART HERE</div>-->
+
+            <!--<table class="table">-->
+                <!--<thead class="thead-light">-->
+                <!--<tr>-->
+                    <!--<th scope="col">Levels of Health Concern</th>-->
+                    <!--<th scope="col">AQI</th>-->
+                    <!--<th scope="col">Meaning</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<th scope="row" class="green-bg white-text">Good</th>-->
+                    <!--<td>0 to 50</td>-->
+                    <!--<td>Air quality is considered satisfactory, and air pollution poses little or no risk.</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th scope="row" class="yellow-bg">Moderate</th>-->
+                    <!--<td>51 to 100</td>-->
+                    <!--<td>Air quality is acceptable; however for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th scope="row" class="orange-bg">Unhealthy for Sensitive Groups</th>-->
+                    <!--<td>101 to 150</td>-->
+                    <!--<td>Members of sensitive groups may experience health effects.  The general public is not likely to be affected</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th scope="row" class="red-bg white-text">Unhealthy</th>-->
+                    <!--<td>150 to 200</td>-->
+                    <!--<td>Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th scope="row" class="purple-bg white-text">Very Unhealthy</th>-->
+                    <!--<td>201 to 300</td>-->
+                    <!--<td>Health alert; everyone may experience more serious health effects.</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th scope="row" class="maroon-bg white-text">Hazardous</th>-->
+                    <!--<td>301 to 500</td>-->
+                    <!--<td>Health warnings of emergency conditions.  The entire population is more likely to be affected.</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+
+
         </div>
 
         <footer th:replace="fragments/footer :: footer" />
