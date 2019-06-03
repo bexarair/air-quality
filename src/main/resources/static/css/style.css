@@ -4,12 +4,40 @@ body {
     background-image: url("/images/stripes-light.png");
     /*background-image: url("https://images.unsplash.com/photo-1495490311930-678c8ecdd120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80");*/
     font-family: 'Didact Gothic', sans-serif;
+}
+
+.gradient{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgb(86, 103, 115));
+    background-color: gray;
+}
+
+
+.bear{
+    display: inline-block;
+    position: absolute;
+    left: -5px;
+}
+
+.bear2{
+    display: inline-block;
+    position: absolute;
+    right: 6px;
+    transform: scaleX(-1);
 
 }
 
+.breath-title{
+    margin-bottom: 10px;
+}
+
+
 .air-calculation{
-
-
+    /*background-image: url("/images/skyBackground.jpeg");*/
+    /*background-image: url("/images/cloudsMoving.gif");*/
+    background-image: url("/images/grass.gif");
+    /*background-image: url("/images/leaves.gif");*/
+    background-repeat: no-repeat;
+    background-size: cover;
     /*background-color: lightgray;*/
     /*padding: 3em;*/
     padding-top: 1em;
@@ -19,8 +47,17 @@ body {
     height: 60vh;
 }
 
+.grass-background{
+    background-color: #e7e7e7;
+    /*background-image: url("/images/grass.gif");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 100%;*/
+    /*!*background-size: cover;*!*/
+}
+
 .icon-row {
     height: 30vh;
+    color: #14213d;
 }
 
 .test{
@@ -29,12 +66,20 @@ body {
 
 
 .login-body{
-    background-image: url("https://images.unsplash.com/photo-1495490311930-678c8ecdd120?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80");
+    /*background-image: url("/images/skyBackground.jpeg");*/
+    /*background-image: url("/images/leaves.gif");*/
+    background-image: url("/images/windLeaf.gif");
+    /*background-image: url("/images/dandilion.gif");*/
+    /*background-image: url("/images/grass.gif");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
 }
 
-.register-body {
-    background-image: url("http://www.pptbackgrounds.org/uploads/beautiful-lonely-tree-wallpapers.jpg");
-}
+/*.register-body {*/
+    /*background-image: url("http://www.pptbackgrounds.org/uploads/beautiful-lonely-tree-wallpapers.jpg");*/
+/*}*/
 
 
 input {
@@ -54,9 +99,9 @@ input {
 
 
 .home-logo{
-    padding-bottom: 2em;
-    padding-top: 4em;
-    width: 175px;
+    /*padding-bottom: 2em;*/
+    /*padding-top: 4em;*/
+    width: 300px;
     /*margin-left: calc(50% - 87.5px);*/
     color: white;
 }

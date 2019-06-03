@@ -102,6 +102,18 @@ public class RestController {
         return ResponseEntity.ok().body(cityHospitalRecord);
     }
 
+    @GetMapping("/hospitalrecords/{year}")
+    @ResponseBody
+    public ResponseEntity<List<CityHospitalRecord>> getHospitalRecordsByYear(@PathVariable String year)
+            throws ResourceNotFoundException {
+        List <CityHospitalRecord> cityHospitalRecord =
+                hospitalRecordCRUD
+                        .findByYear(year);
+        return ResponseEntity.ok().body(cityHospitalRecord);
+    }
+
+
+
     /**this filters out the locations of the user by the current date**/
 
     @GetMapping("/airquality/user/{userId}")

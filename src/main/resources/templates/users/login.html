@@ -5,10 +5,9 @@
         <th:block th:replace="fragments/head :: header('Log-In')"/>
         <link rel="stylesheet" href="/css/forms.css"/>
     </head>
-    <body class="login-body">
+    <body class="min-vh-100 login-body">
         <th:block th:replace="fragments/navbar :: nav"/>
         <div class="login-body-div">
-
             <div class="alert-danger" style="text-align: center" th:if="${param.error}">
                 Invalid Username or Password.
             </div>
@@ -17,9 +16,9 @@
             </div>
             <div class="custom-form-div">
                 <form th:action="@{/login}" method="post" class="vertical-center centered-form">
-                    <div class="form-header">
+                    <!--<div class="form-header">-->
                          <h3 class="form-title">Log In</h3>
-                    </div>
+                    <!--</div>-->
                     <!--<div class="card login" style="text-align: center; width: 100%">-->
                     <div class="form-group">
                         <!--<label for="username">Username</label>   -->
@@ -30,7 +29,7 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder='&#xf023; Password'/>
                     </div>
                     <!--</div>-->
-                    <button type="submit" class="btn btn-primary form-btn">Log In</button>
+                    <button type="submit" class="btn form-btn">Log In</button>
                 </form>
             </div>
         </div>

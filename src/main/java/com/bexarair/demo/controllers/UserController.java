@@ -32,6 +32,11 @@ public class UserController {
     }
 /*********************************************************/
 
+@GetMapping("/")
+public String showHomepage(){
+    return "index";
+}
+
 
 
     @GetMapping("/sign-up")
