@@ -24,12 +24,13 @@ import java.util.List;
 @Controller
 public class LocationController {
     private static final String[] zipcodes = {"78002","78006","78009","78015","78023","78039","78052","78056","78063","78064","78065","78066","78069","78073","78101","78108","78109","78112","78114","78121","78124","78148","78150","78152","78154","78155","78163","78201","78202","78203","78204","78205","78207","78208","78209","78210","78211","78212","78213","78214","78215","78216","78217","78218","78219","78220","78221","78222","78223","78224","78225","78226","78227","78228","78229","78230","78231","78232","78233","78234","78235","78236","78237","78238","78239","78240","78242","78244","78245","78247","78248","78249","78250","78251","78252","78253","78254","78255","78256","78257","78258","78259","78260","78261","78263","78264","78266"};
-
+    private String locationZipCode;
     private UserRepository userCRUD;
     private AirQualityRepository airCRUD;
     private LocationRepository locationCRUD;
     private PasswordEncoder passwordEncoder;
     private SmsSender textService;
+
 
 
     public LocationController(UserRepository userCRUD, AirQualityRepository airCRUD, LocationRepository locationCRUD, PasswordEncoder passwordEncoder, SmsSender textService) {
@@ -136,13 +137,31 @@ public class LocationController {
 
         ArrayList<AqiZipCode> aqiZipCodes = new ArrayList<>();
 
+
 /******************** Shows Users Places *****************************/
+String locationZipCode;
         for(int i = 0; i < current.size(); i++){
             String currentZipCode = current.get(i).getZipCode();
             String currentCatName = current.get(i).getCategoryName();
+
+//            if(aqiZipCode.getCategoryName().equals("Good")){
+//                viewModel.addAttribute("good",true);
+//            }else if(aqiZipCode.getCategoryName().equals("Moderate")){
+//                viewModel.addAttribute("moderate", true);
+//            }else if(currentCatName.equals("Unhealthy for Sensitive Groups")){
+//                viewModel.addAttribute("unhealthySens", true);
+//            }else if(currentCatName.equals("Unhealthy")){
+//                viewModel.addAttribute("unhealthy", true);
+//            }else if(currentCatName.equals("Very Unhealthy")){
+//                viewModel.addAttribute("VeryUnhealthy", true);
+//            }else if(currentCatName.equals("Hazardous")){
+//                viewModel.addAttribute("hazardous", true);
+//            }
+
+
             int currentAqi = current.get(i).getAQI();
             for(int j = 0; j < userLocations.size(); j ++){
-                String locationZipCode = userLocations.get(j).getZipcode();
+                locationZipCode = userLocations.get(j).getZipcode();
                 String locationTitle = userLocations.get(j).getTitle();
                 long userId = userLocations.get(j).getUser().getId();
                 long locId = userLocations.get(j).getId();
@@ -150,37 +169,46 @@ public class LocationController {
                 if(currentZipCode.equals(locationZipCode)) {
 
                     AqiZipCode aqiZipCode = new AqiZipCode();
-
                     aqiZipCode.setAqi(currentAqi);
                     aqiZipCode.setZipCode(locationZipCode);
                     aqiZipCode.setCategoryName(currentCatName);
                     aqiZipCode.setTitle(locationTitle);
                     aqiZipCode.setId(locId);
-
                     aqiZipCodes.add(aqiZipCode);
+
+
+
+
+
                 }
                 System.out.println(locationCRUD.findAllByUserId(user));
                 System.out.println(locationCRUD.findAllByUserId(user).size());
             }
+
+
+
         }
 
         viewModel.addAttribute("aqiZipCodes", aqiZipCodes);
 /********************** SHOWS ADMIN PAGE **********************************/
-    for(int i = 0; i < allAdminUsers.size(); i++){
-       long userAdmin = allAdminUsers.get(i).getId();
-       if(userAdmin == user){
-           viewModel.addAttribute("admin", true);
-       }
-//       else{
-//           viewModel.addAttribute("notAdmin", true);
-//       }
-    }
-        return "users/user-profile";
+        for(int i = 0; i < allAdminUsers.size(); i++){
+           long userAdmin = allAdminUsers.get(i).getId();
+           if(userAdmin == user){
+               viewModel.addAttribute("admin", true);
+           }
+    //       else{
+    //           viewModel.addAttribute("notAdmin", true);
+    //       }
+        }
+            return "users/user-profile";
+
+
+
+/*************************** SHOW CATEGORY NAME ***************************/
+
+
+
 
     }
-
-
-
-
 }//end of class
 
