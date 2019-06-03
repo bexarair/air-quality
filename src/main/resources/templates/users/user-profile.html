@@ -32,9 +32,11 @@
                                 <div class="card-body">
                                     <span class="aqi" th:text="AQI"></span>
                                     <br />
-                                    <h4 class="aqi-number" th:text="${aqiZipCode.aqi}"></h4>
-                                    <span class="badge badge-success" th:text="${aqiZipCode.categoryName}"></span>
-                                        <!--<th:block th:each="location : ${locations}">-->
+                                    <div th:class="${'aqi-number'}" th:text="${aqiZipCode.aqi}"></div>
+
+                                    <span th:if="${aqiZipCode.categoryName == 'Good'}" class="badge badge-success" th:text="${aqiZipCode.categoryName}"></span>
+                                    <span th:if="${aqiZipCode.categoryName == 'Moderate'}" class="badge badge-warning" th:text="${aqiZipCode.categoryName}"></span>
+                                    <!--<span th:unless="${unhealthySens}"  class="badge badge-danger" th:text="${aqiZipCode.categoryName}"></span>-->
                                     <br />
                                     <span class="card-text" th:text="${aqiZipCode.zipCode}"></span>
                                     <div class="profile-icons">
