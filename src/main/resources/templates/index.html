@@ -50,27 +50,32 @@
         </div>
 
             <div id="middle" class="container-fluid map-container">
-                <!--<div id="floating-panel">-->
-                    <!--<button id="toggle-heatmap">Toggle Heatmap</button>-->
-                    <!--<button onclick="changeGradient()">Change gradient</button>-->
-                    <!--<button onclick="changeRadius()">Change radius</button>-->
-                    <!--<button onclick="changeOpacity()">Change opacity</button>-->
-                <!--</div>-->
                 <div class="aq-map-box">
-                    <div>Air Quality Scale</div>
+                    <div class="legend-title">Air Quality Scale</div>
                     <div class="white-text green-bg">Good</div>
                     <div class="yellow-bg">Moderate</div>
                     <div class="orange-bg">
                         <div>Unhealthy</div>
-                        <div><span id="small-text">for sensitive groups</span></div>
+                        <div><span class="small-text white-text">for sensitive groups</span></div>
                     </div>
                     <div class="white-text red-bg">Unhealthy</div>
                     <div class="white-text purple-bg">Very Unhealthy</div>
                     <div class="white-text maroon-bg">Hazardous</div>
                 </div>
 
+                <div class="container-fluid heatmap-container">
+                    <!--<div class="aq-map-box">-->
+                    <div class="legend-title">Pediatric Asthma Rate</div>
+                        <div class="white-text green-bg">Less than 20%</div>
+                        <div class="yellow-bg">21% - 50%</div>
+                        <div class="red-bg white-text">50% - 100%</div>
+                    <!--</div>-->
+                </div>
+
                 <div id="map"></div>
             </div>
+
+
 
         <script
                 src="https://code.jquery.com/jquery-3.4.1.js"
