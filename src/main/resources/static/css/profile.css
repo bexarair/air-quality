@@ -35,8 +35,14 @@ body {
     height: 100vh;
 }
 
-.background-container {
-    background-color: #b3c0c9;
+
+.profile-btn{
+    display: inline;
+}
+
+.background-container{
+    background-color: white;
+
     height: 90vh;
     margin-top: 0;
 }

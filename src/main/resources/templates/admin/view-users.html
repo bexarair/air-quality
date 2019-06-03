@@ -3,21 +3,22 @@
     <head>
         <meta charset="UTF-8" />
         <th:block th:replace="fragments/head :: header('Upgrade-User')"/>
+        <link rel="stylesheet" href="/css/profile.css"/>
     </head>
-    <body>
+    <body class="profile-body">
         <th:block th:replace="fragments/navbar :: nav"/>
-        <div class="container">
+        <div class="container background-container centered-form">
 
-            <h1 style="text-align: center">Current Users</h1>
+            <h1 class="form-title">Current Users</h1>
             <th:block th:each="user : ${users}">
-                <div class="card-header">
-                    <div>Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></div>
-                </div>
+                <!--<div class="card-header">-->
                 <div class="card-body">
-                    <div><span style="font-weight: bold"> User Name: </span><span th:text="${user.username}"></span></div>
+                    <div><span style="font-weight: bold">Name: </span><span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></div>
+                <!--</div>-->
+                    <div>User Name: <span th:text="${user.username}"></span></div>
                     <div>Current Admin Rights: <span th:text="${user.isGodMode()}"></span></div>
                 </div>
-                <button><a th:href="@{'/editadmin/' + ${user.id}}">Edit Admin Rights</a></button>
+                <button type="submit" class="form-btn"><a class="link-color" th:href="@{'/editadmin/' + ${user.id}}">Edit Admin Rights</a></button>
 
                 <!--<form th:action="@{'/editadmin/' + ${user.id}}" th:method="POST" th:object="${users}">-->
                     <!--<div class="form-check">-->

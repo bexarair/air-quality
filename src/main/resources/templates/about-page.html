@@ -3,15 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <th:block th:replace="fragments/head :: header('About')"/>
+        <link rel="stylesheet" href="/css/profile.css"/>
     </head>
-    <body>
+    <body class="min-vh-100 profile-body">
         <th:block th:replace="fragments/navbar :: nav"/>
-        <div class="container about-us-container">
+        <div class="container background-container">
             <br/>
-            <h1 class="text-center">About us</h1>
+            <h1 class="form-title">About Us</h1>
             <br/>
 
-            <div class="row">
+            <div class="row top-row">
                 <div class="col-12 col-md-4">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
