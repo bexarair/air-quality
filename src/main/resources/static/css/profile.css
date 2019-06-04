@@ -29,7 +29,8 @@ body {
 }
 
 .profile-body{
-    background-image: url("/images/grass.gif");
+    /*background-image: url("/images/grass.gif");*/
+    background-image: url("/images/windGrass.gif");
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -42,10 +43,32 @@ body {
 
 .background-container{
     background-color: white;
-
     height: 90vh;
     margin-top: 0;
 }
+
+.about-container{
+    background-color: #ffffff00;
+    height: 90vh;
+    margin-top: 0;
+}
+
+.about-color{
+    color: #E7E7DB;
+}
+
+.about-body{
+    background-image: url("/images/windGrass.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.about-title{
+    text-align: center;
+    color: #14213D;
+    font-weight: bold;
+}
+
 
 .profile-background-container {
     /*background-color: #d4d4d4;*/

@@ -8,6 +8,7 @@
     <body class="profile-body">
         <th:block th:replace="fragments/navbar :: nav"/>
         <div class="container centered-container top-row">
+            <h1 class="form-title">Create a Location</h1>
             <div class="row top-row">
                 <div class="col-6">
 
@@ -34,7 +35,7 @@
                 <div class="card bg-light col-12 col-md-6">
                     <form th:action="@{/locations/create}" th:method="post" th:object="${location}">
 
-                        <div class="card-header">My Locations</div>
+                        <!--<div class="card-header">My Locations</div>-->
                         <div class="card-body">
                             <!--<h5 class="card-title">AQI</h5>-->
 
@@ -58,12 +59,12 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="dailyAlerts" th:field="*{dailyAlert}"/>
                                 <label class="form-check-label" for="dailyAlerts">
-                                    Daily Forecast Alerts
+                                    Daily Forecast Texts
                                 </label>
                             </div>
 
                         </div>
-                        <button type="submit" class="btn blue-btn white-text centered-btn">Create Location</button>
+                        <button type="submit" class="btn location-btn">Create Location</button>
                     </form>
                 </div>
 
