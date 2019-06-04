@@ -44,6 +44,14 @@
     color: #000;
 }
 
+.location-btn{
+    background-color: #de9a36;
+    /*background-color: #96f8ff;*/
+    width: 38%;
+    margin-left: calc(50% - 4em);
+    color: #000;
+}
+
 
 /*::placeholder {*/
     /*color: grey;*/

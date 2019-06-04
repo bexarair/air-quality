@@ -61,7 +61,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                         "/profile", // only authenticated users can view profile
                         "/profile/{id}/edit", // only authenticated users can edit profile
-                        "/uploader.html"//only authenticated users can upload files
+                        "/uploader.html",//only authenticated users can upload files
+                        "/locations/create/",
+                        "/locations/edit/{id}",
+                        "/locations/delete/{id}",
+                        "/profile/edit",
+                        "/viewusers",
+                        "/editadmin/{id}"
 
 
                 )

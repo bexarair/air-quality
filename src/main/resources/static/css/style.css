@@ -69,7 +69,8 @@ th {
 
 .grass-background{
     /*background-color: #e7e7e7;*/
-    background-image: url("/images/grass.gif");
+    /*background-image: url("/images/grass.gif");*/
+    background-image: url("/images/windGrass.gif");
     background-repeat: no-repeat;
     background-size: 100%;
     /*background-size: cover;*/
@@ -125,7 +126,23 @@ input {
     width: 300px;
     /*margin-left: calc(50% - 87.5px);*/
     color: white;
+    /*background-color: #14213D;*/
+    /*margin-bottom: -3em;*/
+    /*margin-top: -3em;*/
+
+    /*margin-top: -28em;*/
+    margin-left: -2em;
 }
+
+.mission{
+    margin-bottom: 1em;
+}
+
+/*.logo-mission{*/
+    /*margin-top: 13em;*/
+    /*background-color: #14213D;*/
+    /*display: inline;*/
+/*}*/
 
 /*.logo{*/
     /*background-color: lightgray;*/
@@ -144,9 +161,19 @@ input {
     line-height: 44px;
 }
 
+.card-border{
+    border-width: thick;
+    border-color: #334355;
+}
+
+.background-card{
+    background-color: #475563;
+}
+
 .james-card, .anwar-card, .bethany-card {
     width: 100%;
     background-repeat: no-repeat;
+
 }
 .centered-card {
     margin-left: calc(50% - 143px);

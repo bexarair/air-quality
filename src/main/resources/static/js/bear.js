@@ -14,8 +14,8 @@ function breathBear() {
             $(".bear2")
                 .append("<img src='/img/dancingBear.gif'/>");
             $(".breath-title")
-                    .css("text-align", "center")
-                    .html("<h2>Remember to breath!</h2>")
+                .css("text-align", "center")
+                .html("<h2 class='form-title'>Remember to breathe!</h2>")
         }
         if (!konamiCode.indexOf(secretCode)) return;
         secretCode = ("" + e.keyCode);
